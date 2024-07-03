@@ -28,5 +28,7 @@ Ide awal game ini adalah:
 - Path Finding
   - https://www.youtube.com/watch?v=CHV1ymlw-P8&t=94s
   - https://www.youtube.com/watch?v=CHV1ymlw-P8&t=94s
+- Camera
+  - https://www.youtube.com/watch?v=pJQndtJ2rk0
 - Assets
   - https://www.mixamo.com/#/
