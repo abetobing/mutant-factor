@@ -631,7 +631,7 @@ MonoBehaviour:
   _hunger: 100
   _thirst: 100
   _stamina: 100
-  _hungerFallRate: 0.5
+  _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
   NeedToEat: 0
 --- !u!1 &124297242
@@ -1135,7 +1135,7 @@ MonoBehaviour:
   _hunger: 100
   _thirst: 100
   _stamina: 100
-  _hungerFallRate: 0.5
+  _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
   NeedToEat: 0
 --- !u!1001 &280035800
@@ -1764,7 +1764,7 @@ MonoBehaviour:
   _hunger: 100
   _thirst: 100
   _stamina: 100
-  _hungerFallRate: 0.5
+  _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
   NeedToEat: 0
 --- !u!1001 &451444603
@@ -5527,7 +5527,7 @@ MonoBehaviour:
   _hunger: 100
   _thirst: 100
   _stamina: 100
-  _hungerFallRate: 0.5
+  _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
   NeedToEat: 0
 --- !u!1001 &2136084984
