@@ -14,17 +14,12 @@ namespace Brains
         [SerializeField] private float _thirst = 100f;
         [SerializeField] private float _stamina = 100f;
 
-        [SerializeField] private float _hungerFallRate = 2;
+        [SerializeField] private float _hungerFallRate = 0.5f; // hunger fall rate per second
 
         private StateMachine _stateMachine;
 
-        public FoodSource FoodTarget { get; set; }
-        public bool IsLookingForFood;
-        public bool IsEatingFood;
-
-        public static readonly int IsWalkingHash = Animator.StringToHash("isWalking");
-        public static readonly int IsRunningHash = Animator.StringToHash("isRunning");
-        public static readonly int IsEating = Animator.StringToHash("isHarvesting");
+        [HideInInspector] public FoodSource FoodTarget;
+        [HideInInspector] public bool NeedToEat;
 
         private void Awake()
         {
@@ -38,28 +33,19 @@ namespace Brains
             var searchFood = new SearchFood(this);
             var moveToFood = new MoveToFood(this, navMeshAgent, animator);
             var eatingFood = new EatingFood(this, animator);
-            // var injured = new Injured(this);
-            // var thirsty = new Thirsty(this);
-            // var tired = new Tired(this);
 
-            At(hungry, searchFood, () => IsLookingForFood);
+            At(hungry, searchFood, () => NeedToEat);
             At(searchFood, moveToFood, ThereAreFoodSource());
             At(moveToFood, eatingFood, ArrivedAtFoodSource());
-            At(eatingFood, healthy, () => _hunger >= 95.0f);
+            At(eatingFood, healthy, () => _hunger >= 99.0f);
 
             Any(hungry, () =>
             {
-                return _hunger <= 20f && !IsLookingForFood && !IsEatingFood;
+                return _hunger <= 20f && !NeedToEat;
             });
 
-            // Any(thirsty, () => thirst <= 20f);
-            // Any(tired, () => stamina <= 20f);
-            // Any(injured, () => health <= 20f);
-            
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
-
             Func<bool> ArrivedAtFoodSource() => () => navMeshAgent.remainingDistance <= 1f;
-
 
             _stateMachine.SetState(healthy);
 
@@ -80,7 +66,7 @@ namespace Brains
             _stateMachine.Tick();
             
             // hunger will fall at a given rate
-            _hunger -= Time.deltaTime * (_hungerFallRate / 100);
+            _hunger -= Time.deltaTime * _hungerFallRate;
             _hunger = Mathf.Clamp(
                 _hunger,
                 0f,
