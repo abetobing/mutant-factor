@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Brains;
+using Entities;
 using UnityEngine;
 
 namespace FSM.GathererState
@@ -25,7 +26,7 @@ namespace FSM.GathererState
                 {
                     _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);
                     _gatherer.TakeFromTarget();
-                    _animator.SetBool(Gatherer.IsHarvestingHash, true);
+                    _animator.SetBool(Constants.IsHarvestingHash, true);
                 }
             }
         }
@@ -36,7 +37,7 @@ namespace FSM.GathererState
 
         public void OnExit()
         {
-            _animator.SetBool(Gatherer.IsHarvestingHash, false);
+            _animator.SetBool(Constants.IsHarvestingHash, false);
         }
     }
 }

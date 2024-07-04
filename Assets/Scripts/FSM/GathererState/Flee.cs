@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Brains;
+using Entities;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -29,7 +30,7 @@ namespace FSM.GathererState
         {
             _navMeshAgent.enabled = true;
             _gatherer.DropAllResources();
-            _animator.SetBool(Gatherer.IsRunningHash, true);
+            _animator.SetBool(Constants.IsRunningHash, true);
             _initialSpeed = _navMeshAgent.speed;
             _navMeshAgent.speed = FLEE_SPEED;
             _particleSystem.Play();
@@ -62,7 +63,7 @@ namespace FSM.GathererState
         {
             _navMeshAgent.speed = _initialSpeed;
             _navMeshAgent.enabled = false;
-            _animator.SetBool(Gatherer.IsRunningHash, false);
+            _animator.SetBool(Constants.IsRunningHash, false);
         }
     }
 }

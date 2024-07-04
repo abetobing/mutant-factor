@@ -1,27 +1,24 @@
 ﻿using System;
+using Entities;
 using FSM;
 using FSM.GathererState;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Entities
+namespace Brains
 {
     public class Gatherer : MonoBehaviour
     {
         public event Action<int> OnGatheredChanged;
     
         [SerializeField] private int _maxCarried = 20;
-        [SerializeField] private float _distanceTolerance = 1.5f;
     
         private StateMachine _stateMachine;
         private int _gathered;
     
         public GatherableResource Target { get; set; }
         public StockPile StockPile { get; set; }
-        public static readonly int IsWalkingHash = Animator.StringToHash("isWalking");
-        public static readonly int IsRunningHash = Animator.StringToHash("isRunning");
-        public static readonly int IsHarvestingHash = Animator.StringToHash("isHarvesting");
-
+        
 
         private void Awake()
         {
@@ -56,12 +53,12 @@ namespace Entities
             Func<bool> HasTarget() => () => Target != null;
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
             Func<bool> ReachedResource() => () => Target != null && 
-                                                  Vector3.Distance(transform.position, Target.transform.position) < _distanceTolerance;
+                                                  Vector3.Distance(transform.position, Target.transform.position) < Constants.NavMeshDistanceTolerance;
         
             Func<bool> TargetIsDepletedAndICanCarryMore() => () => (Target == null || Target.IsDepleted) && !InventoryFull().Invoke();
             Func<bool> InventoryFull() => () => _gathered >= _maxCarried;
             Func<bool> ReachedStockpile() => () => StockPile != null && 
-                                                   Vector3.Distance(transform.position, StockPile.transform.position) <= _distanceTolerance;
+                                                   Vector3.Distance(transform.position, StockPile.transform.position) <= Constants.NavMeshDistanceTolerance;
         }
 
         private void Update() => _stateMachine.Tick();

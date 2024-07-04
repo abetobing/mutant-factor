@@ -30,7 +30,6 @@ namespace Entities
             var pct = Mathf.Clamp01((float)_gathered / _maxHeld);
             // _animator.SetFloat(Pct, pct);
             // _stockpileText.SetText($"{_gathered}/{_maxHeld}");
-            Debug.LogFormat("Gathered: {0}/{1}", _gathered, _maxHeld);
         }
 
         private void Update()

@@ -1,4 +1,5 @@
-﻿using Entities;
+﻿using Brains;
+using Entities;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -34,13 +35,13 @@ namespace FSM.GathererState
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_gatherer.Target.transform.position);
-            _animator.SetBool(Gatherer.IsWalkingHash, true);
+            _animator.SetBool(Constants.IsWalkingHash, true);
         }
 
         public void OnExit()
         {
             _navMeshAgent.enabled = false;
-            _animator.SetBool(Gatherer.IsWalkingHash, false);
+            _animator.SetBool(Constants.IsWalkingHash, false);
         }
     }
 }
