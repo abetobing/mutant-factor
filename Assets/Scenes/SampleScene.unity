@@ -1508,7 +1508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c0ce60145d4ca8ad1763168afb8a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalAvailable: 1000
+  _totalAvailable: 500
 --- !u!1001 &436791188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1764,7 +1764,7 @@ MonoBehaviour:
   _hunger: 100
   _thirst: 100
   _stamina: 100
-  _hungerFallRate: 10
+  _hungerFallRate: 0.5
   FoodTarget: {fileID: 0}
   NeedToEat: 0
 --- !u!1001 &451444603

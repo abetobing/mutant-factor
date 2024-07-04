@@ -36,17 +36,18 @@ namespace Brains
 
             At(hungry, searchFood, () => NeedToEat);
             At(searchFood, moveToFood, ThereAreFoodSource());
+            At(moveToFood, searchFood, StuckForOverASecond()); // in case nav mesh is stuck
             At(moveToFood, eatingFood, ArrivedAtFoodSource());
+            At(eatingFood, searchFood, NoFoodLeft());
             At(eatingFood, healthy, () => _hunger >= 99.0f);
 
-            Any(hungry, () =>
-            {
-                return _hunger <= 20f && !NeedToEat;
-            });
+            // move to hungry state from any state
+            Any(hungry, () => _hunger <= 20f && !NeedToEat);
 
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
             Func<bool> ArrivedAtFoodSource() => () => navMeshAgent.remainingDistance <= 1f;
-
+            Func<bool> StuckForOverASecond() => () => moveToFood.TimeStuck > 1f;
+            Func<bool> NoFoodLeft() => () => FoodTarget.IsDepleted;
             _stateMachine.SetState(healthy);
 
 
