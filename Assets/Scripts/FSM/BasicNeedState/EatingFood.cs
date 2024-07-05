@@ -32,13 +32,13 @@ namespace FSM.BasicNeedState
         {
             Debug.Log("eating food!");
             _animator.SetBool(Constants.IsHarvestingHash, true);
-            _thePerson.NeedToEat = true;
+            _thePerson.HasEnteredHungryState = true;
         }
 
         public void OnExit()
         {
             _animator.SetBool(Constants.IsHarvestingHash, false);
-            _thePerson.NeedToEat = false;
+            _thePerson.HasEnteredHungryState = false;
         }
     }
 }

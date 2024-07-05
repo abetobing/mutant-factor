@@ -25,7 +25,7 @@ namespace FSM.BasicNeedState
             _animator.SetBool(Constants.IsHarvestingHash, false);
             // stop the profession or current job
             _thePerson.GetComponent<Gatherer>().enabled = false;
-            _thePerson.NeedToEat = true;
+            _thePerson.HasEnteredHungryState = true;
         }
 
         public void OnExit()

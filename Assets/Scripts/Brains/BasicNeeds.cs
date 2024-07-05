@@ -19,7 +19,7 @@ namespace Brains
         private StateMachine _stateMachine;
 
         [HideInInspector] public FoodSource FoodTarget;
-        [HideInInspector] public bool NeedToEat;
+        [HideInInspector] public bool HasEnteredHungryState;
 
         private void Awake()
         {
@@ -34,7 +34,7 @@ namespace Brains
             var moveToFood = new MoveToFood(this, navMeshAgent, animator);
             var eatingFood = new EatingFood(this, animator);
 
-            At(hungry, searchFood, () => NeedToEat);
+            At(hungry, searchFood, () => HasEnteredHungryState);
             At(searchFood, moveToFood, ThereAreFoodSource());
             At(moveToFood, searchFood, StuckForOverASecond()); // in case nav mesh is stuck
             At(moveToFood, eatingFood, ArrivedAtFoodSource());
@@ -42,7 +42,7 @@ namespace Brains
             At(eatingFood, healthy, () => _hunger >= 99.0f);
 
             // move to hungry state from any state
-            Any(hungry, () => _hunger <= 20f && !NeedToEat);
+            Any(hungry, () => _hunger <= 20f && !HasEnteredHungryState);
 
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
             Func<bool> ArrivedAtFoodSource() => () => navMeshAgent.remainingDistance <= 1f;
