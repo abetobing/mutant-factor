@@ -19,7 +19,7 @@ namespace FSM.BasicNeedState
         {
             Debug.Log("healthy!");
             // enable the profession or current job again
-            _thePerson.GetComponent<Gatherer>().enabled = true;
+            _thePerson.GetComponent<IProfession>().Enable();
         }
 
         public void OnExit()

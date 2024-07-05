@@ -7,18 +7,17 @@ using UnityEngine.AI;
 
 namespace Brains
 {
-    public class Gatherer : MonoBehaviour
+    public class Gatherer : MonoBehaviour, IProfession
     {
         public event Action<int> OnGatheredChanged;
-    
+
         [SerializeField] private int _maxCarried = 20;
-    
+
         private StateMachine _stateMachine;
         private int _gathered;
-    
+
         public GatherableResource Target { get; set; }
         public StockPile StockPile { get; set; }
-        
 
         private void Awake()
         {
@@ -26,7 +25,7 @@ namespace Brains
             var animator = GetComponent<Animator>();
             var enemyDetector = gameObject.AddComponent<EnemyDetector>();
             var fleeParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
-        
+
             _stateMachine = new StateMachine();
 
             var search = new SearchForResource(this);
@@ -35,7 +34,7 @@ namespace Brains
             var returnToStockpile = new ReturnToStockpile(this, navMeshAgent, animator);
             var placeResourcesInStockpile = new PlaceResourcesInStockpile(this);
             var flee = new Flee(this, navMeshAgent, enemyDetector, animator, fleeParticleSystem);
-        
+
             At(search, moveToSelected, HasTarget());
             At(moveToSelected, search, StuckForOverASecond());
             At(moveToSelected, harvest, ReachedResource());
@@ -43,26 +42,40 @@ namespace Brains
             At(harvest, returnToStockpile, InventoryFull());
             At(returnToStockpile, placeResourcesInStockpile, ReachedStockpile());
             At(placeResourcesInStockpile, search, () => _gathered == 0);
-        
+
             _stateMachine.AddAnyTransition(flee, () => enemyDetector.EnemyInRange);
             At(flee, search, () => enemyDetector.EnemyInRange == false);
-        
+
             _stateMachine.SetState(search);
 
             void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
             Func<bool> HasTarget() => () => Target != null;
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
-            Func<bool> ReachedResource() => () => Target != null && 
-                                                  Vector3.Distance(transform.position, Target.transform.position) < Constants.NavMeshDistanceTolerance;
-        
-            Func<bool> TargetIsDepletedAndICanCarryMore() => () => (Target == null || Target.IsDepleted) && !InventoryFull().Invoke();
+
+            Func<bool> ReachedResource() => () => Target != null &&
+                                                  Vector3.Distance(transform.position, Target.transform.position) <
+                                                  Constants.NavMeshDistanceTolerance;
+
+            Func<bool> TargetIsDepletedAndICanCarryMore() =>
+                () => (Target == null || Target.IsDepleted) && !InventoryFull().Invoke();
+
             Func<bool> InventoryFull() => () => _gathered >= _maxCarried;
-            Func<bool> ReachedStockpile() => () => StockPile != null && 
-                                                   Vector3.Distance(transform.position, StockPile.transform.position) <= Constants.NavMeshDistanceTolerance;
+
+            Func<bool> ReachedStockpile() => () => StockPile != null &&
+                                                   Vector3.Distance(transform.position, StockPile.transform.position) <=
+                                                   Constants.NavMeshDistanceTolerance;
         }
 
         private void Update() => _stateMachine.Tick();
 
+        public string Name() => "Gatherer";
+
+        public ScriptableObject Stats() => null;
+
+        public void Enable() => this.enabled = true;
+
+        public void Disable() => this.enabled = false;
+        
         public void TakeFromTarget()
         {
             if (Target.Take())
@@ -76,7 +89,7 @@ namespace Brains
         {
             if (_gathered <= 0)
                 return false;
-        
+
             _gathered--;
             OnGatheredChanged?.Invoke(_gathered);
             return true;
@@ -91,5 +104,6 @@ namespace Brains
                 OnGatheredChanged?.Invoke(_gathered);
             }
         }
+
     }
 }

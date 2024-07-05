@@ -637,7 +637,7 @@ MonoBehaviour:
   _stamina: 100
   _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
-  NeedToEat: 0
+  HasEnteredHungryState: 0
 --- !u!114 &101767623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1167,7 +1167,7 @@ MonoBehaviour:
   _stamina: 100
   _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
-  NeedToEat: 0
+  HasEnteredHungryState: 0
 --- !u!114 &201013257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1822,7 +1822,7 @@ MonoBehaviour:
   _stamina: 100
   _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
-  NeedToEat: 0
+  HasEnteredHungryState: 0
 --- !u!114 &447454955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5611,7 +5611,7 @@ MonoBehaviour:
   _stamina: 100
   _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
-  NeedToEat: 0
+  HasEnteredHungryState: 0
 --- !u!114 &2116102144
 MonoBehaviour:
   m_ObjectHideFlags: 0
