@@ -1,6 +1,9 @@
+#region
+
 using Brains;
 using UnityEngine;
-using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.BasicNeedState
 {
@@ -21,7 +24,7 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.Log("hungry!");
+            Debug.LogFormat("{0} is hungry", _thePerson.gameObject.name);
             _animator.SetBool(Constants.IsHarvestingHash, false);
             // stop the profession or current job
             _thePerson.GetComponent<IProfession>().Disable();

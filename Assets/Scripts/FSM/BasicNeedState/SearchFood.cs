@@ -1,7 +1,11 @@
+#region
+
 using System.Linq;
 using Brains;
 using Entities;
 using UnityEngine;
+
+#endregion
 
 namespace FSM.BasicNeedState
 {
@@ -21,7 +25,7 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.Log("searching food!");
+            Debug.LogFormat("{0} is searching for food", _thePerson.gameObject.name);
         }
 
         public void OnExit()

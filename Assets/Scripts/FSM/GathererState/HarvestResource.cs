@@ -1,6 +1,9 @@
-﻿using Brains;
-using Entities;
+﻿#region
+
+using Brains;
 using UnityEngine;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -33,6 +36,7 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
+            Debug.LogFormat("{0} is harvesting", _gatherer.gameObject.name);
         }
 
         public void OnExit()

@@ -1,5 +1,8 @@
-﻿using TMPro;
+﻿#region
+
 using UnityEngine;
+
+#endregion
 
 namespace Entities
 {

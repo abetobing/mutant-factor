@@ -1,7 +1,11 @@
-﻿using System.Linq;
+﻿#region
+
+using System.Linq;
 using Brains;
 using Entities;
 using UnityEngine;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -28,7 +32,10 @@ namespace FSM.GathererState
                 .FirstOrDefault();
         }
 
-        public void OnEnter() { }
+        public void OnEnter()
+        {
+            Debug.LogFormat("{0} is searching for resource", _gatherer.gameObject.name);
+        }
         public void OnExit() { }
     }
 }

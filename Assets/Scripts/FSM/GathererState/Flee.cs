@@ -1,7 +1,11 @@
-﻿using Brains;
+﻿#region
+
+using Brains;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -28,6 +32,7 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
+            Debug.LogFormat("{0} is fleeing", _gatherer.gameObject.name);
             _navMeshAgent.enabled = true;
             _gatherer.DropAllResources();
             _animator.SetBool(Constants.IsRunningHash, true);

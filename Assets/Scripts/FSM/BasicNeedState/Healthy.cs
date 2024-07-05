@@ -1,5 +1,9 @@
+#region
+
 using Brains;
 using UnityEngine;
+
+#endregion
 
 namespace FSM.BasicNeedState
 {
@@ -17,7 +21,7 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.Log("healthy!");
+            Debug.LogFormat("{0} is healthy", _thePerson.gameObject.name);
             // enable the profession or current job again
             _thePerson.GetComponent<IProfession>().Enable();
         }

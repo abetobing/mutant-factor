@@ -1,6 +1,10 @@
+#region
+
 using Brains;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.BasicNeedState
 {
@@ -29,7 +33,7 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.Log("move to food!");
+            Debug.LogFormat("{0} is moving to food source", _thePerson.gameObject.name);
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_thePerson.FoodTarget.transform.position);

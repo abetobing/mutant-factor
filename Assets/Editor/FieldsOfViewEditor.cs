@@ -1,6 +1,10 @@
+#region
+
 using Assets.Scripts;
 using UnityEditor;
 using UnityEngine;
+
+#endregion
 
 [CustomEditor(typeof(FieldOfView))]
 public class FieldOfViewEditor : Editor

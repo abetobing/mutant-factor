@@ -1,5 +1,9 @@
-﻿using Brains;
-using Entities;
+﻿#region
+
+using Brains;
+using UnityEngine;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -18,7 +22,10 @@ namespace FSM.GathererState
                 _gatherer.StockPile.Add();
         }
 
-        public void OnEnter() { }
+        public void OnEnter()
+        {
+            Debug.LogFormat("{0} is placing resource in stockpile", _gatherer.gameObject.name);
+        }
 
         public void OnExit() { }
     }

@@ -1,9 +1,13 @@
+#region
+
 using System;
 using Entities;
 using FSM;
 using FSM.BasicNeedState;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace Brains
 {

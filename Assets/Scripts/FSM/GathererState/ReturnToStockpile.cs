@@ -1,7 +1,11 @@
-﻿using Brains;
+﻿#region
+
+using Brains;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -26,6 +30,7 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
+            Debug.LogFormat("{0} is returning to stockpile", _gatherer.gameObject.name);
             _gatherer.StockPile = Object.FindObjectOfType<StockPile>();
             _destination = _gatherer.StockPile.transform.position; 
             _navMeshAgent.enabled = true;

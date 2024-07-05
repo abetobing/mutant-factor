@@ -1,7 +1,10 @@
-﻿using Brains;
-using Entities;
+﻿#region
+
+using Brains;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -32,6 +35,7 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
+            Debug.LogFormat("{0} is moving to resource", _gatherer.gameObject.name);
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_gatherer.Target.transform.position);

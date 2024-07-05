@@ -1,5 +1,9 @@
+#region
+
 using Brains;
 using UnityEngine;
+
+#endregion
 
 namespace FSM.BasicNeedState
 {
@@ -30,7 +34,7 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.Log("eating food!");
+            Debug.LogFormat("{0} is eating food", _thePerson.gameObject.name);
             _animator.SetBool(Constants.IsHarvestingHash, true);
             _thePerson.HasEnteredHungryState = true;
         }

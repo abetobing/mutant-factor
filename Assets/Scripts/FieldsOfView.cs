@@ -1,8 +1,12 @@
+#region
+
+using System.Collections;
+using UnityEngine;
+
+#endregion
+
 namespace Assets.Scripts
 {
-    using System.Collections;
-    using UnityEngine;
-
     public class FieldOfView : MonoBehaviour
     {
         public float radius;
