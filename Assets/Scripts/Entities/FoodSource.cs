@@ -1,25 +1,29 @@
+#region
+
 using UnityEngine;
+
+#endregion
 
 namespace Entities
 {
     public class FoodSource : MonoBehaviour
     {
         
-        [SerializeField] private int _totalAvailable = 1000;
+        [SerializeField] private int _initialAvailable = 1000;
     
-        private int _available;
-        public bool IsDepleted => _available <= 0;
+        public int Available { get; private set; }
+        public bool IsDepleted => Available <= 0;
 
         private void OnEnable()
         {
-            _available = _totalAvailable;
+            Available = _initialAvailable;
         }
         
         public bool Take()
         {
-            if (_available <= 0)
+            if (Available <= 0)
                 return false;
-            _available--;
+            Available--;
 
             return true;
         }
