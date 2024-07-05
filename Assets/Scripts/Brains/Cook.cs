@@ -1,4 +1,9 @@
+#region
+
+using System;
 using UnityEngine;
+
+#endregion
 
 namespace Brains
 {
@@ -6,10 +11,10 @@ namespace Brains
     {
         public string Name() => "Cook";
 
-        public ScriptableObject Stats() => throw new System.NotImplementedException();
+        public ScriptableObject Stats() => null;
 
-        public void Enable() => throw new System.NotImplementedException();
+        public void Enable() => throw new NotImplementedException();
 
-        public void Disable() => throw new System.NotImplementedException();
+        public void Disable() => throw new NotImplementedException();
     }
 }
