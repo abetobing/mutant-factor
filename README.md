@@ -30,5 +30,7 @@ Ide awal game ini adalah:
   - https://www.youtube.com/watch?v=CHV1ymlw-P8&t=94s
 - Camera
   - https://www.youtube.com/watch?v=pJQndtJ2rk0
+- FOV
+  - https://www.youtube.com/watch?v=j1-OyLo77ss
 - Assets
   - https://www.mixamo.com/#/
