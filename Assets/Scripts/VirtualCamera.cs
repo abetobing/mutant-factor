@@ -1,8 +1,6 @@
 #region
 
-using Cinemachine;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 #endregion
 
@@ -17,7 +15,6 @@ public class VirtualCamera : MonoBehaviour
     [SerializeField] private bool enableRotation = true;
     [SerializeField] private bool enableZoom = false;
     [SerializeField] private float zoomSpeed = 10f;
-    [SerializeField] public CinemachineVirtualCamera CinemachineVirtualCamera;
 
     private Vector3 _lastMousePosition;
     private bool _dragPanMoveStarted = false;
@@ -28,17 +25,7 @@ public class VirtualCamera : MonoBehaviour
 
     private void Awake()
     {
-        if (enableZoom)
-        {
-            // make sure CinemachineTransposer reference is set
-            // and make sure the body is a Transposer
-            Assert.IsTrue(enableZoom && CinemachineVirtualCamera != null, "CinemachineVirtualCamera reference must be assigned if zoom is enabled");
-            Assert.IsNotNull(
-                CinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>(),
-                "CinemachineVirtualCamera dont have CinemachineTransposer settings."
-            );
-            _followOffset = CinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset;
-        }
+        
     }
 
     void Update()
@@ -136,11 +123,7 @@ public class VirtualCamera : MonoBehaviour
 
         _followOffset.y = Mathf.Clamp(_followOffset.y, MinZooom, MaxZoom);
         
-        CinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset = Vector3.Lerp(
-            CinemachineVirtualCamera.GetCinemachineComponent<CinemachineTransposer>().m_FollowOffset,
-            _followOffset,
-            Time.deltaTime
-        );
+       
 
     }
 }

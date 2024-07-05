@@ -18,4 +18,6 @@ public class Constants
     public const float DefaultMaxStamina = 100f;
 
     public const float EatIntervalPerSecond = 50f; // default interval per sec to hunger++ and food--
+
+    public const string SelectableTag = "Selectable";
 }
