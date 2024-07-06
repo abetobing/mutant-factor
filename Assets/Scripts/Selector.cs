@@ -35,9 +35,7 @@ namespace DefaultNamespace
             if (!EventSystem.current.IsPointerOverGameObject() &&
                 Physics.Raycast(ray, out raycastHit)) //Make sure you have EventSystem in the hierarchy before using EventSystem
             {
-                Debug.DrawLine(ray.origin, raycastHit.transform.position, Color.yellow);
                 highlight = raycastHit.transform;
-                Debug.LogFormat("highlight: {0}", highlight.gameObject.name);
 
                 if (highlight.CompareTag("Selectable") && highlight != selection)
                 {
@@ -67,6 +65,8 @@ namespace DefaultNamespace
                     // get new selection from highlight
                     selection = highlight;
                     ToggleHighlight(selection.gameObject, true);
+                    // trigger select or unselect event
+                    GameManager.Instance.OnEntitySelected?.Invoke(selection.gameObject);
                     highlight = null;
                 }
                 else
@@ -74,6 +74,8 @@ namespace DefaultNamespace
                     if (selection)
                     {
                         ToggleHighlight(selection.gameObject, false);
+                        // trigger select or unselect event
+                        GameManager.Instance.OnEntityDeselected?.Invoke(selection.gameObject);
                         selection = null;
                     }
                 }

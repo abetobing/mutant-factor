@@ -18,6 +18,11 @@ namespace Brains
         [SerializeField] private float _thirst = 100f;
         [SerializeField] private float _stamina = 100f;
 
+        public float HealthLevel => _health;
+        public float HungerLevel => _hunger;
+        public float ThirstLevel => _thirst;
+        public float StaminaLevel => _stamina;
+
         [SerializeField] private float _hungerFallRate = 0.5f; // hunger fall rate per second
 
         private StateMachine _stateMachine;
