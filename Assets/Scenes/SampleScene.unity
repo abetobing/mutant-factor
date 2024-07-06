@@ -232,8 +232,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -101.95, y: 139}
-  m_SizeDelta: {x: 171.8904, y: 241.3812}
+  m_AnchoredPosition: {x: -101.95001, y: 139}
+  m_SizeDelta: {x: 171.89038, y: 241.3812}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &39891823
 MonoBehaviour:
@@ -3207,7 +3207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 14.99999, z: -10}
+  m_FollowOffset: {x: 0, y: 15, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -6877,6 +6877,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedEntity: {fileID: 0}
+  currentInstanceID: 0
   entityInfoPanel: {fileID: 39891822}
   resourceInfoPanel: {fileID: 0}
   nameText: {fileID: 1710306911}
@@ -7386,6 +7387,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c100a3e361e4f65bc433028d067786f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  UISelectDeselect: {fileID: 1540174114}
   width: 6.03
 --- !u!4 &1723058326
 Transform:
