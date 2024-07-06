@@ -49,21 +49,9 @@ namespace Brains
             _stateMachine.AddTransition(empty, selected, EligibleToSelect());
             _stateMachine.AddTransition(deselected, selected, EligibleToSelect());
 
-            Func<bool> EligibleToSelect() => () =>
-            {
-                if (selectedEntity != null)
-                {
-                    Debug.LogFormat("prev id: {0}, current id: {1}", currentInstanceID, selectedEntity.GetInstanceID());
-                    if (selectedEntity.GetComponent<BasicNeeds>() != null &&
-                        !currentInstanceID.Equals(selectedEntity.GetInstanceID()))
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            };
-
+            Func<bool> EligibleToSelect() => () => (selectedEntity != null &&
+                                                    selectedEntity.GetComponent<BasicNeeds>() != null &&
+                                                    !currentInstanceID.Equals(selectedEntity.GetInstanceID()));
 
             _stateMachine.AddAnyTransition(deselected, () => selectedEntity == null);
             _stateMachine.SetState(deselected);
