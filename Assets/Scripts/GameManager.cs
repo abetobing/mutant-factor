@@ -24,11 +24,6 @@ namespace DefaultNamespace
 
         [SerializeField] private TMP_Text txtStats;
 
-        #region game-events
-        public Action<GameObject> OnEntitySelected;
-        public Action<GameObject> OnEntityDeselected;
-        #endregion
-
         void Awake()
         {
             if (_instance == null)

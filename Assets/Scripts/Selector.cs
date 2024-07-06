@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using Brains;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.EventSystems;
@@ -65,8 +67,7 @@ namespace DefaultNamespace
                     // get new selection from highlight
                     selection = highlight;
                     ToggleHighlight(selection.gameObject, true);
-                    // trigger select or unselect event
-                    GameManager.Instance.OnEntitySelected?.Invoke(selection.gameObject);
+                    StartCoroutine(SetSelectedGameObject(selection.gameObject));
                     highlight = null;
                 }
                 else
@@ -74,12 +75,21 @@ namespace DefaultNamespace
                     if (selection)
                     {
                         ToggleHighlight(selection.gameObject, false);
-                        // trigger select or unselect event
-                        GameManager.Instance.OnEntityDeselected?.Invoke(selection.gameObject);
+                        StartCoroutine(SetSelectedGameObject(null));
                         selection = null;
                     }
+                    
                 }
             }
+        }
+
+        // Set selected game object in a coroutine
+        private IEnumerator SetSelectedGameObject(GameObject selectedGameObject)
+        {
+            var ui = (UISelectDeselect)FindObjectOfType(typeof(UISelectDeselect), true);
+            if (ui != null)
+                ui.selectedEntity = selectedGameObject;
+            yield return null;
         }
     }
 }

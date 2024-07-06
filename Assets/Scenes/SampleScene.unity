@@ -2703,8 +2703,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535450694}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.47090933, y: 0.00000002785307, z: -0.000000014867993, w: 0.88218164}
-  m_LocalPosition: {x: 0, y: 14.930311, z: -10}
+  m_LocalRotation: {x: 0.47185782, y: -0.000000010442539, z: 0.0000000055886766, w: 0.8816747}
+  m_LocalPosition: {x: 0, y: 14.99999, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -3206,7 +3206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 14.93031, z: -10}
+  m_FollowOffset: {x: 0, y: 14.99999, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -4230,8 +4230,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4709094, y: 0.000000027853073, z: -0.000000014867996, w: 0.8821816}
-  m_LocalPosition: {x: 1.1612775, y: 16.194185, z: -17.271511}
+  m_LocalRotation: {x: 0.47185785, y: -0.000000010442539, z: 0.000000005588676, w: 0.88167465}
+  m_LocalPosition: {x: 1.1612775, y: 16.263865, z: -17.271511}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6637,7 +6637,7 @@ GameObject:
   - component: {fileID: 1540174111}
   - component: {fileID: 1540174110}
   - component: {fileID: 1540174109}
-  - component: {fileID: 1540174113}
+  - component: {fileID: 1540174114}
   m_Layer: 5
   m_Name: '[UI Entity Info]'
   m_TagString: Untagged
@@ -6729,7 +6729,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1540174113
+--- !u!114 &1540174114
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6738,11 +6738,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1540174108}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cc593e5ff554df096226fac77f0b728, type: 3}
+  m_Script: {fileID: 11500000, guid: 4816da6039344c638e521a3244632547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedEntity: {fileID: 0}
   entityInfoPanel: {fileID: 39891822}
-  resourceInfoPanel: {fileID: 39891822}
+  resourceInfoPanel: {fileID: 0}
   nameText: {fileID: 1710306911}
   stateText: {fileID: 1471602015}
   healthSlider: {fileID: 1778951429}
