@@ -1,5 +1,4 @@
 using Brains;
-using UnityEngine;
 
 namespace FSM.UIState
 {
@@ -21,7 +20,6 @@ namespace FSM.UIState
 
         public void OnEnter()
         {
-            Debug.Log(String());
             if (_ui == null)
                 return;
 

@@ -24,7 +24,6 @@ namespace FSM.UIState
 
         public void OnEnter()
         {
-            Debug.Log(String());
             _ui.entityInfoPanel.gameObject.SetActive(false);
             _ui.currentInstanceID = 0;
         }
