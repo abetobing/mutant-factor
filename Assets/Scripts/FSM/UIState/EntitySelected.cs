@@ -8,6 +8,7 @@ namespace FSM.UIState
         private UISelectDeselect _ui;
         private BasicNeeds _basicNeeds;
         private IProfession _profession;
+
         public EntitySelected(UISelectDeselect theUiPanel)
         {
             _ui = theUiPanel;
@@ -17,30 +18,33 @@ namespace FSM.UIState
         {
             return "selected";
         }
-        
+
         public void OnEnter()
         {
             Debug.Log(String());
             if (_ui == null)
                 return;
-                
+
             _ui.entityInfoPanel.gameObject.SetActive(true);
             _ui.nameText.text = _ui.selectedEntity.name;
             if (_ui.selectedEntity.GetComponent<BasicNeeds>() != null)
             {
                 _basicNeeds = _ui.selectedEntity.GetComponent<BasicNeeds>();
             }
+
             if (_ui.selectedEntity.GetComponent<IProfession>() != null)
             {
                 _profession = _ui.selectedEntity.GetComponent<IProfession>();
             }
+
+            _ui.currentInstanceID = _ui.selectedEntity.GetInstanceID();
         }
-        
+
         public void Tick()
         {
             if (_basicNeeds != null)
             {
-                _ui.basicNeedsStateText.text = _basicNeeds.CurrentStateString;   
+                _ui.basicNeedsStateText.text = _basicNeeds.CurrentStateString;
                 _ui.healthSlider.value = _basicNeeds.HealthLevel / Constants.DefaultMaxHealth;
                 _ui.hungerSlider.value = _basicNeeds.HungerLevel / Constants.DefaultMaxHunger;
                 _ui.thirstSlider.value = _basicNeeds.ThirstLevel / Constants.DefaultMaxThirst;
@@ -49,7 +53,7 @@ namespace FSM.UIState
 
             if (_profession != null)
             {
-                _ui.professionStateText.text = _profession.Name();
+                _ui.professionStateText.text = _profession.ActivtyText();
             }
         }
 

@@ -3,7 +3,6 @@
 using System;
 using Entities;
 using FSM;
-using FSM.BasicNeedState;
 using FSM.GathererState;
 using UnityEngine;
 using UnityEngine.AI;
@@ -55,8 +54,10 @@ namespace Brains
             _stateMachine.SetState(search);
 
             void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
+
             Func<bool> HasTargetAndCanCarryMore() => () => Target != null &&
                                                            _gathered < _maxCarried;
+
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
 
             Func<bool> ReachedResource() => () => Target != null &&
@@ -77,6 +78,11 @@ namespace Brains
 
         public string Name() => "Gatherer";
 
+        public string ActivtyText()
+        {
+            return _stateMachine.CurrentActivity();
+        }
+
         public ScriptableObject Stats() => null;
 
         public void Enable()
@@ -86,7 +92,7 @@ namespace Brains
         }
 
         public void Disable() => this.enabled = false;
-        
+
         public void TakeFromTarget()
         {
             if (Target.Take())
@@ -115,6 +121,5 @@ namespace Brains
                 OnGatheredChanged?.Invoke(_gathered);
             }
         }
-
     }
 }

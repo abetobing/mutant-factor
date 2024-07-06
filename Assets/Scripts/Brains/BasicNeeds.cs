@@ -29,7 +29,7 @@ namespace Brains
 
         [HideInInspector] public FoodSource FoodTarget;
         [HideInInspector] public bool HasEnteredHungryState;
-        [HideInInspector] public string CurrentStateString => _stateMachine.GetCurrentStateString();
+        [HideInInspector] public string CurrentStateString => _stateMachine.CurrentActivity();
 
         private void Awake()
         {
@@ -75,7 +75,7 @@ namespace Brains
         private void Update()
         {
             _stateMachine.Tick();
-            
+
             // hunger will fall at a given rate
             _hunger -= Time.deltaTime * _hungerFallRate;
             _hunger = Mathf.Clamp(
@@ -83,13 +83,12 @@ namespace Brains
                 0f,
                 Constants.DefaultMaxHunger
             );
-
         }
 
         public void EatFood()
         {
             if (FoodTarget.Take()) _hunger++;
-            _hunger = Mathf.Clamp(_hunger, 0f,  Constants.DefaultMaxHunger);
+            _hunger = Mathf.Clamp(_hunger, 0f, Constants.DefaultMaxHunger);
         }
     }
 }

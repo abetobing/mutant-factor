@@ -12,7 +12,8 @@ namespace Brains
     {
         private StateMachine _stateMachine;
         [HideInInspector] public GameObject selectedEntity;
-        
+        [HideInInspector] public int currentInstanceID;
+
         [SerializeField] public RectTransform entityInfoPanel;
         [SerializeField] public RectTransform resourceInfoPanel;
 
@@ -27,6 +28,7 @@ namespace Brains
         private void Awake()
         {
             _stateMachine = new StateMachine();
+            currentInstanceID = 0;
             Assert.IsNotNull(nameText, "nameText must be assigned");
             Assert.IsNotNull(basicNeedsStateText, "basicNeedsStateText must be assigned");
             Assert.IsNotNull(professionStateText, "professionStateText must be assigned");
@@ -39,12 +41,30 @@ namespace Brains
 
         private void OnEnable()
         {
+            var empty = new EmptyState();
             var selected = new EntitySelected(this);
             var deselected = new EntityDeselected(this);
-            _stateMachine.AddTransition(deselected, selected, () =>
+            _stateMachine.AddTransition(selected, empty,
+                () => !selectedEntity.GetInstanceID().Equals(currentInstanceID));
+            _stateMachine.AddTransition(empty, selected, EligibleToSelect());
+            _stateMachine.AddTransition(deselected, selected, EligibleToSelect());
+
+            Func<bool> EligibleToSelect() => () =>
             {
-                return selectedEntity != null && selectedEntity.GetComponent<BasicNeeds>();
-            });
+                if (selectedEntity != null)
+                {
+                    Debug.LogFormat("prev id: {0}, current id: {1}", currentInstanceID, selectedEntity.GetInstanceID());
+                    if (selectedEntity.GetComponent<BasicNeeds>() != null &&
+                        !currentInstanceID.Equals(selectedEntity.GetInstanceID()))
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            };
+
+
             _stateMachine.AddAnyTransition(deselected, () => selectedEntity == null);
             _stateMachine.SetState(deselected);
         }
