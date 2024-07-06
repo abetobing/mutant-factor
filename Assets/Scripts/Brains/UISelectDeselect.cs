@@ -17,7 +17,8 @@ namespace Brains
         [SerializeField] public RectTransform resourceInfoPanel;
 
         [SerializeField] public TMP_Text nameText;
-        [SerializeField] public TMP_Text stateText;
+        [SerializeField] public TMP_Text basicNeedsStateText;
+        [SerializeField] public TMP_Text professionStateText;
         [SerializeField] public Slider healthSlider;
         [SerializeField] public Slider hungerSlider;
         [SerializeField] public Slider thirstSlider;
@@ -27,7 +28,8 @@ namespace Brains
         {
             _stateMachine = new StateMachine();
             Assert.IsNotNull(nameText, "nameText must be assigned");
-            Assert.IsNotNull(stateText, "stateText must be assigned");
+            Assert.IsNotNull(basicNeedsStateText, "basicNeedsStateText must be assigned");
+            Assert.IsNotNull(professionStateText, "professionStateText must be assigned");
             Assert.IsNotNull(entityInfoPanel, "entityInfoPanel must be assigned");
             Assert.IsNotNull(healthSlider, "healthSlider must be assigned");
             Assert.IsNotNull(hungerSlider, "hungerSlider must be assigned");
