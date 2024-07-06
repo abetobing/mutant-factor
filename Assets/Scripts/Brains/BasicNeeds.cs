@@ -53,11 +53,16 @@ namespace Brains
 
             // move to hungry state from any state
             Any(hungry, () => _hunger <= 20f && !HasEnteredHungryState);
+            Any(healthy, NoFoodLeftButNotHungryAnymore());
 
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
             Func<bool> ArrivedAtFoodSource() => () => navMeshAgent.remainingDistance <= 1f;
             Func<bool> StuckForOverASecond() => () => moveToFood.TimeStuck > 1f;
             Func<bool> NoFoodLeft() => () => FoodTarget.IsDepleted;
+
+            Func<bool> NoFoodLeftButNotHungryAnymore() =>
+                () => (FoodTarget == null || FoodTarget.IsDepleted) && _hunger > 30f;
+
             _stateMachine.SetState(healthy);
 
 

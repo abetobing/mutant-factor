@@ -46,7 +46,6 @@ namespace FSM.BasicNeedState
         public void OnExit()
         {
             _animator.SetBool(Constants.IsHarvestingHash, false);
-            _thePerson.HasEnteredHungryState = false;
         }
     }
 }
