@@ -2042,6 +2042,7 @@ MonoBehaviour:
   enableRotation: 1
   enableZoom: 1
   zoomSpeed: 10
+  CinemachineVirtualCamera: {fileID: 535450696}
 --- !u!1001 &483162389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5326,7 +5327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c100a3e361e4f65bc433028d067786f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  highlightColor: {r: 0.990566, g: 0, b: 0.8396746, a: 0}
   width: 6.03
 --- !u!4 &1723058326
 Transform:
