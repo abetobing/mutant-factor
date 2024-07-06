@@ -23,6 +23,11 @@ namespace FSM.BasicNeedState
             _animator = animator;
         }
 
+        public string String()
+        {
+            return "moving to food source";
+        }
+
         public void Tick()
         {
             if (Vector3.Distance(_thePerson.transform.position, _lastPosition) <= 0f)
@@ -33,7 +38,6 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is moving to food source", _thePerson.gameObject.name);
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_thePerson.FoodTarget.transform.position);

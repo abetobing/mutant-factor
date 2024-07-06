@@ -6744,6 +6744,7 @@ MonoBehaviour:
   entityInfoPanel: {fileID: 39891822}
   resourceInfoPanel: {fileID: 39891822}
   nameText: {fileID: 1710306911}
+  stateText: {fileID: 1471602015}
   healthSlider: {fileID: 1778951429}
   hungerSlider: {fileID: 1444872178}
   thirstSlider: {fileID: 985980264}

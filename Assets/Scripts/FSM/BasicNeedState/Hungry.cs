@@ -18,13 +18,17 @@ namespace FSM.BasicNeedState
             _animator = animator;
         }
 
+        public string String()
+        {
+            return "hungry";
+        }
+
         public void Tick()
         {
         }
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is hungry", _thePerson.gameObject.name);
             _animator.SetBool(Constants.IsHarvestingHash, false);
             // stop the profession or current job
             _thePerson.GetComponent<IProfession>().Disable();

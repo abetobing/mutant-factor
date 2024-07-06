@@ -23,6 +23,11 @@ namespace FSM.GathererState
             _animator = animator;
         }
 
+        public string String()
+        {
+            return "returning to stockpile";
+        }
+
         public void Tick()
         {
             Debug.DrawRay(_destination, Vector3.up, Color.green, 1.0f); //so you can see with gizmos
@@ -30,7 +35,6 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is returning to stockpile", _gatherer.gameObject.name);
             _gatherer.StockPile = Object.FindObjectOfType<StockPile>();
             _destination = _gatherer.StockPile.transform.position; 
             _navMeshAgent.enabled = true;

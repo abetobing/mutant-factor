@@ -15,13 +15,17 @@ namespace FSM.BasicNeedState
             _thePerson = basicNeeds;
         }
 
+        public string String()
+        {
+            return "healthy";
+        }
+
         public void Tick()
         {
         }
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is healthy", _thePerson.gameObject.name);
             // enable the profession or current job again
             _thePerson.GetComponent<IProfession>().Enable();
         }

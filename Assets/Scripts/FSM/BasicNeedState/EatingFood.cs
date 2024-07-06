@@ -20,6 +20,11 @@ namespace FSM.BasicNeedState
             _animator = animator;
         }
 
+        public string String()
+        {
+            return "eating food";
+        }
+
         public void Tick()
         {
             if (_thePerson.FoodTarget != null)
@@ -34,7 +39,6 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is eating food", _thePerson.gameObject.name);
             _animator.SetBool(Constants.IsHarvestingHash, true);
             _thePerson.HasEnteredHungryState = true;
         }

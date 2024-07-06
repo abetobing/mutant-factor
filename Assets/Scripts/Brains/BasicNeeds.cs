@@ -29,6 +29,7 @@ namespace Brains
 
         [HideInInspector] public FoodSource FoodTarget;
         [HideInInspector] public bool HasEnteredHungryState;
+        [HideInInspector] public string CurrentStateString => _stateMachine.GetCurrentStateString();
 
         private void Awake()
         {

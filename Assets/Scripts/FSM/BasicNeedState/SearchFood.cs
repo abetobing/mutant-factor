@@ -18,6 +18,11 @@ namespace FSM.BasicNeedState
             _thePerson = basicNeeds;
         }
 
+        public string String()
+        {
+            return "searching for food";
+        }
+
         public void Tick()
         {
             _thePerson.FoodTarget = ChooseOneOfTheNearestResources(3);
@@ -25,7 +30,6 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is searching for food", _thePerson.gameObject.name);
         }
 
         public void OnExit()

@@ -32,13 +32,17 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is fleeing", _gatherer.gameObject.name);
             _navMeshAgent.enabled = true;
             _gatherer.DropAllResources();
             _animator.SetBool(Constants.IsRunningHash, true);
             _initialSpeed = _navMeshAgent.speed;
             _navMeshAgent.speed = FLEE_SPEED;
             _particleSystem.Play();
+        }
+
+        public string String()
+        {
+            return "fleeing";
         }
 
         public void Tick()

@@ -30,6 +30,8 @@ namespace FSM
    
       private static List<Transition> EmptyTransitions = new List<Transition>(0);
 
+      public string GetCurrentStateString() => _currentState.String();
+
       public void Tick()
       {
          var transition = GetTransition();

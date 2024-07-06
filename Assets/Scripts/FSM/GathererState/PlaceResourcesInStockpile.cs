@@ -16,6 +16,11 @@ namespace FSM.GathererState
             _gatherer = gatherer;
         }
 
+        public string String()
+        {
+            return "placing resource on stockpile";
+        }
+
         public void Tick()
         {
             if (_gatherer.Take())
@@ -24,7 +29,6 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is placing resource in stockpile", _gatherer.gameObject.name);
         }
 
         public void OnExit() { }

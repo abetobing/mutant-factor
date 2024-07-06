@@ -13,6 +13,7 @@ namespace DefaultNamespace
         [SerializeField] private RectTransform resourceInfoPanel;
 
         [SerializeField] private TMP_Text nameText;
+        [SerializeField] private TMP_Text stateText;
         [SerializeField] private Slider healthSlider;
         [SerializeField] private Slider hungerSlider;
         [SerializeField] private Slider thirstSlider;
@@ -22,7 +23,8 @@ namespace DefaultNamespace
 
         private void Awake()
         {
-            Assert.IsNotNull(nameText, "Name text must be assigned");
+            Assert.IsNotNull(nameText, "nameText must be assigned");
+            Assert.IsNotNull(stateText, "stateText must be assigned");
             Assert.IsNotNull(entityInfoPanel, "entityInfoPanel must be assigned");
             Assert.IsNotNull(healthSlider, "healthSlider must be assigned");
             Assert.IsNotNull(hungerSlider, "hungerSlider must be assigned");
@@ -57,6 +59,7 @@ namespace DefaultNamespace
         {
             if (_basicNeeds != null)
             {
+                stateText.text = $"{nameText.text} is {_basicNeeds.CurrentStateString}";   
                 healthSlider.value = _basicNeeds.HealthLevel / Constants.DefaultMaxHealth;
                 hungerSlider.value = _basicNeeds.HungerLevel / Constants.DefaultMaxHunger;
                 thirstSlider.value = _basicNeeds.ThirstLevel / Constants.DefaultMaxThirst;

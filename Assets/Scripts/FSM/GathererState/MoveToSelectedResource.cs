@@ -24,7 +24,12 @@ namespace FSM.GathererState
             _navMeshAgent = navMeshAgent;
             _animator = animator;
         }
-    
+
+        public string String()
+        {
+            return "going to target resource";
+        }
+
         public void Tick()
         {
             if (Vector3.Distance(_gatherer.transform.position, _lastPosition) <= 0f)
@@ -35,7 +40,6 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is moving to resource", _gatherer.gameObject.name);
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_gatherer.Target.transform.position);

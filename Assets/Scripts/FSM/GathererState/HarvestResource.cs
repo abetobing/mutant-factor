@@ -36,7 +36,11 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is harvesting", _gatherer.gameObject.name);
+        }
+
+        public string String()
+        {
+            return "harvesting resource";
         }
 
         public void OnExit()

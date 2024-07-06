@@ -17,6 +17,12 @@ namespace FSM.GathererState
         {
             _gatherer = gatherer;
         }
+
+        public string String()
+        {
+            return "searching for resource";
+        }
+
         public void Tick()
         {
             _gatherer.Target = ChooseOneOfTheNearestResources(5);
@@ -34,7 +40,6 @@ namespace FSM.GathererState
 
         public void OnEnter()
         {
-            Debug.LogFormat("{0} is searching for resource", _gatherer.gameObject.name);
         }
         public void OnExit() { }
     }
