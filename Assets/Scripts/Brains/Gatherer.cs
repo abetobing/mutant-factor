@@ -28,6 +28,7 @@ namespace Brains
         {
             var navMeshAgent = GetComponent<NavMeshAgent>();
             var animator = GetComponent<Animator>();
+            var enemyDetector = gameObject.AddComponent<EnemyDetector>();
             var fleeParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
 
             _stateMachine = new StateMachine();
@@ -37,6 +38,7 @@ namespace Brains
             var harvest = new HarvestResource(this, animator);
             var returnToStockpile = new ReturnToStockpile(this, navMeshAgent, animator);
             var placeResourcesInStockpile = new PlaceResourcesInStockpile(this);
+            var flee = new Flee(this, navMeshAgent, enemyDetector, animator, fleeParticleSystem);
 
             At(search, moveToSelected, HasTargetAndCanCarryMore());
             At(search, returnToStockpile, InventoryFull());
@@ -46,6 +48,9 @@ namespace Brains
             At(harvest, returnToStockpile, InventoryFull());
             At(returnToStockpile, placeResourcesInStockpile, ReachedStockpile());
             At(placeResourcesInStockpile, search, () => _gathered == 0);
+
+            _stateMachine.AddAnyTransition(flee, () => enemyDetector.EnemyInRange);
+            At(flee, search, () => enemyDetector.EnemyInRange == false);
 
             _stateMachine.SetState(search);
 
@@ -74,7 +79,11 @@ namespace Brains
 
         public ScriptableObject Stats() => null;
 
-        public void Enable() => this.enabled = true;
+        public void Enable()
+        {
+            this.enabled = true;
+            // _stateMachine.SetState(new SearchForResource(this));
+        }
 
         public void Disable() => this.enabled = false;
         
