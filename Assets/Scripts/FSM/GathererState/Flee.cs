@@ -1,7 +1,11 @@
-﻿using Brains;
+﻿#region
+
+using Brains;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -34,6 +38,11 @@ namespace FSM.GathererState
             _initialSpeed = _navMeshAgent.speed;
             _navMeshAgent.speed = FLEE_SPEED;
             _particleSystem.Play();
+        }
+
+        public string String()
+        {
+            return "fleeing";
         }
 
         public void Tick()

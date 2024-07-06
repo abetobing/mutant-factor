@@ -1,5 +1,9 @@
+#region
+
 using Brains;
 using UnityEngine;
+
+#endregion
 
 namespace FSM.BasicNeedState
 {
@@ -16,6 +20,11 @@ namespace FSM.BasicNeedState
             _animator = animator;
         }
 
+        public string String()
+        {
+            return "eating food";
+        }
+
         public void Tick()
         {
             if (_thePerson.FoodTarget != null)
@@ -30,7 +39,6 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.Log("eating food!");
             _animator.SetBool(Constants.IsHarvestingHash, true);
             _thePerson.HasEnteredHungryState = true;
         }
@@ -38,7 +46,6 @@ namespace FSM.BasicNeedState
         public void OnExit()
         {
             _animator.SetBool(Constants.IsHarvestingHash, false);
-            _thePerson.HasEnteredHungryState = false;
         }
     }
 }

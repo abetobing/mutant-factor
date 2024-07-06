@@ -1,9 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Cinemachine;
+#region
+
 using UnityEngine;
 using UnityEngine.Assertions;
+using Cinemachine;
+
+#endregion
 
 public class VirtualCamera : MonoBehaviour
 {
@@ -105,7 +106,6 @@ public class VirtualCamera : MonoBehaviour
             Vector3 mouseMovementDelta = Input.mousePosition - _lastMousePosition;
             inputDirection.x = mouseMovementDelta.x * dragPanSpeed;
             inputDirection.z = mouseMovementDelta.y * dragPanSpeed;
-            Debug.Log(mouseMovementDelta);
             _lastMousePosition = Input.mousePosition;
         }
         Vector3 moveDirection = transform.forward * inputDirection.z + transform.right * inputDirection.x;

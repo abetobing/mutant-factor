@@ -1,9 +1,13 @@
+#region
+
 using System;
 using Entities;
 using FSM;
 using FSM.BasicNeedState;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace Brains
 {
@@ -14,12 +18,18 @@ namespace Brains
         [SerializeField] private float _thirst = 100f;
         [SerializeField] private float _stamina = 100f;
 
+        public float HealthLevel => _health;
+        public float HungerLevel => _hunger;
+        public float ThirstLevel => _thirst;
+        public float StaminaLevel => _stamina;
+
         [SerializeField] private float _hungerFallRate = 0.5f; // hunger fall rate per second
 
         private StateMachine _stateMachine;
 
         [HideInInspector] public FoodSource FoodTarget;
         [HideInInspector] public bool HasEnteredHungryState;
+        [HideInInspector] public string CurrentStateString => _stateMachine.CurrentActivity();
 
         private void Awake()
         {
@@ -43,11 +53,16 @@ namespace Brains
 
             // move to hungry state from any state
             Any(hungry, () => _hunger <= 20f && !HasEnteredHungryState);
+            Any(healthy, NoFoodLeftButNotHungryAnymore());
 
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
             Func<bool> ArrivedAtFoodSource() => () => navMeshAgent.remainingDistance <= 1f;
             Func<bool> StuckForOverASecond() => () => moveToFood.TimeStuck > 1f;
             Func<bool> NoFoodLeft() => () => FoodTarget.IsDepleted;
+
+            Func<bool> NoFoodLeftButNotHungryAnymore() =>
+                () => (FoodTarget == null || FoodTarget.IsDepleted) && _hunger > 30f;
+
             _stateMachine.SetState(healthy);
 
 
@@ -65,7 +80,7 @@ namespace Brains
         private void Update()
         {
             _stateMachine.Tick();
-            
+
             // hunger will fall at a given rate
             _hunger -= Time.deltaTime * _hungerFallRate;
             _hunger = Mathf.Clamp(
@@ -73,13 +88,12 @@ namespace Brains
                 0f,
                 Constants.DefaultMaxHunger
             );
-
         }
 
         public void EatFood()
         {
             if (FoodTarget.Take()) _hunger++;
-            _hunger = Mathf.Clamp(_hunger, 0f,  Constants.DefaultMaxHunger);
+            _hunger = Mathf.Clamp(_hunger, 0f, Constants.DefaultMaxHunger);
         }
     }
 }

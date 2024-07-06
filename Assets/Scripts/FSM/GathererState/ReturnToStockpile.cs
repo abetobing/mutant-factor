@@ -1,7 +1,11 @@
-﻿using Brains;
+﻿#region
+
+using Brains;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -17,6 +21,11 @@ namespace FSM.GathererState
             _gatherer = gatherer;
             _navMeshAgent = navMeshAgent;
             _animator = animator;
+        }
+
+        public string String()
+        {
+            return "returning to stockpile";
         }
 
         public void Tick()

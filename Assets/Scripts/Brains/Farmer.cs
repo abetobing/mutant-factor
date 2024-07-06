@@ -1,15 +1,27 @@
+#region
+
+using System;
+using FSM;
 using UnityEngine;
+
+#endregion
 
 namespace Brains
 {
     public class Farmer : MonoBehaviour, IProfession
     {
+        private StateMachine _stateMachine;
         public string Name() => "Farmer";
 
-        public ScriptableObject Stats() => throw new System.NotImplementedException();
+        public string ActivtyText()
+        {
+            return _stateMachine.CurrentActivity();
+        }
 
-        public void Enable() => throw new System.NotImplementedException();
+        public ScriptableObject Stats() => null;
 
-        public void Disable() => throw new System.NotImplementedException();
+        public void Enable() => throw new NotImplementedException();
+
+        public void Disable() => throw new NotImplementedException();
     }
 }

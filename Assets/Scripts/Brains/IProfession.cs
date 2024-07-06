@@ -1,4 +1,8 @@
+#region
+
 using UnityEngine;
+
+#endregion
 
 namespace Brains
 {
@@ -9,9 +13,9 @@ namespace Brains
     public interface IProfession
     {
         public string Name(); // returns the profession name
+        public string ActivtyText();
         public ScriptableObject Stats(); // returns the profession stats
         public void Enable();
         public void Disable();
-
     }
 }

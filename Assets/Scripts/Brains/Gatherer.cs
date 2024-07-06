@@ -1,9 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using Entities;
 using FSM;
 using FSM.GathererState;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace Brains
 {
@@ -19,7 +23,7 @@ namespace Brains
         public GatherableResource Target { get; set; }
         public StockPile StockPile { get; set; }
 
-        private void Awake()
+        private void OnEnable()
         {
             var navMeshAgent = GetComponent<NavMeshAgent>();
             var animator = GetComponent<Animator>();
@@ -35,7 +39,8 @@ namespace Brains
             var placeResourcesInStockpile = new PlaceResourcesInStockpile(this);
             var flee = new Flee(this, navMeshAgent, enemyDetector, animator, fleeParticleSystem);
 
-            At(search, moveToSelected, HasTarget());
+            At(search, moveToSelected, HasTargetAndCanCarryMore());
+            At(search, returnToStockpile, InventoryFull());
             At(moveToSelected, search, StuckForOverASecond());
             At(moveToSelected, harvest, ReachedResource());
             At(harvest, search, TargetIsDepletedAndICanCarryMore());
@@ -49,7 +54,10 @@ namespace Brains
             _stateMachine.SetState(search);
 
             void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
-            Func<bool> HasTarget() => () => Target != null;
+
+            Func<bool> HasTargetAndCanCarryMore() => () => Target != null &&
+                                                           _gathered < _maxCarried;
+
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
 
             Func<bool> ReachedResource() => () => Target != null &&
@@ -70,12 +78,21 @@ namespace Brains
 
         public string Name() => "Gatherer";
 
+        public string ActivtyText()
+        {
+            return _stateMachine.CurrentActivity();
+        }
+
         public ScriptableObject Stats() => null;
 
-        public void Enable() => this.enabled = true;
+        public void Enable()
+        {
+            this.enabled = true;
+            // _stateMachine.SetState(new SearchForResource(this));
+        }
 
         public void Disable() => this.enabled = false;
-        
+
         public void TakeFromTarget()
         {
             if (Target.Take())
@@ -104,6 +121,5 @@ namespace Brains
                 OnGatheredChanged?.Invoke(_gathered);
             }
         }
-
     }
 }

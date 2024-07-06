@@ -1,5 +1,9 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace Entities
 {

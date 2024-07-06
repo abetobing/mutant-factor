@@ -1,5 +1,9 @@
-﻿using System.Collections;
+﻿#region
+
+using System.Collections;
 using UnityEngine;
+
+#endregion
 
 namespace Entities
 {

@@ -1,34 +1,36 @@
-﻿using UnityEngine;
+﻿#region
+
+using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace Entities
 {
     public class GatherableResource : MonoBehaviour
     {
-        [SerializeField] private int _totalAvailable = 1000;
+        [SerializeField] private int _initialAvailable = 1000;
     
-        private int _available;
-        public bool IsDepleted => _available <= 0;
+        public int Available { get; private set; }
+        public bool IsDepleted => Available <= 0;
 
         private void OnEnable()
         {
-            _available = _totalAvailable;
+            Available = _initialAvailable;
         }
-
+        
         public bool Take()
         {
-            if (_available <= 0)
+            if (Available <= 0)
                 return false;
-            _available--;
+            Available--;
 
-            UpdateSize();
-        
             return true;
         }
 
         private void UpdateSize()
         {
-            float scale = (float)_available / _totalAvailable;
+            float scale = (float)Available / _initialAvailable;
             if (scale > 0 && scale < 1f)
             {
                 var vectorScale = Vector3.one * scale;
@@ -50,6 +52,6 @@ namespace Entities
             }
         }
 
-        public void SetAvailable(int amount) => _available = amount;
+        public void SetAvailable(int amount) => Available = amount;
     }
 }

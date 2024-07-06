@@ -1,7 +1,10 @@
-﻿using Brains;
-using Entities;
+﻿#region
+
+using Brains;
 using UnityEngine;
 using UnityEngine.AI;
+
+#endregion
 
 namespace FSM.GathererState
 {
@@ -21,7 +24,12 @@ namespace FSM.GathererState
             _navMeshAgent = navMeshAgent;
             _animator = animator;
         }
-    
+
+        public string String()
+        {
+            return "going to target resource";
+        }
+
         public void Tick()
         {
             if (Vector3.Distance(_gatherer.transform.position, _lastPosition) <= 0f)

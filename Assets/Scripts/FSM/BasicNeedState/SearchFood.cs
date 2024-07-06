@@ -1,7 +1,11 @@
+#region
+
 using System.Linq;
 using Brains;
 using Entities;
 using UnityEngine;
+
+#endregion
 
 namespace FSM.BasicNeedState
 {
@@ -14,6 +18,11 @@ namespace FSM.BasicNeedState
             _thePerson = basicNeeds;
         }
 
+        public string String()
+        {
+            return "searching for food";
+        }
+
         public void Tick()
         {
             _thePerson.FoodTarget = ChooseOneOfTheNearestResources(3);
@@ -21,7 +30,6 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            Debug.Log("searching food!");
         }
 
         public void OnExit()
