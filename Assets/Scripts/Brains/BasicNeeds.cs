@@ -13,10 +13,10 @@ namespace Brains
 {
     public class BasicNeeds : MonoBehaviour
     {
-        [SerializeField] private float _health = 100f;
-        [SerializeField] private float _hunger = 100f;
-        [SerializeField] private float _thirst = 100f;
-        [SerializeField] private float _stamina = 100f;
+        private float _health = 100f;
+        private float _hunger = 100f;
+        private float _thirst = 100f;
+        private float _stamina = 100f;
 
         public float HealthLevel => _health;
         public float HungerLevel => _hunger;
@@ -94,6 +94,13 @@ namespace Brains
         {
             if (FoodTarget.Take()) _hunger++;
             _hunger = Mathf.Clamp(_hunger, 0f, Constants.DefaultMaxHunger);
+        }
+
+        public void TakingDamage(float damage)
+        {
+            _health -= damage;
+            if (_health <= 0f)
+                _health = 0f;
         }
     }
 }

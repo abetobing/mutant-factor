@@ -9,7 +9,10 @@ public class Constants
     public static readonly int IsFemaleHash = Animator.StringToHash("isFemale");
     public static readonly int IsWalkingHash = Animator.StringToHash("isWalking");
     public static readonly int IsRunningHash = Animator.StringToHash("isRunning");
+    public static readonly int IsCombatHash = Animator.StringToHash("isCombat");
     public static readonly int IsHarvestingHash = Animator.StringToHash("isHarvesting");
+    public static readonly int AttackHash = Animator.StringToHash("attack");
+    public static readonly int DeadHash = Animator.StringToHash("dead");
 
     public const float NavMeshDistanceTolerance = 1.5f;
 
