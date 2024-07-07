@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class Constants
 {
+    public static readonly int IsFemaleHash = Animator.StringToHash("isFemale");
     public static readonly int IsWalkingHash = Animator.StringToHash("isWalking");
     public static readonly int IsRunningHash = Animator.StringToHash("isRunning");
     public static readonly int IsHarvestingHash = Animator.StringToHash("isHarvesting");
