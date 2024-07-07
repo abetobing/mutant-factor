@@ -27,7 +27,7 @@ namespace FSM.BasicNeedState
         public void OnEnter()
         {
             // enable the profession or current job again
-            _thePerson.GetComponent<IProfession>().Enable();
+            _thePerson.GetComponent<BaseProfession>().enabled = true;
             _thePerson.HasEnteredHungryState = false;
         }
 

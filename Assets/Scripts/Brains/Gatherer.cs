@@ -11,17 +11,18 @@ using UnityEngine.AI;
 
 namespace Brains
 {
-    public class Gatherer : MonoBehaviour, IProfession
+    public class Gatherer : BaseProfession
     {
         public event Action<int> OnGatheredChanged;
 
         [SerializeField] private int _maxCarried = 20;
 
-        private StateMachine _stateMachine;
         private int _gathered;
 
         public GatherableResource Target { get; set; }
         public StockPile StockPile { get; set; }
+
+        private void Awake() => Profession = "Gatherer";
 
         private void OnEnable()
         {
@@ -76,14 +77,7 @@ namespace Brains
 
         private void Update() => _stateMachine.Tick();
 
-        public string Name() => "Gatherer";
-
-        public string ActivtyText()
-        {
-            return _stateMachine.CurrentActivity();
-        }
-
-        public ScriptableObject Stats() => null;
+        public override ScriptableObject Stats() => null;
 
         public void Enable()
         {

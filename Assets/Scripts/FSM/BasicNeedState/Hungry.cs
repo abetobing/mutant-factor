@@ -11,7 +11,7 @@ namespace FSM.BasicNeedState
     {
         private BasicNeeds _thePerson;
         private Animator _animator;
-        
+
         public Hungry(BasicNeeds basicNeeds, Animator animator)
         {
             _thePerson = basicNeeds;
@@ -31,7 +31,7 @@ namespace FSM.BasicNeedState
         {
             _animator.SetBool(Constants.IsHarvestingHash, false);
             // stop the profession or current job
-            _thePerson.GetComponent<IProfession>().Disable();
+            _thePerson.GetComponent<BaseProfession>().enabled = false;
             _thePerson.HasEnteredHungryState = true;
         }
 

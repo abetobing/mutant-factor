@@ -6,7 +6,7 @@ namespace FSM.UIState
     {
         private UISelectDeselect _ui;
         private BasicNeeds _basicNeeds;
-        private IProfession _profession;
+        private BaseProfession _baseProfession;
 
         public EntitySelected(UISelectDeselect theUiPanel)
         {
@@ -30,9 +30,9 @@ namespace FSM.UIState
                 _basicNeeds = _ui.selectedEntity.GetComponent<BasicNeeds>();
             }
 
-            if (_ui.selectedEntity.GetComponent<IProfession>() != null)
+            if (_ui.selectedEntity.GetComponent<BaseProfession>() != null)
             {
-                _profession = _ui.selectedEntity.GetComponent<IProfession>();
+                _baseProfession = _ui.selectedEntity.GetComponent<BaseProfession>();
             }
 
             _ui.currentInstanceID = _ui.selectedEntity.GetInstanceID();
@@ -49,9 +49,9 @@ namespace FSM.UIState
                 _ui.staminaSlider.value = _basicNeeds.StaminaLevel / Constants.DefaultMaxStamina;
             }
 
-            if (_profession != null)
+            if (_baseProfession != null)
             {
-                _ui.professionStateText.text = _profession.ActivtyText();
+                _ui.professionStateText.text = _baseProfession.ActivtyText();
             }
         }
 

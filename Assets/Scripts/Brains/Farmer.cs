@@ -1,24 +1,17 @@
 #region
 
 using System;
-using FSM;
 using UnityEngine;
 
 #endregion
 
 namespace Brains
 {
-    public class Farmer : MonoBehaviour, IProfession
+    public class Farmer : BaseProfession
     {
-        private StateMachine _stateMachine;
-        public string Name() => "Farmer";
+        private void Awake() => Profession = "Gatherer";
 
-        public string ActivtyText()
-        {
-            return _stateMachine.CurrentActivity();
-        }
-
-        public ScriptableObject Stats() => null;
+        public override ScriptableObject Stats() => null;
 
         public void Enable() => throw new NotImplementedException();
 
