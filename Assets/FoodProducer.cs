@@ -28,7 +28,6 @@ public class FoodProducer : MonoBehaviour
                 fruit.GetComponent<FoodSource>().available / 3, fruit.GetComponent<FoodSource>().available
             );
             fruit.transform.localScale *= Random.Range(0.5f, 1f);
-            Debug.Log(fruit.GetComponent<FoodSource>().available);
         }
     }
 }

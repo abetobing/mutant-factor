@@ -1,7 +1,6 @@
 #region
 
 using Brains;
-using UnityEngine;
 
 #endregion
 
@@ -19,7 +18,6 @@ namespace Entities
 
         public void OnDestroy()
         {
-            Debug.Log("food is destroyed");
         }
     }
 }
