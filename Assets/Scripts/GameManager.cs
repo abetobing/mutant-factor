@@ -1,14 +1,11 @@
 #region
 
-using System;
 using System.Collections;
 using System.Linq;
 using Brains;
 using Entities;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 #endregion
 
@@ -19,7 +16,7 @@ namespace DefaultNamespace
         private static GameManager _instance;
 
         public static GameManager Instance => _instance;
-        
+
         public BasicNeeds selectedEntity;
 
         [SerializeField] private TMP_Text txtStats;
@@ -30,7 +27,7 @@ namespace DefaultNamespace
                 _instance = this;
             StartCoroutine(DisplayStatistic_TotalResource());
         }
-        
+
 
         private IEnumerator DisplayStatistic_TotalResource()
         {
@@ -39,14 +36,15 @@ namespace DefaultNamespace
             {
                 yield return wait;
                 var totalFoodSourceAvailable = FindObjectsOfType<FoodSource>()
-                    .Sum(t => t.Available);
+                    .Sum(t => t.available);
                 var totalGatherableResourceAvailable = FindObjectsOfType<GatherableResource>()
-                    .Sum(t => t.Available);
-                txtStats.text = $"Food source: {totalFoodSourceAvailable} / Resource: {totalGatherableResourceAvailable}";
+                    .Sum(t => t.available);
+                txtStats.text =
+                    $"Food source: {totalFoodSourceAvailable} / Resource: {totalGatherableResourceAvailable}";
             }
         }
 
-        
+
         private void OnDestroy()
         {
             StopCoroutine(DisplayStatistic_TotalResource());

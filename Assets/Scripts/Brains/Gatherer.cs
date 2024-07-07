@@ -111,15 +111,5 @@ namespace Brains
             OnGatheredChanged?.Invoke(_gathered);
             return true;
         }
-
-        public void DropAllResources()
-        {
-            if (_gathered > 0)
-            {
-                FindObjectOfType<WoodDropper>().Drop(_gathered, transform.position);
-                _gathered = 0;
-                OnGatheredChanged?.Invoke(_gathered);
-            }
-        }
     }
 }

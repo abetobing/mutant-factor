@@ -21,7 +21,8 @@ namespace FSM.GathererState
         private const float FLEE_SPEED = 6F;
         private const float FLEE_DISTANCE = 5F;
 
-        public Flee(Gatherer gatherer, NavMeshAgent navMeshAgent, EnemyDetector enemyDetector, Animator animator, ParticleSystem particleSystem)
+        public Flee(Gatherer gatherer, NavMeshAgent navMeshAgent, EnemyDetector enemyDetector, Animator animator,
+            ParticleSystem particleSystem)
         {
             _gatherer = gatherer;
             _navMeshAgent = navMeshAgent;
@@ -33,7 +34,6 @@ namespace FSM.GathererState
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _gatherer.DropAllResources();
             _animator.SetBool(Constants.IsRunningHash, true);
             _initialSpeed = _navMeshAgent.speed;
             _navMeshAgent.speed = FLEE_SPEED;

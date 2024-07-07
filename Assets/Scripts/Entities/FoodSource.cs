@@ -1,31 +1,25 @@
 #region
 
+using Brains;
 using UnityEngine;
 
 #endregion
 
 namespace Entities
 {
-    public class FoodSource : MonoBehaviour
+    public class FoodSource : BaseResource
     {
-        
-        [SerializeField] private int _initialAvailable = 1000;
-    
-        public int Available { get; private set; }
-        public bool IsDepleted => Available <= 0;
+        private void Awake() => displayName = "Food resource";
 
-        private void OnEnable()
+        public void LateUpdate()
         {
-            Available = _initialAvailable;
+            if (IsDepleted)
+                Destroy(gameObject, 0.5f);
         }
-        
-        public bool Take()
-        {
-            if (Available <= 0)
-                return false;
-            Available--;
 
-            return true;
+        public void OnDestroy()
+        {
+            Debug.Log("food is destroyed");
         }
     }
 }
