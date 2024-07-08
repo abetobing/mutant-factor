@@ -1,4 +1,5 @@
 using Brains;
+using Entities;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -22,6 +23,17 @@ namespace DefaultNamespace
                 0f,
                 Constants.DefaultMaxHunger
             );
+        }
+
+        private void Update()
+        {
+            if (!IsAlive)
+            {
+                if (GetComponent<FoodSource>() == null) // this is not a food source, so destroy it after death
+                    Destroy(gameObject, 2f);
+                else
+                    GetComponent<FoodSource>().enabled = true; // else enable it so it can be harvested
+            }
         }
 
         public void TakingDamage(float damage)
