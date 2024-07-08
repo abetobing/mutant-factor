@@ -28,9 +28,7 @@ namespace FSM.Combat
             Debug.Log(String());
             _navMeshAgent.enabled = true;
             _navMeshAgent.ResetPath();
-            _animator.SetTrigger(Constants.DeadHash);
-            // TODO: perform object deletion on death, code below is not working
-            // _combat.target.GetComponent<BasicNeeds>()?.Dead();
+            // _animator.SetTrigger(Constants.DeadHash);
         }
 
         public void OnExit()
