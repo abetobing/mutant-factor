@@ -31,14 +31,12 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _navMeshAgent.SetDestination(_combat.target.transform.position);
-            _animator.SetBool(Constants.IsRunningHash, true);
             _navMeshAgent.enabled = true;
+            _navMeshAgent.SetDestination(_combat.target.transform.position);
         }
 
         public void OnExit()
         {
-            _animator.SetBool(Constants.IsRunningHash, false);
         }
     }
 }

@@ -126,6 +126,7 @@ namespace Brains
                 canSeeTarget = false;
 
             canAttackTarget = target != null &&
+                              target.GetComponent<BasicNeeds>().HealthLevel >= 1f &&
                               canSeeTarget &&
                               (Vector3.Distance(transform.position, target.position) <= attackRange);
         }

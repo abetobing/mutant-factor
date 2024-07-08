@@ -34,7 +34,7 @@ namespace FSM.GathererState
         public void OnEnter()
         {
             _navMeshAgent.enabled = true;
-            _animator.SetBool(Constants.IsRunningHash, true);
+            _animator.SetFloat(Constants.SpeedHash, 2f);
             _initialSpeed = _navMeshAgent.speed;
             _navMeshAgent.speed = FLEE_SPEED;
             _particleSystem.Play();
@@ -72,7 +72,7 @@ namespace FSM.GathererState
         {
             _navMeshAgent.speed = _initialSpeed;
             _navMeshAgent.enabled = false;
-            _animator.SetBool(Constants.IsRunningHash, false);
+            _animator.SetFloat(Constants.SpeedHash, 1f);
         }
     }
 }

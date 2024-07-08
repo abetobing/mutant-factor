@@ -32,13 +32,14 @@ namespace FSM.MinerState
                 {
                     _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);
                     _miner.TakeFromTarget();
-                    _animator.SetBool(Constants.IsHarvestingHash, true);
                 }
             }
         }
 
         public void OnEnter()
         {
+            _animator.SetBool(Constants.IsWorkingHash, true);
+            _animator.SetTrigger(Constants.Mining);
         }
 
         public string String()
@@ -48,7 +49,7 @@ namespace FSM.MinerState
 
         public void OnExit()
         {
-            _animator.SetBool(Constants.IsHarvestingHash, false);
+            _animator.SetBool(Constants.IsWorkingHash, false);
         }
     }
 }

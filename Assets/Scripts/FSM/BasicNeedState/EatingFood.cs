@@ -39,13 +39,13 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            _animator.SetBool(Constants.IsHarvestingHash, true);
+            _animator.SetBool(Constants.IsWorkingHash, true);
             _thePerson.HasEnteredHungryState = true;
         }
 
         public void OnExit()
         {
-            _animator.SetBool(Constants.IsHarvestingHash, false);
+            _animator.SetBool(Constants.IsWorkingHash, false);
         }
     }
 }

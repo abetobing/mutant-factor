@@ -29,7 +29,7 @@ namespace FSM.BasicNeedState
 
         public void OnEnter()
         {
-            _animator.SetBool(Constants.IsHarvestingHash, false);
+            _animator.SetBool(Constants.IsWorkingHash, false);
             // stop the profession or current job
             // enable the profession or current job again
             var profession = _thePerson.GetComponent<BaseProfession>();

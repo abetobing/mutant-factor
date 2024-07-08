@@ -42,11 +42,13 @@ namespace FSM.Combat
         public void OnEnter()
         {
             _navMeshAgent.enabled = false;
+            _animator.SetBool(Constants.IsCombatHash, true);
         }
 
         public void OnExit()
         {
             _navMeshAgent.enabled = true;
+            _animator.SetBool(Constants.IsCombatHash, false);
             _animator.ResetTrigger(Constants.AttackHash);
         }
     }

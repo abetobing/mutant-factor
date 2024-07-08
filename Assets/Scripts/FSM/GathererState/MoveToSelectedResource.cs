@@ -15,7 +15,7 @@ namespace FSM.GathererState
         private readonly Animator _animator;
 
         private Vector3 _lastPosition = Vector3.zero;
-    
+
         public float TimeStuck;
 
         public MoveToSelectedResource(Gatherer gatherer, NavMeshAgent navMeshAgent, Animator animator)
@@ -43,13 +43,11 @@ namespace FSM.GathererState
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_gatherer.Target.transform.position);
-            _animator.SetBool(Constants.IsWalkingHash, true);
         }
 
         public void OnExit()
         {
             _navMeshAgent.enabled = false;
-            _animator.SetBool(Constants.IsWalkingHash, false);
         }
     }
 }

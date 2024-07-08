@@ -27,7 +27,6 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _animator.SetBool(Constants.IsRunningHash, false);
             if (_navMeshAgent.hasPath)
                 _navMeshAgent.ResetPath();
             _profession = _combat.GetComponent<BaseProfession>();

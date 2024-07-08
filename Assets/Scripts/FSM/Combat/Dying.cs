@@ -28,10 +28,12 @@ namespace FSM.Combat
             Debug.Log(String());
             _navMeshAgent.ResetPath();
             _navMeshAgent.enabled = true;
+            _animator.SetTrigger(Constants.DeadHash);
         }
 
         public void OnExit()
         {
+            _combat.target.GetComponent<BasicNeeds>()?.Dead();
         }
     }
 }

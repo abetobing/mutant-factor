@@ -480,15 +480,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6501044868313502536}
-    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 6441197768562539107}
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 4889561648285648073}
+    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7076819572188541559}
   m_SourcePrefab: {fileID: 100100000, guid: f3e302415cc00a34e9e59ad7925c235f, type: 3}
 --- !u!4 &1344814905496670233 stripped
 Transform:
@@ -549,7 +549,7 @@ MonoBehaviour:
   baseDamage: 5
   targetMask:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 256
   obstructionMask:
     serializedVersion: 2
     m_Bits: 0
@@ -566,7 +566,7 @@ Animator:
   m_GameObject: {fileID: 3659020111186994537}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: f3e302415cc00a34e9e59ad7925c235f, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1427c0a6bab46844e8e8a2ba0754a662, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0b9698d3fb6f0224ab798939eb41b635, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -599,32 +599,6 @@ NavMeshAgent:
   m_BaseOffset: -0.05
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 0
---- !u!114 &6501044868313502536
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659020111186994537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9486d0f6832e3c34aba7bc72be518524, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 5
-  angle: 90
-  attackRange: 2
-  attackSpeed: 2
-  baseDamage: 5
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 256
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 0
-  target: {fileID: 0}
-  canSeeTarget: 0
-  canAttackTarget: 0
 --- !u!65 &6441197768562539107
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -662,3 +636,15 @@ MonoBehaviour:
   weaponPrefab: {fileID: 3330531830160758691, guid: a7ebed570ef474047b92d2b8faf5c503,
     type: 3}
   weaponPlaceholder: {fileID: 5649234651831546744}
+--- !u!114 &7076819572188541559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3659020111186994537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bb67f83cb84a34b1969c916da405f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

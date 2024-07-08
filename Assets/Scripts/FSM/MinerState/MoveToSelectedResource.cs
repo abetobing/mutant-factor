@@ -43,13 +43,11 @@ namespace FSM.MinerState
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_miner.Target.transform.position);
-            _animator.SetBool(Constants.IsWalkingHash, true);
         }
 
         public void OnExit()
         {
             _navMeshAgent.enabled = false;
-            _animator.SetBool(Constants.IsWalkingHash, false);
         }
     }
 }

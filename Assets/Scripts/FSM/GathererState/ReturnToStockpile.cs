@@ -45,13 +45,11 @@ namespace FSM.GathererState
             }
 
             _navMeshAgent.SetDestination(_destination);
-            _animator.SetBool(Constants.IsWalkingHash, true);
         }
 
         public void OnExit()
         {
             _navMeshAgent.enabled = false;
-            _animator.SetBool(Constants.IsWalkingHash, false);
         }
     }
 }

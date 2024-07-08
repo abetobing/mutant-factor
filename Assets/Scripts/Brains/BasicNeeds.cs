@@ -102,5 +102,10 @@ namespace Brains
             if (_health <= 0f)
                 _health = 0f;
         }
+
+        public void Dead()
+        {
+            Destroy(gameObject, 2f);
+        }
     }
 }

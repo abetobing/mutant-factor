@@ -7,12 +7,15 @@ using UnityEngine;
 public class Constants
 {
     public static readonly int IsFemaleHash = Animator.StringToHash("isFemale");
-    public static readonly int IsWalkingHash = Animator.StringToHash("isWalking");
-    public static readonly int IsRunningHash = Animator.StringToHash("isRunning");
     public static readonly int IsCombatHash = Animator.StringToHash("isCombat");
-    public static readonly int IsHarvestingHash = Animator.StringToHash("isHarvesting");
+    public static readonly int IsWorkingHash = Animator.StringToHash("isWorking");
+    public static readonly int SpeedHash = Animator.StringToHash("speed");
     public static readonly int AttackHash = Animator.StringToHash("attack");
     public static readonly int DeadHash = Animator.StringToHash("dead");
+    public static readonly int Gathering = Animator.StringToHash("gathering");
+    public static readonly int Mining = Animator.StringToHash("mining");
+    public static readonly int Farming = Animator.StringToHash("farming");
+    public static readonly int Fishing = Animator.StringToHash("fishing");
 
     public const float NavMeshDistanceTolerance = 1.5f;
 
