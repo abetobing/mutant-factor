@@ -1963,6 +1963,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   target: {fileID: 0}
+  attackedBy: {fileID: 0}
   canSeeTarget: 0
   canAttackTarget: 0
 --- !u!65 &447454961
@@ -2293,7 +2294,7 @@ Transform:
   m_GameObject: {fileID: 535450694}
   serializedVersion: 2
   m_LocalRotation: {x: 0.47185397, y: -9.59538e-16, z: 4.6577834e-16, w: 0.88167673}
-  m_LocalPosition: {x: 0, y: 14.995411, z: -10}
+  m_LocalPosition: {x: 0, y: 14.999981, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2888,6 +2889,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   target: {fileID: 0}
+  attackedBy: {fileID: 0}
   canSeeTarget: 0
   canAttackTarget: 0
 --- !u!114 &605921396
@@ -3048,6 +3050,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   target: {fileID: 0}
+  attackedBy: {fileID: 0}
   canSeeTarget: 0
   canAttackTarget: 0
 --- !u!114 &606457608
@@ -3542,7 +3545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 14.99541, z: -10}
+  m_FollowOffset: {x: 0, y: 14.99998, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -4567,7 +4570,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.47185397, y: -9.953463e-16, z: 5.326875e-16, w: 0.88167673}
-  m_LocalPosition: {x: 1.1612775, y: 16.259285, z: -17.271511}
+  m_LocalPosition: {x: 1.1612775, y: 16.263855, z: -17.271511}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6642,7 +6645,6 @@ MonoBehaviour:
   professionStateText: {fileID: 857184741}
   healthSlider: {fileID: 1778951429}
   hungerSlider: {fileID: 1444872178}
-  thirstSlider: {fileID: 0}
   staminaSlider: {fileID: 708981684}
 --- !u!1001 &1562490401
 PrefabInstance:

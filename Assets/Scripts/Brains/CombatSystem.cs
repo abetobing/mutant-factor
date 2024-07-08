@@ -31,6 +31,7 @@ namespace Brains
 
         // [HideInInspector] 
         public Transform target;
+        public Transform attackedBy;
 
         // [HideInInspector] 
         public bool canSeeTarget;
@@ -61,19 +62,12 @@ namespace Brains
             var dying = new Dying(this, _animator, _navMeshAgent);
 
             At(idle, moveToTarget, () => canSeeTarget);
-            At(idle, moveToTarget, BeingAttacked());
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
             Any(idle, () => !canSeeTarget);
             Any(dying, () => !_metabolism.IsAlive);
 
             _stateMachine.SetState(idle);
-
-            Func<bool> BeingAttacked() => () =>
-            {
-                // TODO: are we being attacked?
-                return false;
-            };
 
             void At(IState from, IState to, Func<bool> condition)
             {
@@ -90,6 +84,10 @@ namespace Brains
         {
             // Debug.LogFormat("{0} is {1}", gameObject.name, _stateMachine.CurrentActivity());
             _stateMachine.Tick();
+            if (attackedBy != null && !canSeeTarget)
+            {
+                transform.LookAt(attackedBy);
+            }
         }
 
         private IEnumerator FOVRoutine()
@@ -154,7 +152,7 @@ namespace Brains
         public void PerformAttack()
         {
             Debug.Log("performing attack");
-            target.GetComponent<Metabolism>()?.TakingDamage(baseDamage);
+            target.GetComponent<Metabolism>()?.TakingDamage(baseDamage, gameObject);
         }
 
         private void OnDrawGizmosSelected()

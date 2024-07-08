@@ -36,10 +36,16 @@ namespace DefaultNamespace
             }
         }
 
-        public void TakingDamage(float damage)
+        public void TakingDamage(float damage, GameObject damageSource)
         {
             health -= damage;
             health = Mathf.Clamp(health, 0, Constants.DefaultMaxHealth);
+
+            var combatSystem = GetComponent<CombatSystem>();
+            if (combatSystem != null)
+            {
+                combatSystem.attackedBy = damageSource.transform;
+            }
         }
     }
 }
