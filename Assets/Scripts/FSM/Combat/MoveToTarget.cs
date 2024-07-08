@@ -25,6 +25,7 @@ namespace FSM.Combat
             if (_combat.target != null)
             {
                 _combat.transform.LookAt(_combat.target.transform.position);
+                _navMeshAgent.enabled = true;
                 _navMeshAgent.SetDestination(_combat.target.transform.position);
             }
         }

@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  angle: 120
+  angle: 360
   attackRange: 3
   attackSpeed: 10
   baseDamage: 5

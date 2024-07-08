@@ -87,6 +87,7 @@ namespace Brains
 
         private void Update()
         {
+            Debug.Log(_stateMachine.CurrentActivity());
             _stateMachine.Tick();
         }
 

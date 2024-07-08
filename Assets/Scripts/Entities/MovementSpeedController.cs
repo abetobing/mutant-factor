@@ -17,7 +17,7 @@ namespace Entities
         private void Update()
         {
             var movementSpeed = _navMeshAgent.velocity.magnitude / _navMeshAgent.speed;
-            _animator.SetFloat(Constants.SpeedHash, movementSpeed);
+            _animator?.SetFloat(Constants.SpeedHash, movementSpeed);
         }
     }
 }
