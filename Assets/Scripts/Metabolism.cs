@@ -34,6 +34,14 @@ namespace DefaultNamespace
                 else
                     GetComponent<FoodSource>().enabled = true; // else enable it so it can be harvested
             }
+
+            // hunger will fall at a given rate
+            hunger -= Time.deltaTime * hungerFallRate;
+            hunger = Mathf.Clamp(
+                hunger,
+                0f,
+                Constants.DefaultMaxHunger
+            );
         }
 
         public void TakingDamage(float damage, GameObject damageSource)
