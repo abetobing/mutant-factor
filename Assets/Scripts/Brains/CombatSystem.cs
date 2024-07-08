@@ -63,8 +63,8 @@ namespace Brains
             At(idle, moveToTarget, BeingAttacked());
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
-            Any(idle, () => !canSeeTarget && !canAttackTarget);
-            Any(dying, () => _basicNeeds.HealthLevel <= 0.0f);
+            Any(idle, () => !canSeeTarget);
+            Any(dying, () => !_basicNeeds.IsAlive);
 
             _stateMachine.SetState(idle);
 
@@ -87,7 +87,7 @@ namespace Brains
 
         private void Update()
         {
-            Debug.Log(_stateMachine.CurrentActivity());
+            Debug.LogFormat("{0} is {1}", gameObject.name, _stateMachine.CurrentActivity());
             _stateMachine.Tick();
         }
 
@@ -109,6 +109,13 @@ namespace Brains
             if (rangeChecks.Length != 0)
             {
                 target = rangeChecks[0].transform;
+                if (target.GetComponent<BasicNeeds>() != null &&
+                    !target.GetComponent<BasicNeeds>().IsAlive)
+                {
+                    canSeeTarget = canAttackTarget = false;
+                    return;
+                }
+
                 Vector3 directionToTarget = (target.position - transform.position).normalized;
 
                 if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
@@ -126,10 +133,23 @@ namespace Brains
             else if (canSeeTarget)
                 canSeeTarget = false;
 
-            canAttackTarget = target != null &&
-                              target.GetComponent<BasicNeeds>().HealthLevel >= 1f &&
-                              canSeeTarget &&
-                              (Vector3.Distance(transform.position, target.position) <= attackRange);
+
+            // canAttackTarget = target != null &&
+            //                   canSeeTarget &&
+            //                   (Vector3.Distance(transform.position, target.position) <= attackRange);
+            if (target != null)
+            {
+                var targetBasicNeeds = target.GetComponent<BasicNeeds>();
+                canAttackTarget = targetBasicNeeds.IsAlive &&
+                                  canSeeTarget &&
+                                  (Vector3.Distance(transform.position, target.position) <= attackRange);
+            }
+
+            if (!canSeeTarget)
+            {
+                target = null;
+                canAttackTarget = false;
+            }
         }
 
 

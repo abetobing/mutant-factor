@@ -2291,8 +2291,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 535450694}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4331891, y: -0.00000002686093, z: 0.000000012910042, w: 0.9013031}
-  m_LocalPosition: {x: 0, y: 12.50002, z: -10}
+  m_LocalRotation: {x: 0.4717989, y: 0.000000015388299, z: -0.000000008234241, w: 0.88170624}
+  m_LocalPosition: {x: 0, y: 15, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -2556,7 +2556,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: d36c86ac4ae015a4b98bcf8dbc4caff4, type: 2}
+      objectReference: {fileID: 9100000, guid: c4248638c38409443bcb4d75c789f0da, type: 2}
     - target: {fileID: 8187015543198388608, guid: 6b12735268a70114186cb0ea66d06763,
         type: 3}
       propertyPath: m_Layer
@@ -2848,6 +2848,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 605921404}
+    - targetCorrespondingSourceObject: {fileID: 8187015543198388644, guid: 6b12735268a70114186cb0ea66d06763,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 605921407}
   m_SourcePrefab: {fileID: 100100000, guid: 6b12735268a70114186cb0ea66d06763, type: 3}
 --- !u!1 &605921394 stripped
 GameObject:
@@ -2939,6 +2943,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &605921407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605921394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bb67f83cb84a34b1969c916da405f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &606457604 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8187015543198388644, guid: 6b12735268a70114186cb0ea66d06763,
@@ -3029,6 +3045,18 @@ MonoBehaviour:
   _hungerFallRate: 0.5
   FoodTarget: {fileID: 0}
   HasEnteredHungryState: 0
+--- !u!114 &606457611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606457604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bb67f83cb84a34b1969c916da405f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &620840326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3092,7 +3120,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: d36c86ac4ae015a4b98bcf8dbc4caff4, type: 2}
+      objectReference: {fileID: 9100000, guid: c4248638c38409443bcb4d75c789f0da, type: 2}
     - target: {fileID: 8187015543198388608, guid: 6b12735268a70114186cb0ea66d06763,
         type: 3}
       propertyPath: m_Layer
@@ -3384,6 +3412,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 606457605}
+    - targetCorrespondingSourceObject: {fileID: 8187015543198388644, guid: 6b12735268a70114186cb0ea66d06763,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 606457611}
   m_SourcePrefab: {fileID: 100100000, guid: 6b12735268a70114186cb0ea66d06763, type: 3}
 --- !u!1 &655572012
 GameObject:
@@ -3471,7 +3503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 12.50002, z: -10}
+  m_FollowOffset: {x: 0, y: 15, z: -10}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -4629,8 +4661,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43318912, y: -0.000000026860931, z: 0.000000012910045, w: 0.90130305}
-  m_LocalPosition: {x: 1.1612775, y: 13.763894, z: -17.271511}
+  m_LocalRotation: {x: 0.47179893, y: 0.000000015388302, z: -0.000000008234244, w: 0.8817062}
+  m_LocalPosition: {x: 1.1612775, y: 16.263874, z: -17.271511}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

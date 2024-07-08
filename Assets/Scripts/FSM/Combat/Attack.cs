@@ -41,6 +41,7 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
+            _navMeshAgent.ResetPath();
             _navMeshAgent.enabled = false;
             _animator.SetBool(Constants.IsCombatHash, true);
         }

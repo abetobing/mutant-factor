@@ -26,14 +26,14 @@ namespace FSM.Combat
         public void OnEnter()
         {
             Debug.Log(String());
-            _navMeshAgent.ResetPath();
             _navMeshAgent.enabled = true;
+            _navMeshAgent.ResetPath();
             _animator.SetTrigger(Constants.DeadHash);
+            // _combat.target.GetComponent<BasicNeeds>()?.Dead();
         }
 
         public void OnExit()
         {
-            _combat.target.GetComponent<BasicNeeds>()?.Dead();
         }
     }
 }

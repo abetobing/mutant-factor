@@ -28,8 +28,8 @@ namespace FSM.Combat
         public void OnEnter()
         {
             _animator.SetBool(Constants.IsCombatHash, false);
-            if (_navMeshAgent.hasPath)
-                _navMeshAgent.ResetPath();
+            // if (_navMeshAgent.hasPath)
+            //     _navMeshAgent.ResetPath();
             _profession = _combat.GetComponent<BaseProfession>();
             if (_profession != null)
                 _profession.enabled = true;

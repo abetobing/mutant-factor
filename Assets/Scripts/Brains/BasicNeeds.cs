@@ -23,6 +23,8 @@ namespace Brains
         public float ThirstLevel => _thirst;
         public float StaminaLevel => _stamina;
 
+        public bool IsAlive => _health > 0f;
+
         [SerializeField] private float _hungerFallRate = 0.5f; // hunger fall rate per second
 
         private StateMachine _stateMachine;
@@ -105,6 +107,7 @@ namespace Brains
 
         public void Dead()
         {
+            Debug.LogFormat("destroying {0}", gameObject.name);
             Destroy(gameObject, 2f);
         }
     }
