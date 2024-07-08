@@ -84,7 +84,7 @@ namespace Brains
         {
             // Debug.LogFormat("{0} is {1}", gameObject.name, _stateMachine.CurrentActivity());
             _stateMachine.Tick();
-            if (attackedBy != null && !canSeeTarget)
+            if (attackedBy != null && !canSeeTarget && attackedBy != target)
             {
                 transform.LookAt(attackedBy);
             }
