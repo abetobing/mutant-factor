@@ -514,10 +514,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ec3f08a6f454d77940e97a3b7ab9cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
-  _hunger: 100
-  _thirst: 100
-  _stamina: 100
   _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
   HasEnteredHungryState: 0
@@ -546,10 +542,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9486d0f6832e3c34aba7bc72be518524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 0
-  angle: 0
+  radius: 5
+  angle: 120
   attackRange: 3
-  attackSpeed: 2
+  attackSpeed: 10
   baseDamage: 5
   targetMask:
     serializedVersion: 2
@@ -559,6 +555,7 @@ MonoBehaviour:
     m_Bits: 0
   target: {fileID: 0}
   canSeeTarget: 0
+  canAttackTarget: 0
 --- !u!95 &7629513298587476958
 Animator:
   serializedVersion: 5
@@ -627,6 +624,7 @@ MonoBehaviour:
     m_Bits: 0
   target: {fileID: 0}
   canSeeTarget: 0
+  canAttackTarget: 0
 --- !u!65 &6441197768562539107
 BoxCollider:
   m_ObjectHideFlags: 0
