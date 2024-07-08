@@ -24,13 +24,13 @@ namespace FSM.Combat
         {
             if (_combat.target != null)
             {
-                // _combat.PerformAttack();
                 _combat.transform.LookAt(_combat.target);
                 if (_nextAttackTime <= Time.time)
                 {
                     _nextAttackTime = Time.time + (10f / _combat.attackSpeed);
-                    _combat.PerformAttack();
                     _animator.SetTrigger(Constants.AttackHash);
+                    if (_combat.canAttackTarget)
+                        _combat.PerformAttack();
                 }
                 else
                 {
