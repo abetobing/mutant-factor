@@ -464,10 +464,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1301586950222380641}
-    - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 3187852523719880195}
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
         type: 3}
@@ -517,19 +513,6 @@ MonoBehaviour:
   _hungerFallRate: 0.25
   FoodTarget: {fileID: 0}
   HasEnteredHungryState: 0
---- !u!114 &1301586950222380641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3659020111186994537}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8235b90fce6bf8140ac649578956cbce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isFemale: 0
 --- !u!114 &3187852523719880195
 MonoBehaviour:
   m_ObjectHideFlags: 0
