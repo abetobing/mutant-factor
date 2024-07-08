@@ -516,7 +516,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   hunger: 100
-  thirst: 100
   stamina: 100
   hungerFallRate: 0.25
 --- !u!114 &53181791169522702
@@ -546,8 +545,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 5
-  angle: 360
-  attackRange: 3
+  angle: 165
+  attackRange: 1.5
   attackSpeed: 10
   baseDamage: 5
   targetMask:
@@ -557,6 +556,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   target: {fileID: 0}
+  attackedBy: {fileID: 0}
   canSeeTarget: 0
   canAttackTarget: 0
 --- !u!95 &7629513298587476958

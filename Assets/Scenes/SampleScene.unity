@@ -4441,7 +4441,7 @@ PrefabInstance:
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
       propertyPath: angle
-      value: 360
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
@@ -4450,8 +4450,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
-      propertyPath: attackRange
+      propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
+        type: 3}
+      propertyPath: attackRange
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
@@ -4477,6 +4482,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackRange
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6515491373044877544, guid: b072d2eef1240324890f3597c0b886ff,
+        type: 3}
+      propertyPath: hungerFallRate
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5610,7 +5620,7 @@ PrefabInstance:
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
       propertyPath: angle
-      value: 360
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
@@ -5620,7 +5630,7 @@ PrefabInstance:
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3187852523719880195, guid: b072d2eef1240324890f3597c0b886ff,
         type: 3}
