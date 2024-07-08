@@ -87,7 +87,7 @@ namespace Brains
 
         private void Update()
         {
-            Debug.LogFormat("{0} is {1}", gameObject.name, _stateMachine.CurrentActivity());
+            // Debug.LogFormat("{0} is {1}", gameObject.name, _stateMachine.CurrentActivity());
             _stateMachine.Tick();
         }
 
@@ -134,9 +134,6 @@ namespace Brains
                 canSeeTarget = false;
 
 
-            // canAttackTarget = target != null &&
-            //                   canSeeTarget &&
-            //                   (Vector3.Distance(transform.position, target.position) <= attackRange);
             if (target != null)
             {
                 var targetBasicNeeds = target.GetComponent<BasicNeeds>();
