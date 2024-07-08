@@ -1,4 +1,5 @@
 using Brains;
+using DefaultNamespace;
 
 namespace FSM.UIState
 {
@@ -6,6 +7,7 @@ namespace FSM.UIState
     {
         private UISelectDeselect _ui;
         private BasicNeeds _basicNeeds;
+        private Metabolism _metabolism;
         private BaseProfession _baseProfession;
 
         public EntitySelected(UISelectDeselect theUiPanel)
@@ -30,6 +32,11 @@ namespace FSM.UIState
                 _basicNeeds = _ui.selectedEntity.GetComponent<BasicNeeds>();
             }
 
+            if (_ui.selectedEntity.GetComponent<Metabolism>() != null)
+            {
+                _metabolism = _ui.selectedEntity.GetComponent<Metabolism>();
+            }
+
             if (_ui.selectedEntity.GetComponent<BaseProfession>() != null)
             {
                 _baseProfession = _ui.selectedEntity.GetComponent<BaseProfession>();
@@ -40,13 +47,13 @@ namespace FSM.UIState
 
         public void Tick()
         {
-            if (_basicNeeds != null)
+            if (_metabolism != null && _basicNeeds != null)
             {
                 _ui.basicNeedsStateText.text = _basicNeeds.CurrentStateString;
-                _ui.healthSlider.value = _basicNeeds.HealthLevel / Constants.DefaultMaxHealth;
-                _ui.hungerSlider.value = _basicNeeds.HungerLevel / Constants.DefaultMaxHunger;
-                _ui.thirstSlider.value = _basicNeeds.ThirstLevel / Constants.DefaultMaxThirst;
-                _ui.staminaSlider.value = _basicNeeds.StaminaLevel / Constants.DefaultMaxStamina;
+                _ui.healthSlider.value = _metabolism.health / Constants.DefaultMaxHealth;
+                _ui.hungerSlider.value = _metabolism.hunger / Constants.DefaultMaxHunger;
+                _ui.thirstSlider.value = _metabolism.thirst / Constants.DefaultMaxThirst;
+                _ui.staminaSlider.value = _metabolism.stamina / Constants.DefaultMaxStamina;
             }
 
             if (_baseProfession != null)

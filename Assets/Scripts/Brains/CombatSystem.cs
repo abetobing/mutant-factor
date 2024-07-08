@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections;
+using DefaultNamespace;
 using FSM;
 using FSM.Combat;
 using UnityEngine;
@@ -36,7 +37,7 @@ namespace Brains
         public bool canAttackTarget;
 
         private StateMachine _stateMachine;
-        private BasicNeeds _basicNeeds;
+        private Metabolism _metabolism;
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
 
@@ -47,7 +48,7 @@ namespace Brains
 
         private void OnEnable()
         {
-            _basicNeeds = GetComponent<BasicNeeds>();
+            _metabolism = GetComponent<Metabolism>();
             _animator = GetComponent<Animator>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -64,7 +65,7 @@ namespace Brains
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
             Any(idle, () => !canSeeTarget);
-            Any(dying, () => !_basicNeeds.IsAlive);
+            Any(dying, () => !_metabolism.IsAlive);
 
             _stateMachine.SetState(idle);
 
@@ -109,8 +110,8 @@ namespace Brains
             if (rangeChecks.Length != 0)
             {
                 target = rangeChecks[0].transform;
-                if (target.GetComponent<BasicNeeds>() != null &&
-                    !target.GetComponent<BasicNeeds>().IsAlive)
+                if (target.GetComponent<Metabolism>() != null &&
+                    !target.GetComponent<Metabolism>().IsAlive)
                 {
                     canSeeTarget = canAttackTarget = false;
                     return;
@@ -136,8 +137,8 @@ namespace Brains
 
             if (target != null)
             {
-                var targetBasicNeeds = target.GetComponent<BasicNeeds>();
-                canAttackTarget = targetBasicNeeds.IsAlive &&
+                var metabolism = target.GetComponent<Metabolism>();
+                canAttackTarget = metabolism.IsAlive &&
                                   canSeeTarget &&
                                   (Vector3.Distance(transform.position, target.position) <= attackRange);
             }
@@ -153,7 +154,7 @@ namespace Brains
         public void PerformAttack()
         {
             Debug.Log("performing attack");
-            target.GetComponent<BasicNeeds>()?.TakingDamage(baseDamage);
+            target.GetComponent<Metabolism>()?.TakingDamage(baseDamage);
         }
 
         private void OnDrawGizmosSelected()
