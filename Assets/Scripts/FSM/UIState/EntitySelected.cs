@@ -52,7 +52,6 @@ namespace FSM.UIState
                 _ui.basicNeedsStateText.text = _basicNeeds.CurrentStateString;
                 _ui.healthSlider.value = _metabolism.health / Constants.DefaultMaxHealth;
                 _ui.hungerSlider.value = _metabolism.hunger / Constants.DefaultMaxHunger;
-                _ui.thirstSlider.value = _metabolism.thirst / Constants.DefaultMaxThirst;
                 _ui.staminaSlider.value = _metabolism.stamina / Constants.DefaultMaxStamina;
             }
 

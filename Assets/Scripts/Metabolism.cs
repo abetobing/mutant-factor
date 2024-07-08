@@ -7,7 +7,6 @@ namespace DefaultNamespace
     {
         public float health = 100f;
         public float hunger = 100f;
-        public float thirst = 100f;
         public float stamina = 100f;
 
         public bool IsAlive => health > 0f;
