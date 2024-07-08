@@ -28,8 +28,8 @@ namespace FSM.Combat
         public void OnEnter()
         {
             _animator.SetBool(Constants.IsCombatHash, false);
-            // if (_navMeshAgent.hasPath)
-            //     _navMeshAgent.ResetPath();
+
+            // enable profession
             _profession = _combat.GetComponent<BaseProfession>();
             if (_profession != null)
                 _profession.enabled = true;
@@ -40,6 +40,12 @@ namespace FSM.Combat
 
         public void OnExit()
         {
+            // must disable profession, so its not finding another path when combat
+            if (_profession != null)
+                _profession.enabled = false;
+            _basicNeeds = _combat.GetComponent<BasicNeeds>();
+            if (_basicNeeds != null)
+                _basicNeeds.enabled = false;
         }
     }
 }
