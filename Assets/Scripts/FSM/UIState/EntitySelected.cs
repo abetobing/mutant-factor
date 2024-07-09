@@ -1,4 +1,5 @@
 using Brains;
+using DefaultNamespace;
 
 namespace FSM.UIState
 {
@@ -6,7 +7,8 @@ namespace FSM.UIState
     {
         private UISelectDeselect _ui;
         private BasicNeeds _basicNeeds;
-        private IProfession _profession;
+        private Metabolism _metabolism;
+        private BaseProfession _baseProfession;
 
         public EntitySelected(UISelectDeselect theUiPanel)
         {
@@ -30,9 +32,14 @@ namespace FSM.UIState
                 _basicNeeds = _ui.selectedEntity.GetComponent<BasicNeeds>();
             }
 
-            if (_ui.selectedEntity.GetComponent<IProfession>() != null)
+            if (_ui.selectedEntity.GetComponent<Metabolism>() != null)
             {
-                _profession = _ui.selectedEntity.GetComponent<IProfession>();
+                _metabolism = _ui.selectedEntity.GetComponent<Metabolism>();
+            }
+
+            if (_ui.selectedEntity.GetComponent<BaseProfession>() != null)
+            {
+                _baseProfession = _ui.selectedEntity.GetComponent<BaseProfession>();
             }
 
             _ui.currentInstanceID = _ui.selectedEntity.GetInstanceID();
@@ -40,18 +47,17 @@ namespace FSM.UIState
 
         public void Tick()
         {
-            if (_basicNeeds != null)
+            if (_metabolism != null && _basicNeeds != null)
             {
                 _ui.basicNeedsStateText.text = _basicNeeds.CurrentStateString;
-                _ui.healthSlider.value = _basicNeeds.HealthLevel / Constants.DefaultMaxHealth;
-                _ui.hungerSlider.value = _basicNeeds.HungerLevel / Constants.DefaultMaxHunger;
-                _ui.thirstSlider.value = _basicNeeds.ThirstLevel / Constants.DefaultMaxThirst;
-                _ui.staminaSlider.value = _basicNeeds.StaminaLevel / Constants.DefaultMaxStamina;
+                _ui.healthSlider.value = _metabolism.health / Constants.DefaultMaxHealth;
+                _ui.hungerSlider.value = _metabolism.hunger / Constants.DefaultMaxHunger;
+                _ui.staminaSlider.value = _metabolism.stamina / Constants.DefaultMaxStamina;
             }
 
-            if (_profession != null)
+            if (_baseProfession != null)
             {
-                _ui.professionStateText.text = _profession.ActivtyText();
+                _ui.professionStateText.text = _baseProfession.ActivtyText();
             }
         }
 

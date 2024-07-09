@@ -16,6 +16,7 @@ namespace FSM.BasicNeedState
 
         private Vector3 _lastPosition = Vector3.zero;
         public float TimeStuck;
+
         public MoveToFood(BasicNeeds basicNeeds, NavMeshAgent navMeshAgent, Animator animator)
         {
             _thePerson = basicNeeds;
@@ -41,13 +42,13 @@ namespace FSM.BasicNeedState
             TimeStuck = 0f;
             _navMeshAgent.enabled = true;
             _navMeshAgent.SetDestination(_thePerson.FoodTarget.transform.position);
-            _animator.SetBool(Constants.IsWalkingHash, true);
+            // _animator.SetBool(Constants.IsWalkingHash, true);
         }
 
         public void OnExit()
         {
             _navMeshAgent.enabled = false;
-            _animator.SetBool(Constants.IsWalkingHash, false);
+            // _animator.SetBool(Constants.IsWalkingHash, false);
         }
     }
 }

@@ -22,7 +22,6 @@ namespace Brains
         [SerializeField] public TMP_Text professionStateText;
         [SerializeField] public Slider healthSlider;
         [SerializeField] public Slider hungerSlider;
-        [SerializeField] public Slider thirstSlider;
         [SerializeField] public Slider staminaSlider;
 
         private void Awake()
@@ -35,7 +34,6 @@ namespace Brains
             Assert.IsNotNull(entityInfoPanel, "entityInfoPanel must be assigned");
             Assert.IsNotNull(healthSlider, "healthSlider must be assigned");
             Assert.IsNotNull(hungerSlider, "hungerSlider must be assigned");
-            Assert.IsNotNull(thirstSlider, "thirstSlider must be assigned");
             Assert.IsNotNull(staminaSlider, "staminaSlider must be assigned");
         }
 

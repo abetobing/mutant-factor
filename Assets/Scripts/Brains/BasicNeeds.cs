@@ -1,6 +1,7 @@
 #region
 
 using System;
+using DefaultNamespace;
 using Entities;
 using FSM;
 using FSM.BasicNeedState;
@@ -13,19 +14,8 @@ namespace Brains
 {
     public class BasicNeeds : MonoBehaviour
     {
-        [SerializeField] private float _health = 100f;
-        [SerializeField] private float _hunger = 100f;
-        [SerializeField] private float _thirst = 100f;
-        [SerializeField] private float _stamina = 100f;
-
-        public float HealthLevel => _health;
-        public float HungerLevel => _hunger;
-        public float ThirstLevel => _thirst;
-        public float StaminaLevel => _stamina;
-
-        [SerializeField] private float _hungerFallRate = 0.5f; // hunger fall rate per second
-
         private StateMachine _stateMachine;
+        private Metabolism _metabolism;
 
         [HideInInspector] public FoodSource FoodTarget;
         [HideInInspector] public bool HasEnteredHungryState;
@@ -36,6 +26,7 @@ namespace Brains
             var navMeshAgent = GetComponent<NavMeshAgent>();
             var animator = GetComponent<Animator>();
 
+            _metabolism = GetComponent<Metabolism>();
             _stateMachine = new StateMachine();
 
             var healthy = new Healthy(this);
@@ -49,10 +40,10 @@ namespace Brains
             At(moveToFood, searchFood, StuckForOverASecond()); // in case nav mesh is stuck
             At(moveToFood, eatingFood, ArrivedAtFoodSource());
             At(eatingFood, searchFood, NoFoodLeft());
-            At(eatingFood, healthy, () => _hunger >= 99.0f);
+            At(eatingFood, healthy, () => _metabolism.hunger >= 99.0f);
 
             // move to hungry state from any state
-            Any(hungry, () => _hunger <= 20f && !HasEnteredHungryState);
+            Any(hungry, () => _metabolism.hunger <= 20f && !HasEnteredHungryState);
             Any(healthy, NoFoodLeftButNotHungryAnymore());
 
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
@@ -61,7 +52,7 @@ namespace Brains
             Func<bool> NoFoodLeft() => () => FoodTarget.IsDepleted;
 
             Func<bool> NoFoodLeftButNotHungryAnymore() =>
-                () => (FoodTarget == null || FoodTarget.IsDepleted) && _hunger > 30f;
+                () => (FoodTarget == null || FoodTarget.IsDepleted) && _metabolism.hunger > 30f;
 
             _stateMachine.SetState(healthy);
 
@@ -80,20 +71,18 @@ namespace Brains
         private void Update()
         {
             _stateMachine.Tick();
-
-            // hunger will fall at a given rate
-            _hunger -= Time.deltaTime * _hungerFallRate;
-            _hunger = Mathf.Clamp(
-                _hunger,
-                0f,
-                Constants.DefaultMaxHunger
-            );
         }
 
         public void EatFood()
         {
-            if (FoodTarget.Take()) _hunger++;
-            _hunger = Mathf.Clamp(_hunger, 0f, Constants.DefaultMaxHunger);
+            if (FoodTarget.Take()) _metabolism.hunger++;
+            _metabolism.hunger = Mathf.Clamp(_metabolism.hunger, 0f, Constants.DefaultMaxHunger);
+        }
+
+        public void Dead()
+        {
+            Debug.LogFormat("destroying {0}", gameObject.name);
+            Destroy(gameObject, 2f);
         }
     }
 }

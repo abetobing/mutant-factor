@@ -29,13 +29,14 @@ namespace FSM.GathererState
                 {
                     _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);
                     _gatherer.TakeFromTarget();
-                    _animator.SetBool(Constants.IsHarvestingHash, true);
                 }
             }
         }
 
         public void OnEnter()
         {
+            _animator.SetBool(Constants.IsWorkingHash, true);
+            _animator.SetTrigger(Constants.Gathering);
         }
 
         public string String()
@@ -45,7 +46,7 @@ namespace FSM.GathererState
 
         public void OnExit()
         {
-            _animator.SetBool(Constants.IsHarvestingHash, false);
+            _animator.SetBool(Constants.IsWorkingHash, false);
         }
     }
 }

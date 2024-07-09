@@ -1,24 +1,17 @@
 #region
 
 using System;
-using FSM;
 using UnityEngine;
 
 #endregion
 
 namespace Brains
 {
-    public class Cook : MonoBehaviour, IProfession
+    public class Cook : BaseProfession
     {
-        private StateMachine _stateMachine;
-        public string Name() => "Cook";
+        public void Awake() => Profession = "Cook";
 
-        public string ActivtyText()
-        {
-            return _stateMachine.CurrentActivity();
-        }
-
-        public ScriptableObject Stats() => null;
+        public override ScriptableObject Stats() => null;
 
         public void Enable() => throw new NotImplementedException();
 
