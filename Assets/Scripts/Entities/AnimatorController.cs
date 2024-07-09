@@ -37,5 +37,26 @@ namespace Entities
             var animationAttackSpeed = _combatSystem.attackSpeed / 10f;
             _animator?.SetFloat(Constants.AttackSpeedHash, animationAttackSpeed);
         }
+
+
+        public void AnimEventAttack()
+        {
+            _combatSystem.PerformAttack();
+        }
+
+        public void AnimEventHarvest()
+        {
+            var profession = GetComponent<BaseProfession>();
+            if (profession == null) return;
+            switch (profession)
+            {
+                case Miner miner:
+                    miner.TakeFromTarget();
+                    break;
+                case Gatherer gatherer:
+                    gatherer.TakeFromTarget();
+                    break;
+            }
+        }
     }
 }

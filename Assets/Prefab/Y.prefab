@@ -488,7 +488,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -927199367670048503, guid: f3e302415cc00a34e9e59ad7925c235f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7076819572188541559}
+      addedObject: {fileID: 8709354764121090042}
   m_SourcePrefab: {fileID: 100100000, guid: f3e302415cc00a34e9e59ad7925c235f, type: 3}
 --- !u!4 &1344814905496670233 stripped
 Transform:
@@ -559,6 +559,7 @@ MonoBehaviour:
   attackedBy: {fileID: 0}
   canSeeTarget: 0
   canAttackTarget: 0
+  waitUntilEnemySeen: 0
 --- !u!95 &7629513298587476958
 Animator:
   serializedVersion: 5
@@ -639,7 +640,7 @@ MonoBehaviour:
   weaponPrefab: {fileID: 3330531830160758691, guid: a7ebed570ef474047b92d2b8faf5c503,
     type: 3}
   weaponPlaceholder: {fileID: 5649234651831546744}
---- !u!114 &7076819572188541559
+--- !u!114 &8709354764121090042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

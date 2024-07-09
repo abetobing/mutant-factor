@@ -13,9 +13,6 @@ namespace FSM.MinerState
         private readonly Miner _miner;
         private NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
-        private float _resourcesPerSecond = 3;
-
-        private float _nextTakeResourceTime;
 
         public HarvestResource(Miner miner, NavMeshAgent navMeshAgent, Animator animator)
         {
@@ -29,11 +26,6 @@ namespace FSM.MinerState
             if (_miner.Target != null)
             {
                 _miner.transform.LookAt(_miner.Target.transform);
-                if (_nextTakeResourceTime <= Time.time)
-                {
-                    _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);
-                    _miner.TakeFromTarget();
-                }
             }
         }
 

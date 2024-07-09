@@ -75,7 +75,7 @@ namespace Brains
 
         public void EatFood()
         {
-            if (FoodTarget.Take()) _metabolism.hunger++;
+            if (FoodTarget.Take(1)) _metabolism.hunger++;
             _metabolism.hunger = Mathf.Clamp(_metabolism.hunger, 0f, Constants.DefaultMaxHunger);
         }
 

@@ -11,9 +11,6 @@ namespace FSM.GathererState
     {
         private readonly Gatherer _gatherer;
         private readonly Animator _animator;
-        private float _resourcesPerSecond = 3;
-
-        private float _nextTakeResourceTime;
 
         public HarvestResource(Gatherer gatherer, Animator animator)
         {
@@ -26,11 +23,6 @@ namespace FSM.GathererState
             if (_gatherer.Target != null)
             {
                 _gatherer.transform.LookAt(_gatherer.Target.transform);
-                if (_nextTakeResourceTime <= Time.time)
-                {
-                    _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);
-                    _gatherer.TakeFromTarget();
-                }
             }
         }
 

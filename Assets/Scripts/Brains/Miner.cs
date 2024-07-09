@@ -15,6 +15,7 @@ namespace Brains
     {
         public event Action<int> OnGatheredChanged;
 
+        public int harvestPerHit = 5;
         [SerializeField] private int _maxCarried = 20;
 
         private int _gathered;
@@ -85,16 +86,15 @@ namespace Brains
         public void Enable()
         {
             this.enabled = true;
-            // _stateMachine.SetState(new SearchForResource(this));
         }
 
         public void Disable() => this.enabled = false;
 
         public void TakeFromTarget()
         {
-            if (Target.Take())
+            if (Target.Take(harvestPerHit))
             {
-                _gathered++;
+                _gathered += harvestPerHit;
                 OnGatheredChanged?.Invoke(_gathered);
             }
         }
