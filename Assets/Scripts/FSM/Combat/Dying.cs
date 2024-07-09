@@ -26,9 +26,9 @@ namespace FSM.Combat
         public void OnEnter()
         {
             Debug.Log(String());
-            _navMeshAgent.enabled = true;
-            _navMeshAgent.ResetPath();
-            // _animator.SetTrigger(Constants.DeadHash);
+            _navMeshAgent.enabled = false;
+            // _combat.GetComponent<Bas>().enabled = false;
+            // _combat.GetComponent<BaseProfession>().enabled = false;
         }
 
         public void OnExit()
