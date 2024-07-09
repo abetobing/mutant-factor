@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections;
+using DefaultNamespace;
 using FSM;
 using FSM.Combat;
 using UnityEngine;
@@ -30,13 +31,14 @@ namespace Brains
 
         // [HideInInspector] 
         public Transform target;
+        public Transform attackedBy;
 
         // [HideInInspector] 
         public bool canSeeTarget;
         public bool canAttackTarget;
 
         private StateMachine _stateMachine;
-        private BasicNeeds _basicNeeds;
+        private Metabolism _metabolism;
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
 
@@ -47,7 +49,7 @@ namespace Brains
 
         private void OnEnable()
         {
-            _basicNeeds = GetComponent<BasicNeeds>();
+            _metabolism = GetComponent<Metabolism>();
             _animator = GetComponent<Animator>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
 
@@ -58,21 +60,19 @@ namespace Brains
             var moveToTarget = new MoveToTarget(this, _animator, _navMeshAgent);
             var attack = new Attack(this, _animator, _navMeshAgent);
             var dying = new Dying(this, _animator, _navMeshAgent);
+            var respondToAttack = new RespondToAttack(this, _animator, _navMeshAgent);
 
             At(idle, moveToTarget, () => canSeeTarget);
-            At(idle, moveToTarget, BeingAttacked());
+            At(idle, respondToAttack, BeingAttacked());
+            At(respondToAttack, moveToTarget, () => canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
-            Any(idle, () => !canSeeTarget);
-            Any(dying, () => !_basicNeeds.IsAlive);
+            Any(idle, () => !canSeeTarget && attackedBy == null && _metabolism.IsAlive);
+            Any(dying, () => !_metabolism.IsAlive);
 
             _stateMachine.SetState(idle);
 
-            Func<bool> BeingAttacked() => () =>
-            {
-                // TODO: are we being attacked?
-                return false;
-            };
+            Func<bool> BeingAttacked() => () => attackedBy != null && !canSeeTarget;
 
             void At(IState from, IState to, Func<bool> condition)
             {
@@ -87,7 +87,6 @@ namespace Brains
 
         private void Update()
         {
-            // Debug.LogFormat("{0} is {1}", gameObject.name, _stateMachine.CurrentActivity());
             _stateMachine.Tick();
         }
 
@@ -109,8 +108,8 @@ namespace Brains
             if (rangeChecks.Length != 0)
             {
                 target = rangeChecks[0].transform;
-                if (target.GetComponent<BasicNeeds>() != null &&
-                    !target.GetComponent<BasicNeeds>().IsAlive)
+                if (target.GetComponent<Metabolism>() != null &&
+                    !target.GetComponent<Metabolism>().IsAlive)
                 {
                     canSeeTarget = canAttackTarget = false;
                     return;
@@ -136,8 +135,8 @@ namespace Brains
 
             if (target != null)
             {
-                var targetBasicNeeds = target.GetComponent<BasicNeeds>();
-                canAttackTarget = targetBasicNeeds.IsAlive &&
+                var metabolism = target.GetComponent<Metabolism>();
+                canAttackTarget = metabolism.IsAlive &&
                                   canSeeTarget &&
                                   (Vector3.Distance(transform.position, target.position) <= attackRange);
             }
@@ -153,7 +152,7 @@ namespace Brains
         public void PerformAttack()
         {
             Debug.Log("performing attack");
-            target.GetComponent<BasicNeeds>()?.TakingDamage(baseDamage);
+            target.GetComponent<Metabolism>()?.TakingDamage(baseDamage, gameObject);
         }
 
         private void OnDrawGizmosSelected()

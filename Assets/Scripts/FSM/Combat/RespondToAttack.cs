@@ -4,20 +4,20 @@ using UnityEngine.AI;
 
 namespace FSM.Combat
 {
-    public class Dying : IState
+    public class RespondToAttack : IState
     {
         private CombatSystem _combat;
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
 
-        public Dying(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
+        public RespondToAttack(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
         {
             _combat = combatSystem;
             _animator = animator;
             _navMeshAgent = navMeshAgent;
         }
 
-        public string String() => "dying";
+        public string String() => "responding to attacker";
 
         public void Tick()
         {
@@ -25,14 +25,15 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            Debug.Log(String());
+            Debug.Log("responding to attack");
             _navMeshAgent.enabled = false;
-            // _combat.GetComponent<Bas>().enabled = false;
-            // _combat.GetComponent<BaseProfession>().enabled = false;
+            _combat.transform.LookAt(_combat.attackedBy);
         }
 
         public void OnExit()
         {
+            _navMeshAgent.enabled = true;
+            _combat.attackedBy = null;
         }
     }
 }

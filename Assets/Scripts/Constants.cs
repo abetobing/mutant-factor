@@ -10,8 +10,11 @@ public class Constants
     public static readonly int IsCombatHash = Animator.StringToHash("isCombat");
     public static readonly int IsWorkingHash = Animator.StringToHash("isWorking");
     public static readonly int SpeedHash = Animator.StringToHash("speed");
+
     public static readonly int AttackHash = Animator.StringToHash("attack");
-    public static readonly int DeadHash = Animator.StringToHash("dead");
+
+    // public static readonly int DeadHash = Animator.StringToHash("dead");
+    public static readonly int HealthHash = Animator.StringToHash("health");
     public static readonly int Gathering = Animator.StringToHash("gathering");
     public static readonly int Mining = Animator.StringToHash("mining");
     public static readonly int Farming = Animator.StringToHash("farming");
@@ -21,7 +24,6 @@ public class Constants
 
     public const float DefaultMaxHealth = 100f;
     public const float DefaultMaxHunger = 100f;
-    public const float DefaultMaxThirst = 100f;
     public const float DefaultMaxStamina = 100f;
 
     public const float EatIntervalPerSecond = 50f; // default interval per sec to hunger++ and food--
