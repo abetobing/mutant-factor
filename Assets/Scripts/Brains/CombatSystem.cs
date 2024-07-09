@@ -151,8 +151,11 @@ namespace Brains
 
         public void PerformAttack()
         {
-            Debug.Log("performing attack");
-            target.GetComponent<Metabolism>()?.TakingDamage(baseDamage, gameObject);
+            if (target != null)
+            {
+                var targetMetabolism = target.GetComponent<Metabolism>();
+                targetMetabolism?.TakingDamage(baseDamage, gameObject);
+            }
         }
 
         private void OnDrawGizmosSelected()

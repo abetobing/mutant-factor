@@ -29,8 +29,6 @@ namespace FSM.Combat
                 {
                     _nextAttackTime = Time.time + (10f / _combat.attackSpeed);
                     _animator.SetTrigger(Constants.AttackHash);
-                    if (_combat.canAttackTarget)
-                        _combat.PerformAttack();
                 }
                 else
                 {
