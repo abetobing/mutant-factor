@@ -20,7 +20,7 @@ namespace Brains
         [Range(0, 360)] public float angle;
 
         public float attackRange = 3f;
-        [Range(1f, 100f)] public float attackSpeed = 2f;
+        [Range(1f, 100f)] public float attackSpeed = 1f;
         public float baseDamage = 5f;
 
         #endregion
