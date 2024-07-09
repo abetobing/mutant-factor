@@ -25,6 +25,7 @@ namespace FSM.GathererState
         {
             if (_gatherer.Target != null)
             {
+                _gatherer.transform.LookAt(_gatherer.Target.transform);
                 if (_nextTakeResourceTime <= Time.time)
                 {
                     _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);

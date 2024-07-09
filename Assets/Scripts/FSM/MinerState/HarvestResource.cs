@@ -28,6 +28,7 @@ namespace FSM.MinerState
         {
             if (_miner.Target != null)
             {
+                _miner.transform.LookAt(_miner.Target.transform);
                 if (_nextTakeResourceTime <= Time.time)
                 {
                     _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);
