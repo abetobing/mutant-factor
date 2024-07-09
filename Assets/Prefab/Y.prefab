@@ -547,7 +547,7 @@ MonoBehaviour:
   radius: 5
   angle: 165
   attackRange: 1.5
-  attackSpeed: 10
+  attackSpeed: 15
   baseDamage: 5
   targetMask:
     serializedVersion: 2
