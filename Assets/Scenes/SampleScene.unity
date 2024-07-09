@@ -3848,6 +3848,7 @@ MonoBehaviour:
   attackedBy: {fileID: 0}
   canSeeTarget: 0
   canAttackTarget: 0
+  waitUntilEnemySeen: 0
 --- !u!65 &447454961
 BoxCollider:
   m_ObjectHideFlags: 0

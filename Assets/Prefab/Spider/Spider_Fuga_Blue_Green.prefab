@@ -1188,6 +1188,7 @@ GameObject:
   - component: {fileID: -1716716779963480981}
   - component: {fileID: 6545193631634944842}
   - component: {fileID: 9096989372228754011}
+  - component: {fileID: -3502492784568855335}
   m_Layer: 8
   m_Name: Spider_Fuga_Blue_Green
   m_TagString: Selectable
@@ -1345,3 +1346,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FoodTarget: {fileID: 0}
   HasEnteredHungryState: 0
+--- !u!114 &-3502492784568855335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7978624207812556279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52108959efe14f788c3cf87990e1b87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
