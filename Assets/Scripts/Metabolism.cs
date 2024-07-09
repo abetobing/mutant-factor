@@ -27,7 +27,6 @@ namespace DefaultNamespace
 
         private void Update()
         {
-            GetComponent<Animator>().SetFloat(Constants.HealthHash, health);
             if (!IsAlive)
             {
                 if (GetComponent<FoodSource>() == null) // this is not a food source, so destroy it after death
