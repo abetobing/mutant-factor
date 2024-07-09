@@ -13,6 +13,7 @@ public class Constants
     public static readonly int AngleHash = Animator.StringToHash("angle");
 
     public static readonly int AttackHash = Animator.StringToHash("attack");
+    public static readonly int AttackSpeedHash = Animator.StringToHash("attackSpeed");
 
     // public static readonly int DeadHash = Animator.StringToHash("dead");
     public static readonly int HealthHash = Animator.StringToHash("health");

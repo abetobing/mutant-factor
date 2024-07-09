@@ -25,15 +25,16 @@ namespace FSM.Combat
             if (_combat.target != null)
             {
                 _combat.transform.LookAt(_combat.target);
-                if (_nextAttackTime <= Time.time)
-                {
-                    _nextAttackTime = Time.time + (10f / _combat.attackSpeed);
-                    _animator.SetTrigger(Constants.AttackHash);
-                }
-                else
-                {
-                    _animator.ResetTrigger(Constants.AttackHash);
-                }
+                // _animator.SetTrigger(Constants.AttackHash);
+                // if (_nextAttackTime <= Time.time)
+                // {
+                //     _nextAttackTime = Time.time + (10f / _combat.attackSpeed);
+                //     _animator.SetTrigger(Constants.AttackHash);
+                // }
+                // else
+                // {
+                //     _animator.ResetTrigger(Constants.AttackHash);
+                // }
             }
         }
 
@@ -42,6 +43,7 @@ namespace FSM.Combat
             _navMeshAgent.ResetPath();
             _navMeshAgent.enabled = false;
             _animator.SetBool(Constants.IsCombatHash, true);
+            _animator.SetTrigger(Constants.AttackHash);
         }
 
         public void OnExit()
