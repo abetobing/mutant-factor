@@ -65,6 +65,7 @@ namespace Brains
             At(idle, moveToTarget, () => canSeeTarget);
             At(idle, respondToAttack, BeingAttacked());
             At(respondToAttack, moveToTarget, () => canSeeTarget);
+            At(respondToAttack, idle, () => !canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
             Any(idle, () => !canSeeTarget && attackedBy == null && _metabolism.IsAlive);
@@ -162,6 +163,11 @@ namespace Brains
         {
             if (target != null)
                 Debug.DrawLine(transform.position, target.position, Color.magenta);
+        }
+
+        public string ActivityText()
+        {
+            return _stateMachine.CurrentActivity();
         }
     }
 }
