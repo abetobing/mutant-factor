@@ -36,6 +36,7 @@ namespace Brains
         // [HideInInspector] 
         public bool canSeeTarget;
         public bool canAttackTarget;
+        public bool waitUntilEnemySeen;
 
         private StateMachine _stateMachine;
         private Metabolism _metabolism;
@@ -65,7 +66,7 @@ namespace Brains
             At(idle, moveToTarget, () => canSeeTarget);
             At(idle, respondToAttack, BeingAttacked());
             At(respondToAttack, moveToTarget, () => canSeeTarget);
-            At(respondToAttack, idle, () => !canSeeTarget);
+            At(respondToAttack, idle, () => !canSeeTarget && !waitUntilEnemySeen);
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
             Any(idle, () => !canSeeTarget && attackedBy == null && _metabolism.IsAlive);

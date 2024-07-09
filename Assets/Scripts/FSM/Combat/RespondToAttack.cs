@@ -4,11 +4,16 @@ using UnityEngine.AI;
 
 namespace FSM.Combat
 {
+    /// <summary>
+    /// make the object look at attacker an wait for _timeToWait seconds
+    /// then go back to idle if it not seen
+    /// </summary>
     public class RespondToAttack : IState
     {
         private CombatSystem _combat;
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
+        private float _timeToWait = 2f;
 
         public RespondToAttack(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
         {
@@ -21,13 +26,16 @@ namespace FSM.Combat
 
         public void Tick()
         {
+            _combat.transform.LookAt(_combat.attackedBy);
+            if (Time.deltaTime > _timeToWait)
+                _combat.waitUntilEnemySeen = false;
         }
 
         public void OnEnter()
         {
             Debug.Log("responding to attack");
+            _combat.waitUntilEnemySeen = true;
             _navMeshAgent.enabled = false;
-            _combat.transform.LookAt(_combat.attackedBy);
         }
 
         public void OnExit()
