@@ -60,14 +60,19 @@ namespace Brains
             var moveToTarget = new MoveToTarget(this, _animator, _navMeshAgent);
             var attack = new Attack(this, _animator, _navMeshAgent);
             var dying = new Dying(this, _animator, _navMeshAgent);
+            var respondToAttack = new RespondToAttack(this, _animator, _navMeshAgent);
 
             At(idle, moveToTarget, () => canSeeTarget);
+            At(idle, respondToAttack, BeingAttacked());
+            At(respondToAttack, moveToTarget, () => canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
-            Any(idle, () => !canSeeTarget);
+            Any(idle, () => !canSeeTarget && attackedBy == null && _metabolism.IsAlive);
             Any(dying, () => !_metabolism.IsAlive);
 
             _stateMachine.SetState(idle);
+
+            Func<bool> BeingAttacked() => () => attackedBy != null && !canSeeTarget;
 
             void At(IState from, IState to, Func<bool> condition)
             {
@@ -82,12 +87,7 @@ namespace Brains
 
         private void Update()
         {
-            // Debug.LogFormat("{0} is {1}", gameObject.name, _stateMachine.CurrentActivity());
             _stateMachine.Tick();
-            if (attackedBy != null && !canSeeTarget && attackedBy != target)
-            {
-                transform.LookAt(attackedBy);
-            }
         }
 
         private IEnumerator FOVRoutine()
