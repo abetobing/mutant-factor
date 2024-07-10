@@ -33,7 +33,6 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            Debug.Log("responding to attack");
             _combat.waitUntilEnemySeen = true;
             _navMeshAgent.enabled = false;
         }
