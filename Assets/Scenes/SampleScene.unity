@@ -1357,8 +1357,8 @@ GameObject:
   - component: {fileID: 124297246}
   - component: {fileID: 124297245}
   - component: {fileID: 124297244}
-  - component: {fileID: 124297243}
   - component: {fileID: 124297247}
+  - component: {fileID: 124297248}
   m_Layer: 6
   m_Name: Resource (4)
   m_TagString: Selectable
@@ -1366,20 +1366,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &124297243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124297242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Resource
-  available: 2000
 --- !u!23 &124297244
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1466,6 +1452,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &124297248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124297242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &158911291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,8 +1569,8 @@ GameObject:
   - component: {fileID: 182145694}
   - component: {fileID: 182145693}
   - component: {fileID: 182145692}
-  - component: {fileID: 182145690}
   - component: {fileID: 182145695}
+  - component: {fileID: 182145696}
   m_Layer: 6
   m_Name: Resource (2)
   m_TagString: Selectable
@@ -1580,20 +1578,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &182145690
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 182145689}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Resource
-  available: 2000
 --- !u!23 &182145692
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1680,6 +1664,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &182145696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 182145689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &189697558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2842,8 +2838,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c0ce60145d4ca8ad1763168afb8a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: Resource
-  available: 0
 --- !u!1001 &436791188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5151,8 +5145,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f13f560b1a374b7598804ceaa878a5be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  harvestPerHit: 5
   _maxCarried: 20
+  Target: {fileID: 0}
+  StockPile: {fileID: 0}
 --- !u!114 &447454954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6695,8 +6690,8 @@ GameObject:
   - component: {fileID: 929786033}
   - component: {fileID: 929786032}
   - component: {fileID: 929786031}
-  - component: {fileID: 929786029}
   - component: {fileID: 929786034}
+  - component: {fileID: 929786035}
   m_Layer: 6
   m_Name: Resource (1)
   m_TagString: Selectable
@@ -6704,20 +6699,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &929786029
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929786028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Resource
-  available: 2000
 --- !u!23 &929786031
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6804,6 +6785,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &929786035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929786028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &940728752
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7172,8 +7165,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -166.82806, y: -54.82361}
-  m_SizeDelta: {x: 301.6561, y: 73.6472}
+  m_AnchoredPosition: {x: -212.9417, y: -37.0876}
+  m_SizeDelta: {x: 393.8832, y: 38.1752}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1000059496
 MonoBehaviour:
@@ -7195,10 +7188,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I am facing an issue. My api calling is working fine in Unity Editor, but
-    when I call that on my webGl build, the game gets stuck everytime. there is no
-    error showing too and everything is working absolutely fine on Editor. Cant figure
-    out the issue yet
+  m_text: informational text about resources, stockpile and etc and etc
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7700,8 +7690,8 @@ GameObject:
   - component: {fileID: 1090884811}
   - component: {fileID: 1090884810}
   - component: {fileID: 1090884809}
-  - component: {fileID: 1090884807}
   - component: {fileID: 1090884812}
+  - component: {fileID: 1090884813}
   m_Layer: 6
   m_Name: Resource (3)
   m_TagString: Selectable
@@ -7709,20 +7699,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1090884807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1090884806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayName: Resource
-  available: 2000
 --- !u!23 &1090884809
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -7809,6 +7785,18 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1090884813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090884806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f860acbf45d24413ad655ea8c6f1ca92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1116714239
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9306,7 +9294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb999ec1bc46445c82fd64a80f7d6851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHeld: 2000
+  maxHeld: 2000
 --- !u!1 &1693480991
 GameObject:
   m_ObjectHideFlags: 0

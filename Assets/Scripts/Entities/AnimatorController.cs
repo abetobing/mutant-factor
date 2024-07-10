@@ -47,16 +47,21 @@ namespace Entities
         public void AnimEventHarvest()
         {
             var profession = GetComponent<BaseProfession>();
-            if (profession == null) return;
-            switch (profession)
-            {
-                case Miner miner:
-                    miner.TakeFromTarget();
-                    break;
-                case Gatherer gatherer:
-                    gatherer.TakeFromTarget();
-                    break;
-            }
+            if (profession == null)
+                return;
+
+            if (profession is IHarvestable p)
+                p.TakeFromTarget();
+
+            // switch (profession)
+            // {
+            //     case Miner miner:
+            //         miner.TakeFromTarget();
+            //         break;
+            //     case Gatherer gatherer:
+            //         gatherer.TakeFromTarget();
+            //         break;
+            // }
         }
     }
 }

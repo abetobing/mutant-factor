@@ -11,14 +11,18 @@ using UnityEngine.AI;
 
 namespace Brains
 {
-    public class Miner : BaseProfession
+    public class Miner : BaseProfession, IHarvestable
     {
         public event Action<int> OnGatheredChanged;
 
-        public int harvestPerHit = 5;
+        // gathered resource
+        public int TotalOwned { get; set; } = 0;
+
+        // how many item harvested per shot
+        public int HarvestPerHit { get; set; } = 5;
+
         [SerializeField] private int _maxCarried = 20;
 
-        private int _gathered;
 
         public GatherableResource Target { get; set; }
         public StockPile StockPile { get; set; }
@@ -54,14 +58,14 @@ namespace Brains
             At(harvest, search, TargetIsDepletedAndICanCarryMore());
             At(harvest, returnToStockpile, InventoryFull());
             At(returnToStockpile, placeResourcesInStockpile, ReachedStockpile());
-            At(placeResourcesInStockpile, search, () => _gathered == 0);
+            At(placeResourcesInStockpile, search, () => TotalOwned == 0);
 
             _stateMachine.SetState(search);
 
             void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
             Func<bool> HasTargetAndCanCarryMore() => () => Target != null &&
-                                                           _gathered < _maxCarried;
+                                                           TotalOwned < _maxCarried;
 
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
 
@@ -72,7 +76,7 @@ namespace Brains
             Func<bool> TargetIsDepletedAndICanCarryMore() =>
                 () => (Target == null || Target.IsDepleted) && !InventoryFull().Invoke();
 
-            Func<bool> InventoryFull() => () => _gathered >= _maxCarried;
+            Func<bool> InventoryFull() => () => TotalOwned >= _maxCarried;
 
             Func<bool> ReachedStockpile() => () => StockPile != null &&
                                                    Vector3.Distance(transform.position, StockPile.transform.position) <=
@@ -90,23 +94,14 @@ namespace Brains
 
         public void Disable() => this.enabled = false;
 
-        public void TakeFromTarget()
+        void IHarvestable.TakeFromTarget()
         {
-            if (Target.Take(harvestPerHit))
-            {
-                _gathered += harvestPerHit;
-                OnGatheredChanged?.Invoke(_gathered);
-            }
-        }
-
-        public bool Take()
-        {
-            if (_gathered <= 0)
-                return false;
-
-            _gathered--;
-            OnGatheredChanged?.Invoke(_gathered);
-            return true;
+            if (Target is not IHarvestable t)
+                return;
+            if (t.IsDepleted)
+                return;
+            TotalOwned += HarvestPerHit;
+            t.TotalOwned -= HarvestPerHit;
         }
     }
 }

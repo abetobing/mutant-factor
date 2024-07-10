@@ -22,7 +22,8 @@ namespace FSM.MinerState
 
         public void Tick()
         {
-            if (_miner.Take())
+            if (_miner is not IHarvestable g) return;
+            if (g.Take(1))
                 _miner.StockPile.Add();
         }
 

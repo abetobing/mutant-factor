@@ -36,11 +36,13 @@ namespace DefaultNamespace
             {
                 yield return wait;
                 var totalFoodSourceAvailable = FindObjectsOfType<FoodSource>()
-                    .Sum(t => t.available);
+                    .Sum(t => ((IHarvestable)t).TotalOwned);
                 var totalGatherableResourceAvailable = FindObjectsOfType<GatherableResource>()
-                    .Sum(t => t.available);
+                    .Sum(t => ((IHarvestable)t).TotalOwned);
+                var inStockPile = FindObjectsOfType<StockPile>()
+                    .Sum(s => (s as IHarvestable).TotalOwned);
                 txtStats.text =
-                    $"Food source: {totalFoodSourceAvailable} / Resource: {totalGatherableResourceAvailable}";
+                    $"Food source: {totalFoodSourceAvailable} / Resource: {totalGatherableResourceAvailable} / In Stockpile: {inStockPile}";
             }
         }
 

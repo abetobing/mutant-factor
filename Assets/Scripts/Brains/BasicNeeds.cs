@@ -75,7 +75,9 @@ namespace Brains
 
         public void EatFood()
         {
-            if (FoodTarget.Take(1)) _metabolism.hunger++;
+            if (FoodTarget is IHarvestable food)
+                if (food.Take(1))
+                    _metabolism.hunger++;
             _metabolism.hunger = Mathf.Clamp(_metabolism.hunger, 0f, Constants.DefaultMaxHunger);
         }
 

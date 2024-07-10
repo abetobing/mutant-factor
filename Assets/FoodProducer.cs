@@ -24,8 +24,8 @@ public class FoodProducer : MonoBehaviour
             var fruit = Instantiate(fruitPrefab);
             fruit.transform.SetPositionAndRotation(randomSpawnPoint, transform.rotation);
             fruit.GetComponent<Rigidbody>().AddForce(Random.insideUnitCircle.normalized);
-            fruit.GetComponent<FoodSource>().available = Random.Range(
-                fruit.GetComponent<FoodSource>().available / 3, fruit.GetComponent<FoodSource>().available
+            fruit.GetComponent<FoodSource>().TotalOwned = Random.Range(
+                fruit.GetComponent<FoodSource>().TotalOwned / 3, fruit.GetComponent<FoodSource>().TotalOwned
             );
             fruit.transform.localScale *= Random.Range(0.5f, 1f);
         }
