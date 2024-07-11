@@ -26,7 +26,7 @@ namespace Entities
             GetComponent<Animator>().SetFloat(Constants.HealthHash, _metabolism.health);
 
             // set speed parameter
-            var movementSpeed = _navMeshAgent.velocity.magnitude / _navMeshAgent.speed;
+            var movementSpeed = _navMeshAgent.velocity.magnitude;
             _animator?.SetFloat(Constants.SpeedHash, movementSpeed);
 
             // set angle parameter
