@@ -106,6 +106,9 @@ namespace Brains
 
         private void FieldOfViewCheck()
         {
+            if (TargetLocked())
+                return;
+
             var targetCandidates = new Collider[5];
             var numberOfTargetAround =
                 Physics.OverlapSphereNonAlloc(transform.position, radius, targetCandidates, targetMask);
@@ -117,12 +120,6 @@ namespace Brains
                 if (attackedBy != null)
                     target = attackedBy;
 
-                if (CheckTargetIsDead())
-                {
-                    canSeeTarget = canAttackTarget = false;
-                    return;
-                }
-
                 canSeeTarget = CheckIfCanSeeTarget();
             }
             else if (canSeeTarget)
@@ -131,6 +128,8 @@ namespace Brains
 
             canAttackTarget = CheckIfTargetInsideAttackRange();
 
+            CheckTargetIsDead();
+
             if (!canSeeTarget)
             {
                 target = null;
@@ -138,11 +137,26 @@ namespace Brains
             }
         }
 
-        private bool CheckTargetIsDead()
+
+        // if currently is busy chasing enemy
+        private bool TargetLocked()
         {
+            CheckTargetIsDead();
+            return target != null && canSeeTarget && canAttackTarget;
+        }
+
+        // pretty sure we cant attack dead target
+        private void CheckTargetIsDead()
+        {
+            if (target == null)
+                return;
             if (target.GetComponent<Metabolism>() == null)
-                return false;
-            return !target.GetComponent<Metabolism>().IsAlive;
+                return;
+            if (target.GetComponent<Metabolism>().IsAlive)
+                return;
+            target = null;
+            canSeeTarget = false;
+            canAttackTarget = false;
         }
 
 
@@ -173,14 +187,7 @@ namespace Brains
         {
             if (target == null)
                 return false;
-            var metabolism = target.GetComponent<Metabolism>();
-
-            if (metabolism == null)
-                return false;
-
-            return metabolism.IsAlive &&
-                   canSeeTarget &&
-                   (Vector3.Distance(transform.position, target.position) <= attackRange);
+            return Vector3.Distance(transform.position, target.position) <= attackRange;
         }
 
 
