@@ -64,8 +64,8 @@ namespace Brains
 
             At(idle, moveToTarget, () => canSeeTarget);
             At(idle, respondToAttack, BeingAttacked());
-            At(respondToAttack, attack, () => canSeeTarget && canAttackTarget);
-            At(respondToAttack, moveToTarget, () => canSeeTarget);
+            At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
+            At(respondToAttack, attack, () => canAttackTarget);
             At(respondToAttack, idle, () => !canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
@@ -106,53 +106,81 @@ namespace Brains
 
         private void FieldOfViewCheck()
         {
-            Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+            var targetCandidates = new Collider[5];
+            var numberOfTargetAround =
+                Physics.OverlapSphereNonAlloc(transform.position, radius, targetCandidates, targetMask);
 
-            if (rangeChecks.Length != 0)
+            if (numberOfTargetAround != 0)
             {
-                target = rangeChecks[0].transform;
+                target = targetCandidates[0].transform;
                 // if being attacked, set the target to the attacker
                 if (attackedBy != null)
                     target = attackedBy;
 
-                if (target.GetComponent<Metabolism>() != null &&
-                    !target.GetComponent<Metabolism>().IsAlive)
+                if (CheckTargetIsDead())
                 {
                     canSeeTarget = canAttackTarget = false;
                     return;
                 }
 
-                Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-                if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
-                {
-                    float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-                    if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
-                        canSeeTarget = true;
-                    else
-                        canSeeTarget = false;
-                }
-                else
-                    canSeeTarget = false;
+                canSeeTarget = CheckIfCanSeeTarget();
             }
             else if (canSeeTarget)
                 canSeeTarget = false;
 
 
-            if (target != null)
-            {
-                var metabolism = target.GetComponent<Metabolism>();
-                canAttackTarget = metabolism.IsAlive &&
-                                  canSeeTarget &&
-                                  (Vector3.Distance(transform.position, target.position) <= attackRange);
-            }
+            canAttackTarget = CheckIfTargetInsideAttackRange();
 
             if (!canSeeTarget)
             {
                 target = null;
                 canAttackTarget = false;
             }
+        }
+
+        private bool CheckTargetIsDead()
+        {
+            if (target.GetComponent<Metabolism>() == null)
+                return false;
+            return !target.GetComponent<Metabolism>().IsAlive;
+        }
+
+
+        /// <summary>
+        /// this will check if target is visible within range
+        /// and vision is not obstructed by wall or any object
+        /// </summary>
+        /// <returns>true or false</returns>
+        private bool CheckIfCanSeeTarget()
+        {
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    return true;
+                return false;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// check if target is within radius of attack range
+        /// </summary>
+        private bool CheckIfTargetInsideAttackRange()
+        {
+            if (target == null)
+                return false;
+            var metabolism = target.GetComponent<Metabolism>();
+
+            if (metabolism == null)
+                return false;
+
+            return metabolism.IsAlive &&
+                   canSeeTarget &&
+                   (Vector3.Distance(transform.position, target.position) <= attackRange);
         }
 
 
