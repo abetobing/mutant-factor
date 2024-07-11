@@ -31,7 +31,6 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _combat.waitUntilEnemySeen = true;
             _navMeshAgent.enabled = false;
         }
 
