@@ -13,7 +13,6 @@ namespace FSM.Combat
         private CombatSystem _combat;
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
-        private float _timeToWait = 2f;
 
         public RespondToAttack(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
         {
