@@ -36,7 +36,6 @@ namespace Brains
         // [HideInInspector] 
         public bool canSeeTarget;
         public bool canAttackTarget;
-        public bool waitUntilEnemySeen;
 
         private StateMachine _stateMachine;
         private Metabolism _metabolism;
@@ -65,12 +64,13 @@ namespace Brains
 
             At(idle, moveToTarget, () => canSeeTarget);
             At(idle, respondToAttack, BeingAttacked());
+            At(respondToAttack, attack, () => canSeeTarget && canAttackTarget);
             At(respondToAttack, moveToTarget, () => canSeeTarget);
-            At(respondToAttack, idle, () => !canSeeTarget && !waitUntilEnemySeen);
+            At(respondToAttack, idle, () => !canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
             At(attack, idle, () => !canAttackTarget);
-            Any(idle, () => !canSeeTarget && attackedBy == null && _metabolism.IsAlive);
             Any(dying, () => !_metabolism.IsAlive);
+            Any(idle, () => !canSeeTarget && attackedBy == null);
 
             _stateMachine.SetState(idle);
 
@@ -86,6 +86,7 @@ namespace Brains
                 _stateMachine.AddAnyTransition(to, condition);
             }
         }
+
 
         private void Update()
         {
@@ -110,6 +111,10 @@ namespace Brains
             if (rangeChecks.Length != 0)
             {
                 target = rangeChecks[0].transform;
+                // if being attacked, set the target to the attacker
+                if (attackedBy != null)
+                    target = attackedBy;
+
                 if (target.GetComponent<Metabolism>() != null &&
                     !target.GetComponent<Metabolism>().IsAlive)
                 {

@@ -27,8 +27,6 @@ namespace FSM.Combat
         public void Tick()
         {
             _combat.transform.LookAt(_combat.attackedBy);
-            if (Time.deltaTime > _timeToWait)
-                _combat.waitUntilEnemySeen = false;
         }
 
         public void OnEnter()

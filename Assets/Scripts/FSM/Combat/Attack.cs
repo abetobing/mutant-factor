@@ -25,16 +25,6 @@ namespace FSM.Combat
             if (_combat.target != null)
             {
                 _combat.transform.LookAt(_combat.target);
-                // _animator.SetTrigger(Constants.AttackHash);
-                // if (_nextAttackTime <= Time.time)
-                // {
-                //     _nextAttackTime = Time.time + (10f / _combat.attackSpeed);
-                //     _animator.SetTrigger(Constants.AttackHash);
-                // }
-                // else
-                // {
-                //     _animator.ResetTrigger(Constants.AttackHash);
-                // }
             }
         }
 
