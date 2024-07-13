@@ -29,17 +29,19 @@ namespace Brains
         public GameObject weaponPrefab;
         public Transform weaponPlaceholder;
 
-        private void Awake() => Profession = "Gatherer";
-
-        private void OnEnable()
+        private void Awake()
         {
+            Profession = "Gatherer";
             if (weaponPrefab != null && weaponPlaceholder != null)
             {
                 var weapon = Instantiate(weaponPrefab, weaponPlaceholder);
                 weapon.transform.localPosition = weaponPlaceholder.transform.localPosition;
                 weapon.transform.localRotation = Quaternion.identity;
             }
+        }
 
+        private void OnEnable()
+        {
             var navMeshAgent = GetComponent<NavMeshAgent>();
             var animator = GetComponent<Animator>();
 
