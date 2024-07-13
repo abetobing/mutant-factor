@@ -21,7 +21,7 @@ namespace Brains
         // how many item harvested per shot
         public int HarvestPerHit { get; set; } = 5;
 
-        [SerializeField] private int _maxCarried = 20;
+        [SerializeField] private int maxCarried = 20;
 
 
         public GatherableResource Target { get; set; }
@@ -65,7 +65,7 @@ namespace Brains
             void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
             Func<bool> HasTargetAndCanCarryMore() => () => Target != null &&
-                                                           TotalOwned < _maxCarried;
+                                                           TotalOwned < maxCarried;
 
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
 
@@ -76,7 +76,7 @@ namespace Brains
             Func<bool> TargetIsDepletedAndICanCarryMore() =>
                 () => (Target == null || Target.IsDepleted) && !InventoryFull().Invoke();
 
-            Func<bool> InventoryFull() => () => TotalOwned >= _maxCarried;
+            Func<bool> InventoryFull() => () => TotalOwned >= maxCarried;
 
             Func<bool> ReachedStockpile() => () => StockPile != null &&
                                                    Vector3.Distance(transform.position, StockPile.transform.position) <=

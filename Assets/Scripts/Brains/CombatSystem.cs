@@ -29,11 +29,9 @@ namespace Brains
         public LayerMask targetMask;
         public LayerMask obstructionMask;
 
-        // [HideInInspector] 
         public Transform target;
         public Transform attackedBy;
 
-        // [HideInInspector] 
         public bool canSeeTarget;
         public bool canAttackTarget;
 
