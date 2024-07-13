@@ -30,6 +30,7 @@ namespace DefaultNamespace
                 // _animator.SetFloat(Constants.VerticalHash, isFacingMoveDirection ? animDir.x : 0f, .5f, Time.deltaTime);
                 // _animator.SetFloat(Constants.HorizontalHash, isFacingMoveDirection ? animDir.z : 0f, .5f, Time.deltaTime);
 
+                _animator.SetFloat(Constants.TurnHash, animDir.x);
                 RotateTo(dir);
             }
             else

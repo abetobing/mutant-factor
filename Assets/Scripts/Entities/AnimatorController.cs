@@ -25,10 +25,6 @@ namespace Entities
             // set health parameter
             GetComponent<Animator>().SetFloat(Constants.HealthHash, _metabolism.health);
 
-            // set angle parameter
-            var movementAngleMagnitude = transform.InverseTransformDirection(_navMeshAgent.desiredVelocity).x;
-            _animator?.SetFloat(Constants.AngleHash, movementAngleMagnitude);
-
             // set attackSpeed parameter
             var animationAttackSpeed = _combatSystem.attackSpeed / 10f;
             _animator?.SetFloat(Constants.AttackSpeedHash, animationAttackSpeed);
