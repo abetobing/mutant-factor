@@ -30,8 +30,7 @@ namespace DefaultNamespace
                 // _animator.SetFloat(Constants.VerticalHash, isFacingMoveDirection ? animDir.x : 0f, .5f, Time.deltaTime);
                 // _animator.SetFloat(Constants.HorizontalHash, isFacingMoveDirection ? animDir.z : 0f, .5f, Time.deltaTime);
 
-                transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir),
-                    180 * Time.deltaTime);
+                RotateTo(dir);
             }
             else
             {
@@ -60,13 +59,9 @@ namespace DefaultNamespace
         {
             if (_agent.hasPath)
             {
-                Vector3 dir = (_agent.steeringTarget - transform.position).normalized;
-                var animDir = transform.InverseTransformDirection(dir);
-                Debug.DrawLine(transform.position, _agent.steeringTarget, Color.cyan);
-                Debug.DrawLine(transform.position, _agent.steeringTarget - transform.position, Color.yellow);
                 for (var i = 0; i < _agent.path.corners.Length - 1; i++)
                 {
-                    Debug.DrawLine(_agent.path.corners[i], _agent.path.corners[i + 1], Color.blue);
+                    Debug.DrawLine(_agent.path.corners[i], _agent.path.corners[i + 1], Color.black);
                 }
             }
         }
