@@ -35,7 +35,6 @@ namespace FSM.MinerState
 
         public void Tick()
         {
-            Debug.DrawRay(_destination, Vector3.up, Color.green, 1.0f); //so you can see with gizmos
         }
 
         public void OnEnter()
