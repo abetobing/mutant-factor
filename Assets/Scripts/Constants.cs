@@ -11,6 +11,8 @@ public class Constants
     public static readonly int IsWorkingHash = Animator.StringToHash("isWorking");
     public static readonly int SpeedHash = Animator.StringToHash("speed");
     public static readonly int AngleHash = Animator.StringToHash("angle");
+    public static readonly int HorizontalHash = Animator.StringToHash("horizontal");
+    public static readonly int VerticalHash = Animator.StringToHash("vertical");
 
     public static readonly int AttackHash = Animator.StringToHash("attack");
     public static readonly int AttackSpeedHash = Animator.StringToHash("attackSpeed");
