@@ -23,6 +23,9 @@ namespace DefaultNamespace
         {
             if (_agent.hasPath)
             {
+                if (Vector3.Distance(transform.position, _agent.destination) <= 0.2f)
+                    Stop();
+
                 var dir = (_agent.steeringTarget - transform.position).normalized;
                 var animDir = transform.InverseTransformDirection(dir);
                 var isFacingMoveDirection = Vector3.Dot(dir, transform.forward) > 0f;
@@ -31,12 +34,12 @@ namespace DefaultNamespace
                 // _animator.SetFloat(Constants.HorizontalHash, isFacingMoveDirection ? animDir.z : 0f, .5f, Time.deltaTime);
 
                 _animator.SetFloat(Constants.TurnHash, animDir.x);
-                RotateTo(dir);
+                // RotateTo(dir);
             }
             else
             {
-                _animator.SetFloat(Constants.VerticalHash, 0f);
-                _animator.SetFloat(Constants.HorizontalHash, 0f);
+                _animator.SetFloat(Constants.SpeedHash, 0f, 0.25f, Time.deltaTime);
+                _animator.SetFloat(Constants.TurnHash, 0f, 0.25f, Time.deltaTime);
             }
         }
 
