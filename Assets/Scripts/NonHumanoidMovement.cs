@@ -23,5 +23,10 @@ namespace DefaultNamespace
         public void RotateTo(Vector3 direction)
         {
         }
+
+        public void Stop()
+        {
+            _agent.ResetPath();
+        }
     }
 }

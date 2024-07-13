@@ -24,12 +24,13 @@ namespace DefaultNamespace
         {
             if (_agent.hasPath)
             {
-                Vector3 dir = (_agent.steeringTarget - transform.position).normalized;
+                var dir = (_agent.steeringTarget - transform.position).normalized;
                 var animDir = transform.InverseTransformDirection(dir);
-                var isFacingMoveDirection = Vector3.Dot(dir, transform.forward) > .5f;
-                _animator.SetFloat(Constants.VerticalHash, isFacingMoveDirection ? animDir.x : 0f, .5f, Time.deltaTime);
-                _animator.SetFloat(Constants.HorizontalHash, isFacingMoveDirection ? animDir.y : 0f, .5f,
-                    Time.deltaTime);
+                Debug.Log(animDir);
+                var isFacingMoveDirection = Vector3.Dot(dir, transform.forward) > 0f;
+                _animator.SetFloat(Constants.SpeedHash, isFacingMoveDirection ? animDir.z : 0, .1f, Time.deltaTime);
+                // _animator.SetFloat(Constants.VerticalHash, isFacingMoveDirection ? animDir.x : 0f, .5f, Time.deltaTime);
+                // _animator.SetFloat(Constants.HorizontalHash, isFacingMoveDirection ? animDir.z : 0f, .5f, Time.deltaTime);
 
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(dir),
                     180 * Time.deltaTime);
@@ -52,10 +53,19 @@ namespace DefaultNamespace
                 180 * Time.deltaTime);
         }
 
+        public void Stop()
+        {
+            _agent.ResetPath();
+        }
+
         private void OnDrawGizmos()
         {
             if (_agent.hasPath)
             {
+                Vector3 dir = (_agent.steeringTarget - transform.position).normalized;
+                var animDir = transform.InverseTransformDirection(dir);
+                Debug.DrawLine(transform.position, _agent.steeringTarget, Color.cyan);
+                Debug.DrawLine(transform.position, _agent.steeringTarget - transform.position, Color.yellow);
                 for (var i = 0; i < _agent.path.corners.Length - 1; i++)
                 {
                     Debug.DrawLine(_agent.path.corners[i], _agent.path.corners[i + 1], Color.blue);
