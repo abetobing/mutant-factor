@@ -556,6 +556,7 @@ GameObject:
   - component: {fileID: 545867326613144219}
   - component: {fileID: -6224339353687580285}
   - component: {fileID: 422758525114051598}
+  - component: {fileID: 8816694677905971776}
   m_Layer: 8
   m_Name: Spider_Fuga_Red
   m_TagString: Selectable
@@ -645,7 +646,6 @@ MonoBehaviour:
   attackedBy: {fileID: 0}
   canSeeTarget: 0
   canAttackTarget: 0
-  waitUntilEnemySeen: 0
 --- !u!195 &3179108470650167042
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -740,6 +740,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 1532279058203686599}
+--- !u!114 &8816694677905971776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7122654101855521591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edebb9070aea42daac1b456ed77dbc7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7122654101855521597
 GameObject:
   m_ObjectHideFlags: 0

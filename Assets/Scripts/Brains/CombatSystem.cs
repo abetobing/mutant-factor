@@ -54,11 +54,11 @@ namespace Brains
             _stateMachine = new StateMachine();
 
 
-            var idle = new Idle(this, _animator, _navMeshAgent);
-            var moveToTarget = new MoveToTarget(this, _animator, _navMeshAgent);
-            var attack = new Attack(this, _animator, _navMeshAgent);
-            var dying = new Dying(this, _animator, _navMeshAgent);
-            var respondToAttack = new RespondToAttack(this, _animator, _navMeshAgent);
+            var idle = new Idle(this);
+            var moveToTarget = new MoveToTarget(this);
+            var attack = new Attack(this);
+            var dying = new Dying(this);
+            var respondToAttack = new RespondToAttack(this);
 
             At(idle, moveToTarget, () => canSeeTarget);
             At(idle, respondToAttack, BeingAttacked());

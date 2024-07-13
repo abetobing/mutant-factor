@@ -30,10 +30,10 @@ namespace Brains
             _stateMachine = new StateMachine();
 
             var healthy = new Healthy(this);
-            var hungry = new Hungry(this, animator);
+            var hungry = new Hungry(this);
             var searchFood = new SearchFood(this);
-            var moveToFood = new MoveToFood(this, navMeshAgent, animator);
-            var eatingFood = new EatingFood(this, animator);
+            var moveToFood = new MoveToFood(this);
+            var eatingFood = new EatingFood(this);
 
             At(hungry, searchFood, () => HasEnteredHungryState);
             At(searchFood, moveToFood, ThereAreFoodSource());

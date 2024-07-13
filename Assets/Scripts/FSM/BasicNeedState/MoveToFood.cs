@@ -1,8 +1,8 @@
 #region
 
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -11,17 +11,15 @@ namespace FSM.BasicNeedState
     public class MoveToFood : IState
     {
         private BasicNeeds _thePerson;
-        private readonly NavMeshAgent _navMeshAgent;
-        private readonly Animator _animator;
+        private readonly ICharacterMovement _characterMovement;
 
         private Vector3 _lastPosition = Vector3.zero;
         public float TimeStuck;
 
-        public MoveToFood(BasicNeeds basicNeeds, NavMeshAgent navMeshAgent, Animator animator)
+        public MoveToFood(BasicNeeds basicNeeds)
         {
             _thePerson = basicNeeds;
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
+            _characterMovement = basicNeeds.GetComponent<ICharacterMovement>();
         }
 
         public string String()
@@ -40,15 +38,12 @@ namespace FSM.BasicNeedState
         public void OnEnter()
         {
             TimeStuck = 0f;
-            _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_thePerson.FoodTarget.transform.position);
-            // _animator.SetBool(Constants.IsWalkingHash, true);
+            _characterMovement.MoveTo(_thePerson.FoodTarget.transform.position);
         }
 
         public void OnExit()
         {
-            _navMeshAgent.enabled = false;
-            // _animator.SetBool(Constants.IsWalkingHash, false);
+            _characterMovement.Stop();
         }
     }
 }

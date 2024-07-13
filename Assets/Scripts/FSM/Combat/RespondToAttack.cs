@@ -1,6 +1,5 @@
 using Brains;
-using UnityEngine;
-using UnityEngine.AI;
+using DefaultNamespace;
 
 namespace FSM.Combat
 {
@@ -11,14 +10,12 @@ namespace FSM.Combat
     public class RespondToAttack : IState
     {
         private CombatSystem _combat;
-        private Animator _animator;
-        private NavMeshAgent _navMeshAgent;
+        private readonly ICharacterMovement _characterMovement;
 
-        public RespondToAttack(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
+        public RespondToAttack(CombatSystem combatSystem)
         {
             _combat = combatSystem;
-            _animator = animator;
-            _navMeshAgent = navMeshAgent;
+            _characterMovement = combatSystem.GetComponent<ICharacterMovement>();
         }
 
         public string String() => "responding to attacker";
@@ -30,12 +27,11 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _navMeshAgent.enabled = false;
+            _characterMovement.Stop();
         }
 
         public void OnExit()
         {
-            _navMeshAgent.enabled = true;
             _combat.attackedBy = null;
         }
     }

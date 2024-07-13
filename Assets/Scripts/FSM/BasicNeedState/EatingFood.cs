@@ -9,15 +9,15 @@ namespace FSM.BasicNeedState
 {
     public class EatingFood : IState
     {
-        private BasicNeeds _thePerson;
-        private Animator _animator;
+        private readonly BasicNeeds _thePerson;
+        private readonly Animator _animator;
 
         private float _nextEatingTime; // time to delay eating
 
-        public EatingFood(BasicNeeds basicNeeds, Animator animator)
+        public EatingFood(BasicNeeds basicNeeds)
         {
             _thePerson = basicNeeds;
-            _animator = animator;
+            _animator = basicNeeds.GetComponent<Animator>();
         }
 
         public string String()

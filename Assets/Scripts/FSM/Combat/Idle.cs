@@ -1,6 +1,5 @@
 using Brains;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace FSM.Combat
 {
@@ -8,15 +7,13 @@ namespace FSM.Combat
     {
         private CombatSystem _combat;
         private Animator _animator;
-        private NavMeshAgent _navMeshAgent;
         private BaseProfession _profession;
         private BasicNeeds _basicNeeds;
 
-        public Idle(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
+        public Idle(CombatSystem combatSystem)
         {
             _combat = combatSystem;
-            _animator = animator;
-            _navMeshAgent = navMeshAgent;
+            _animator = combatSystem.GetComponent<Animator>();
         }
 
         public string String() => "Idle";

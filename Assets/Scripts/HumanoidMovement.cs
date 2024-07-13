@@ -7,7 +7,6 @@ namespace DefaultNamespace
     {
         private NavMeshAgent _agent;
         private Animator _animator;
-        private Vector3 _destination;
 
         private void OnValidate()
         {
@@ -26,7 +25,6 @@ namespace DefaultNamespace
             {
                 var dir = (_agent.steeringTarget - transform.position).normalized;
                 var animDir = transform.InverseTransformDirection(dir);
-                Debug.Log(animDir);
                 var isFacingMoveDirection = Vector3.Dot(dir, transform.forward) > 0f;
                 _animator.SetFloat(Constants.SpeedHash, isFacingMoveDirection ? animDir.z : 0, .1f, Time.deltaTime);
                 // _animator.SetFloat(Constants.VerticalHash, isFacingMoveDirection ? animDir.x : 0f, .5f, Time.deltaTime);

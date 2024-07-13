@@ -7,12 +7,16 @@ namespace DefaultNamespace
     {
         private NavMeshAgent _agent;
         private Animator _animator;
-        private Vector3 _destination;
 
         private void OnValidate()
         {
             if (!_agent) _agent = GetComponent<NavMeshAgent>();
             if (!_animator) _animator = GetComponent<Animator>();
+        }
+
+        private void Update()
+        {
+            _animator.SetFloat(Constants.SpeedHash, _agent.velocity.magnitude);
         }
 
         public void MoveTo(Vector3 destination)

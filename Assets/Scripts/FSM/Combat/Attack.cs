@@ -1,21 +1,21 @@
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace FSM.Combat
 {
     public class Attack : IState
     {
-        private CombatSystem _combat;
-        private Animator _animator;
-        private NavMeshAgent _navMeshAgent;
+        private readonly CombatSystem _combat;
+        private readonly Animator _animator;
         private float _nextAttackTime;
+        private readonly ICharacterMovement _characterMovement;
 
-        public Attack(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
+        public Attack(CombatSystem combatSystem)
         {
             _combat = combatSystem;
-            _animator = animator;
-            _navMeshAgent = navMeshAgent;
+            _animator = combatSystem.GetComponent<Animator>();
+            _characterMovement = combatSystem.GetComponent<ICharacterMovement>();
         }
 
         public string String() => "attacking";
@@ -30,15 +30,13 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _navMeshAgent.ResetPath();
-            _navMeshAgent.enabled = false;
+            _characterMovement.Stop();
             _animator.SetBool(Constants.IsCombatHash, true);
             _animator.SetTrigger(Constants.AttackHash);
         }
 
         public void OnExit()
         {
-            _navMeshAgent.enabled = true;
             _animator.SetBool(Constants.IsCombatHash, false);
             _animator.ResetTrigger(Constants.AttackHash);
         }
