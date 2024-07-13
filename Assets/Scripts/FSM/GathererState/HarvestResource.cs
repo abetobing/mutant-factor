@@ -1,6 +1,7 @@
 ﻿#region
 
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
 
 #endregion
@@ -11,11 +12,13 @@ namespace FSM.GathererState
     {
         private readonly Gatherer _gatherer;
         private readonly Animator _animator;
+        private readonly ICharacterMovement _characterMovement;
 
-        public HarvestResource(Gatherer gatherer, Animator animator)
+        public HarvestResource(Gatherer gatherer)
         {
             _gatherer = gatherer;
-            _animator = animator;
+            _characterMovement = gatherer.GetComponent<ICharacterMovement>();
+            _animator = gatherer.GetComponent<Animator>();
         }
 
         public void Tick()

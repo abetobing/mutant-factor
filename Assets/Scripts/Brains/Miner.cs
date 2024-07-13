@@ -46,9 +46,9 @@ namespace Brains
             _stateMachine = new StateMachine();
 
             var search = new SearchForResource(this);
-            var moveToSelected = new MoveToSelectedResource(this, navMeshAgent, animator);
-            var harvest = new HarvestResource(this, navMeshAgent, animator);
-            var returnToStockpile = new ReturnToStockpile(this, navMeshAgent, animator);
+            var moveToSelected = new MoveToSelectedResource(this);
+            var harvest = new HarvestResource(this);
+            var returnToStockpile = new ReturnToStockpile(this);
             var placeResourcesInStockpile = new PlaceResourcesInStockpile(this);
 
             At(search, moveToSelected, HasTargetAndCanCarryMore());

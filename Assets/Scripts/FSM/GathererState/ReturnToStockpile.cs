@@ -1,6 +1,7 @@
 ﻿#region
 
 using Brains;
+using DefaultNamespace;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,15 +13,15 @@ namespace FSM.GathererState
     internal class ReturnToStockpile : IState
     {
         private readonly Gatherer _gatherer;
-        private readonly NavMeshAgent _navMeshAgent;
         private readonly Animator _animator;
+        private readonly ICharacterMovement _characterMovement;
         private Vector3 _destination;
 
-        public ReturnToStockpile(Gatherer gatherer, NavMeshAgent navMeshAgent, Animator animator)
+        public ReturnToStockpile(Gatherer gatherer)
         {
             _gatherer = gatherer;
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
+            _characterMovement = gatherer.GetComponent<ICharacterMovement>();
+            _animator = gatherer.GetComponent<Animator>();
         }
 
         public string String()
@@ -37,19 +38,18 @@ namespace FSM.GathererState
         {
             _gatherer.StockPile = Object.FindObjectOfType<StockPile>();
             _destination = _gatherer.StockPile.transform.position;
-            _navMeshAgent.enabled = true;
             if (NavMesh.SamplePosition(_destination, out var hit, 2.0f,
                     NavMesh.AllAreas)) //documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
             {
                 _destination = hit.position;
             }
 
-            _navMeshAgent.SetDestination(_destination);
+            _characterMovement.MoveTo(_destination);
         }
 
         public void OnExit()
         {
-            _navMeshAgent.enabled = false;
+            _characterMovement.Stop();
         }
     }
 }

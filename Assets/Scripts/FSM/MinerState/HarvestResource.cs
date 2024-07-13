@@ -1,8 +1,8 @@
 ﻿#region
 
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -11,14 +11,14 @@ namespace FSM.MinerState
     internal class HarvestResource : IState
     {
         private readonly Miner _miner;
-        private NavMeshAgent _navMeshAgent;
+        private readonly ICharacterMovement _characterMovement;
         private readonly Animator _animator;
 
-        public HarvestResource(Miner miner, NavMeshAgent navMeshAgent, Animator animator)
+        public HarvestResource(Miner miner)
         {
             _miner = miner;
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
+            _characterMovement = miner.GetComponent<ICharacterMovement>();
+            _animator = miner.GetComponent<Animator>();
         }
 
         public void Tick()

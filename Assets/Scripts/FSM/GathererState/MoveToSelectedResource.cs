@@ -1,8 +1,8 @@
 ﻿#region
 
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -11,18 +11,18 @@ namespace FSM.GathererState
     internal class MoveToSelectedResource : IState
     {
         private readonly Gatherer _gatherer;
-        private readonly NavMeshAgent _navMeshAgent;
+        private readonly ICharacterMovement _characterMovement;
         private readonly Animator _animator;
 
         private Vector3 _lastPosition = Vector3.zero;
 
         public float TimeStuck;
 
-        public MoveToSelectedResource(Gatherer gatherer, NavMeshAgent navMeshAgent, Animator animator)
+        public MoveToSelectedResource(Gatherer gatherer)
         {
             _gatherer = gatherer;
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
+            _characterMovement = gatherer.GetComponent<ICharacterMovement>();
+            _animator = gatherer.GetComponent<Animator>();
         }
 
         public string String()
@@ -41,13 +41,12 @@ namespace FSM.GathererState
         public void OnEnter()
         {
             TimeStuck = 0f;
-            _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_gatherer.Target.transform.position);
+            _characterMovement.MoveTo(_gatherer.Target.transform.position);
         }
 
         public void OnExit()
         {
-            _navMeshAgent.enabled = false;
+            _characterMovement.Stop();
         }
     }
 }

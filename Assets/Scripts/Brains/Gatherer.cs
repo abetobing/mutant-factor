@@ -5,7 +5,6 @@ using Entities;
 using FSM;
 using FSM.GathererState;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -30,16 +29,12 @@ namespace Brains
 
         private void OnEnable()
         {
-            var navMeshAgent = GetComponent<NavMeshAgent>();
-            var animator = GetComponent<Animator>();
-            var fleeParticleSystem = gameObject.GetComponentInChildren<ParticleSystem>();
-
             _stateMachine = new StateMachine();
 
             var search = new SearchForResource(this);
-            var moveToSelected = new MoveToSelectedResource(this, navMeshAgent, animator);
-            var harvest = new HarvestResource(this, animator);
-            var returnToStockpile = new ReturnToStockpile(this, navMeshAgent, animator);
+            var moveToSelected = new MoveToSelectedResource(this);
+            var harvest = new HarvestResource(this);
+            var returnToStockpile = new ReturnToStockpile(this);
             var placeResourcesInStockpile = new PlaceResourcesInStockpile(this);
 
             At(search, moveToSelected, HasTargetAndCanCarryMore());
