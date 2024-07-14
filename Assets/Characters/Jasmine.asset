@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 669127f41cc54a3a8476fef888d0b670, type: 3}
-  m_Name: Abraham
+  m_Name: Jasmine
   m_EditorClassIdentifier: 
-  name: Abraham
+  name: Jasmine
   visionRange: 5
-  attackRange: 2.5
+  attackRange: 2
   attackRangeAngle: 165
-  baseDamage: 5
-  attackSpeed: 15
+  baseDamage: 2.5
+  attackSpeed: 20
   targetMask:
     serializedVersion: 2
     m_Bits: 256
@@ -25,6 +25,6 @@ MonoBehaviour:
   stamina: 100
   hunger: 100
   hungerFallRate: 0.25
-  isFemale: 0
-  weapon: {fileID: 3330531830160758691, guid: a7ebed570ef474047b92d2b8faf5c503, type: 3}
-  profession: 2
+  isFemale: 1
+  weapon: {fileID: 0}
+  profession: 1
