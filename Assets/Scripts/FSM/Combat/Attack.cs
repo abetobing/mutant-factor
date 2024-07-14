@@ -31,12 +31,14 @@ namespace FSM.Combat
         {
             _animator.SetBool(Constants.IsCombatHash, true);
             _animator.SetTrigger(Constants.AttackHash);
+            _combat.GetComponent<HealthBar>().enabled = true;
         }
 
         public void OnExit()
         {
             _animator.SetBool(Constants.IsCombatHash, false);
             _animator.ResetTrigger(Constants.AttackHash);
+            _combat.GetComponent<HealthBar>().enabled = false;
         }
     }
 }
