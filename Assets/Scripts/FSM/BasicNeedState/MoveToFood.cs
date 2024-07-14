@@ -28,7 +28,8 @@ namespace FSM.BasicNeedState
 
         public void Tick()
         {
-            if (Vector3.Distance(_thePerson.transform.position, _lastPosition) <= 0f)
+            if (Vector3.Distance(_lastPosition, _thePerson.transform.position) <= 1f &&
+                Vector3.Distance(_thePerson.transform.position, _lastPosition) <= 0f)
                 TimeStuck += Time.deltaTime;
 
             _lastPosition = _thePerson.transform.position;
