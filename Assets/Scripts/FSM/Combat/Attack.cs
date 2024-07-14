@@ -1,5 +1,4 @@
 using Brains;
-using DefaultNamespace;
 using UnityEngine;
 
 namespace FSM.Combat

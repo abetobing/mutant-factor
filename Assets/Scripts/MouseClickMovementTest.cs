@@ -1,33 +1,30 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace DefaultNamespace
+public class MouseClickMovementTest : MonoBehaviour
 {
-    public class MouseClickMovementTest : MonoBehaviour
+    private NavMeshAgent _navMeshAgent;
+    RaycastHit raycastHit = new RaycastHit();
+
+    private void Awake()
     {
-        private NavMeshAgent _navMeshAgent;
-        RaycastHit raycastHit = new RaycastHit();
+        _navMeshAgent = GetComponent<NavMeshAgent>();
+    }
 
-        private void Awake()
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(1))
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-        }
-
-        private void Update()
-        {
-            if (Input.GetMouseButtonDown(1))
+            var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray.origin, ray.direction, out raycastHit))
             {
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray.origin, ray.direction, out raycastHit))
-                {
-                    Debug.DrawLine(ray.origin, raycastHit.point, Color.white);
-                    _navMeshAgent?.SetDestination(raycastHit.point);
-                }
+                Debug.DrawLine(ray.origin, raycastHit.point, Color.white);
+                _navMeshAgent?.SetDestination(raycastHit.point);
             }
         }
+    }
 
-        private void OnDrawGizmos()
-        {
-        }
+    private void OnDrawGizmos()
+    {
     }
 }

@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections;
-using DefaultNamespace;
 using FSM;
 using FSM.Combat;
 using UnityEngine;
