@@ -42,6 +42,11 @@ namespace DefaultNamespace
             _agent.ResetPath();
         }
 
+        public bool HasArrived()
+        {
+            return _agent.hasPath && _agent.remainingDistance <= _agent.stoppingDistance;
+        }
+
         private void OnDrawGizmos()
         {
             if (_agent.hasPath)

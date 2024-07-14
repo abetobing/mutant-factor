@@ -6,7 +6,6 @@ using Entities;
 using FSM;
 using FSM.BasicNeedState;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -23,8 +22,7 @@ namespace Brains
 
         private void Awake()
         {
-            var navMeshAgent = GetComponent<NavMeshAgent>();
-            var animator = GetComponent<Animator>();
+            var characterMovement = GetComponent<ICharacterMovement>();
 
             _metabolism = GetComponent<Metabolism>();
             _stateMachine = new StateMachine();
@@ -47,7 +45,7 @@ namespace Brains
             Any(healthy, NoFoodLeftButNotHungryAnymore());
 
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
-            Func<bool> ArrivedAtFoodSource() => () => navMeshAgent.remainingDistance <= 1f;
+            Func<bool> ArrivedAtFoodSource() => () => characterMovement.HasArrived();
             Func<bool> StuckForOverASecond() => () => moveToFood.TimeStuck > 1f;
             Func<bool> NoFoodLeft() => () => FoodTarget.IsDepleted;
 

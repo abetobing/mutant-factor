@@ -23,18 +23,18 @@ namespace DefaultNamespace
         {
             if (_agent.hasPath)
             {
-                if (Vector3.Distance(transform.position, _agent.destination) <= 0.2f)
+                if (HasArrived())
                     Stop();
 
                 var dir = (_agent.steeringTarget - transform.position).normalized;
                 var animDir = transform.InverseTransformDirection(dir);
-                var isFacingMoveDirection = Vector3.Dot(dir, transform.forward) > 0f;
+                var isFacingMoveDirection = Vector3.Dot(dir, transform.forward) > 0.2f;
                 _animator.SetFloat(Constants.SpeedHash, isFacingMoveDirection ? animDir.z : 0, .1f, Time.deltaTime);
                 // _animator.SetFloat(Constants.VerticalHash, isFacingMoveDirection ? animDir.x : 0f, .5f, Time.deltaTime);
                 // _animator.SetFloat(Constants.HorizontalHash, isFacingMoveDirection ? animDir.z : 0f, .5f, Time.deltaTime);
 
                 _animator.SetFloat(Constants.TurnHash, animDir.x);
-                // RotateTo(dir);
+                RotateTo(dir);
             }
             else
             {
@@ -57,6 +57,11 @@ namespace DefaultNamespace
         public void Stop()
         {
             _agent.ResetPath();
+        }
+
+        public bool HasArrived()
+        {
+            return _agent.hasPath && Vector3.Distance(_agent.destination, transform.position) <= 0.2f;
         }
 
         private void OnDrawGizmos()

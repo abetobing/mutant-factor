@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using DefaultNamespace;
 using Entities;
 using FSM;
 using FSM.GathererState;
@@ -29,6 +30,8 @@ namespace Brains
 
         private void OnEnable()
         {
+            var characterMovement = GetComponent<ICharacterMovement>();
+
             _stateMachine = new StateMachine();
 
             var search = new SearchForResource(this);
@@ -56,8 +59,7 @@ namespace Brains
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
 
             Func<bool> ReachedResource() => () => Target != null &&
-                                                  Vector3.Distance(transform.position, Target.transform.position) <
-                                                  Constants.NavMeshDistanceTolerance;
+                                                  characterMovement.HasArrived();
 
             Func<bool> TargetIsDepletedAndICanCarryMore() =>
                 () => (Target == null || Target.IsDepleted) && !InventoryFull().Invoke();
@@ -65,8 +67,7 @@ namespace Brains
             Func<bool> InventoryFull() => () => TotalOwned >= _maxCarried;
 
             Func<bool> ReachedStockpile() => () => StockPile != null &&
-                                                   Vector3.Distance(transform.position, StockPile.transform.position) <=
-                                                   Constants.NavMeshDistanceTolerance;
+                                                   characterMovement.HasArrived();
         }
 
         private void Update()
