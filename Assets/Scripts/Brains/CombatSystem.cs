@@ -66,6 +66,7 @@ namespace Brains
             At(respondToAttack, attack, () => canAttackTarget);
             At(respondToAttack, idle, () => !canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
+            At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
             At(attack, idle, () => !canAttackTarget);
             Any(dying, () => !_metabolism.IsAlive);
             Any(idle, () => !canSeeTarget && attackedBy == null);
@@ -104,8 +105,8 @@ namespace Brains
 
         private void FieldOfViewCheck()
         {
-            if (TargetLocked())
-                return;
+            // if (TargetLocked())
+            //     return;
 
             var targetCandidates = new Collider[5];
             var numberOfTargetAround =

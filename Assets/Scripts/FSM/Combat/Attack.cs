@@ -22,7 +22,7 @@ namespace FSM.Combat
 
         public void Tick()
         {
-            if (_combat.target != null)
+            if (_combat.target != null && _combat.canSeeTarget)
             {
                 _combat.transform.LookAt(_combat.target);
             }
@@ -30,7 +30,6 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _characterMovement.Stop();
             _animator.SetBool(Constants.IsCombatHash, true);
             _animator.SetTrigger(Constants.AttackHash);
         }

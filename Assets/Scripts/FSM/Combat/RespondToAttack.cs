@@ -22,7 +22,8 @@ namespace FSM.Combat
 
         public void Tick()
         {
-            _combat.transform.LookAt(_combat.attackedBy);
+            // _combat.transform.LookAt(_combat.attackedBy);
+            _characterMovement.RotateTo(_combat.attackedBy.position);
         }
 
         public void OnEnter()
