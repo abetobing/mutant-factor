@@ -9,11 +9,13 @@ namespace FSM.Combat
         private Animator _animator;
         private BaseProfession _profession;
         private BasicNeeds _basicNeeds;
+        private HealthBar _healthBar;
 
         public Idle(CombatSystem combatSystem)
         {
             _combat = combatSystem;
             _animator = combatSystem.GetComponent<Animator>();
+            _healthBar = combatSystem.GetComponent<HealthBar>();
         }
 
         public string String() => "Idle";
@@ -24,7 +26,8 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _combat.GetComponent<HealthBar>().enabled = false;
+            if (_healthBar != null)
+                _healthBar.enabled = false;
             _animator.SetBool(Constants.IsCombatHash, false);
 
             // enable profession

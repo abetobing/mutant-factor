@@ -22,7 +22,7 @@ namespace Entities
         private void Update()
         {
             // set health parameter
-            GetComponent<Animator>().SetFloat(Constants.HealthHash, _metabolism.health);
+            _animator?.SetFloat(Constants.HealthHash, _metabolism.health);
 
             // set attackSpeed parameter
             var animationAttackSpeed = _combatSystem.attackSpeed / 10f;
