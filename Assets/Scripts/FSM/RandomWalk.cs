@@ -1,6 +1,6 @@
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
 namespace FSM
@@ -11,25 +11,27 @@ namespace FSM
     public class RandomWalk : IState
     {
         private GameObject _gameObject;
-        private NavMeshAgent _navMeshAgent;
+        private ICharacterMovement _characterMovement;
         private readonly float _mRange = 5f;
 
         public RandomWalk(GameObject gameObject)
         {
-            _navMeshAgent = gameObject.GetComponent<NavMeshAgent>();
-            var combatSystem = gameObject.GetComponent<CombatSystem>();
+            _gameObject = gameObject;
+            _characterMovement = _gameObject.GetComponent<ICharacterMovement>();
+            var combatSystem = _gameObject.GetComponent<CombatSystem>();
             if (combatSystem != null)
-                _mRange = combatSystem.attackRange;
+                _mRange = combatSystem.radius;
         }
 
         public string String() => "roaming around";
 
         public void Tick()
         {
-            if (_navMeshAgent.pathPending || !_navMeshAgent.isOnNavMesh || _navMeshAgent.remainingDistance > 0.1f)
+            if (!_characterMovement.HasArrived())
                 return;
-
-            _navMeshAgent.destination = _mRange * Random.insideUnitCircle;
+            var randomVec2 = _mRange * Random.insideUnitCircle;
+            var randomPos = _gameObject.transform.position + new Vector3(randomVec2.x, 0, randomVec2.y);
+            _characterMovement.MoveTo(randomPos);
         }
 
         public void OnEnter()
@@ -38,6 +40,7 @@ namespace FSM
 
         public void OnExit()
         {
+            _characterMovement.Stop();
         }
     }
 }
