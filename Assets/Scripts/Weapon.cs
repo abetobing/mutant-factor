@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
 
     public void SwitchTo(GameObject prefab)
     {
-        if (_weaponPrefab == null || weaponPlaceholder == null)
+        if (prefab == null || weaponPlaceholder == null)
             return;
 
         _weaponPrefab = prefab;
