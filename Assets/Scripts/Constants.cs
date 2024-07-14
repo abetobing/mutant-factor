@@ -34,4 +34,16 @@ public class Constants
     public const float EatIntervalPerSecond = 50f; // how many food eaten per second
 
     public const string SelectableTag = "Selectable";
+
+    public const ProfessionType DefaultProfession = ProfessionType.None;
+}
+
+public enum ProfessionType
+{
+    None,
+    Gatherer,
+    Miner,
+    Farmer,
+    Fisher,
+    Guard
 }

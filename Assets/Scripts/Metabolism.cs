@@ -10,7 +10,7 @@ public class Metabolism : MonoBehaviour
     public bool isFemale;
 
     public bool IsAlive => health > 0f;
-    [SerializeField] private float hungerFallRate = 0.25f;
+    public float hungerFallRate = 0.25f;
 
     private BasicNeeds _basicNeeds;
 
