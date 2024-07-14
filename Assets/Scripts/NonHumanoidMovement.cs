@@ -42,7 +42,9 @@ public class NonHumanoidMovement : MonoBehaviour, ICharacterMovement
 
     public bool HasArrived()
     {
-        return _agent.hasPath && _agent.remainingDistance <= _agent.stoppingDistance;
+        if (_agent.hasPath)
+            return Vector3.Distance(_agent.destination, transform.position) <= 0.2f;
+        return true;
     }
 
     private void OnDrawGizmos()
