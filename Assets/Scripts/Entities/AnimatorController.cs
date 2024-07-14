@@ -27,6 +27,10 @@ namespace Entities
             // set attackSpeed parameter
             var animationAttackSpeed = _combatSystem.attackSpeed / 10f;
             _animator?.SetFloat(Constants.AttackSpeedHash, animationAttackSpeed);
+
+            // set gender parameter
+            var gender = _metabolism.isFemale ? 1f : 0f;
+            _animator?.SetFloat(Constants.GenderHash, gender);
         }
 
 

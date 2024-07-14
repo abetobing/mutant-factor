@@ -686,6 +686,7 @@ MonoBehaviour:
   health: 100
   hunger: 100
   stamina: 100
+  isFemale: 0
   hungerFallRate: 0.25
 --- !u!114 &53181791169522702
 MonoBehaviour:
