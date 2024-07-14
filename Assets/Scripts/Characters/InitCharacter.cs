@@ -15,6 +15,8 @@ namespace Characters
             Assert.IsNotNull(character);
             gameObject.name = character.name;
 
+            gameObject.AddComponent<HumanoidMovement>();
+
             var metabolism = gameObject.AddComponent<Metabolism>();
             metabolism.hunger = character.hunger;
             metabolism.health = character.health;
@@ -23,7 +25,6 @@ namespace Characters
             metabolism.isFemale = character.isFemale;
 
             gameObject.AddComponent<BasicNeeds>();
-            gameObject.AddComponent<HumanoidMovement>();
 
             var combat = gameObject.AddComponent<CombatSystem>();
             combat.attackRange = character.attackRange;
