@@ -27,4 +27,5 @@ MonoBehaviour:
   hungerFallRate: 0.25
   isFemale: 0
   weapon: {fileID: 3158247807654608021, guid: bde69ec5863090d49a8323d671d16aed, type: 3}
+  weaponType: 2
   profession: 2

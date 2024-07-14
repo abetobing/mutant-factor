@@ -27,4 +27,5 @@ MonoBehaviour:
   hungerFallRate: 0.25
   isFemale: 1
   weapon: {fileID: 0}
+  weaponType: 0
   profession: 1

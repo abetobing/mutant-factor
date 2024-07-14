@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Officer Hannah
   m_EditorClassIdentifier: 
   name: Officer Hannah
-  visionRange: 5
-  attackRange: 2
-  attackRangeAngle: 165
-  baseDamage: 2.5
+  visionRange: 20
+  attackRange: 20
+  attackRangeAngle: 90
+  baseDamage: 5
   attackSpeed: 20
   targetMask:
     serializedVersion: 2
@@ -26,5 +26,6 @@ MonoBehaviour:
   hunger: 100
   hungerFallRate: 0.25
   isFemale: 1
-  weapon: {fileID: 0}
+  weapon: {fileID: 4965438261709640327, guid: 0183eba91cbc88c44ab984b815d48d88, type: 3}
+  weaponType: 5
   profession: 0

@@ -17,6 +17,7 @@ public class Constants
     public static readonly int AttackHash = Animator.StringToHash("attack");
     public static readonly int AttackSpeedHash = Animator.StringToHash("attackSpeed");
     public static readonly int GenderHash = Animator.StringToHash("gender");
+    public static readonly int WeaponTypeHash = Animator.StringToHash("weaponType");
 
     // public static readonly int DeadHash = Animator.StringToHash("dead");
     public static readonly int HealthHash = Animator.StringToHash("health");
@@ -46,4 +47,20 @@ public enum ProfessionType
     Farmer,
     Fisher,
     Guard
+}
+
+public enum WeaponType
+{
+    None,
+    Knife,
+    AxeOrBlunt,
+    Sword,
+    Bow,
+    Handgun,
+    Handgun2,
+    Rifle1,
+    Rifle2,
+    Rifle3,
+    Rifle4,
+    SniperRifle
 }

@@ -21,5 +21,6 @@ namespace Characters
         public float hungerFallRate = 0.25f;
         public bool isFemale;
         public GameObject weapon;
+        public WeaponType weaponType = WeaponType.None;
     }
 }

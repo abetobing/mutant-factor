@@ -1,4 +1,5 @@
 using Brains;
+using Characters;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -10,6 +11,7 @@ namespace Entities
         private NavMeshAgent _navMeshAgent;
         private Metabolism _metabolism;
         private CombatSystem _combatSystem;
+        private InitCharacter _character;
 
         private void Awake()
         {
@@ -17,6 +19,7 @@ namespace Entities
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _metabolism = GetComponent<Metabolism>();
             _combatSystem = GetComponent<CombatSystem>();
+            _character = GetComponent<InitCharacter>();
         }
 
         private void Update()
@@ -31,6 +34,12 @@ namespace Entities
             // set gender parameter
             var gender = _metabolism.isFemale ? 1f : 0f;
             _animator?.SetFloat(Constants.GenderHash, gender);
+
+            if (_character && _character.character)
+            {
+                var weaponType = _character.character.weaponType;
+                _animator?.SetInteger(Constants.WeaponTypeHash, weaponType.GetHashCode());
+            }
         }
 
 
