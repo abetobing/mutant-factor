@@ -1,7 +1,6 @@
 using Brains;
 using Entities;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Assertions;
 
 namespace Characters
@@ -15,9 +14,6 @@ namespace Characters
         {
             Assert.IsNotNull(character);
             gameObject.name = character.name;
-
-            var navMeshAgent = gameObject.AddComponent<NavMeshAgent>();
-            navMeshAgent.obstacleAvoidanceType = ObstacleAvoidanceType.NoObstacleAvoidance;
 
             var metabolism = gameObject.AddComponent<Metabolism>();
             metabolism.hunger = character.hunger;
@@ -37,6 +33,9 @@ namespace Characters
             combat.targetMask = character.targetMask;
 
             gameObject.AddComponent<AnimatorController>();
+            var weapon = GetComponent<Weapon>();
+            if (character.weapon != null && weapon != null)
+                weapon.SwitchTo(character.weapon);
 
             if (character is DefaultCharacter defaultCharacter)
             {
@@ -50,7 +49,7 @@ namespace Characters
                         gameObject.AddComponent<Miner>();
                         break;
                     case ProfessionType.None:
-                    default:
+                        gameObject.AddComponent<Unemployed>();
                         break;
                 }
             }

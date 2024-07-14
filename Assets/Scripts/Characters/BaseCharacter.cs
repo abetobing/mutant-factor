@@ -20,5 +20,6 @@ namespace Characters
         public float hunger = Constants.DefaultMaxHunger;
         public float hungerFallRate = 0.25f;
         public bool isFemale;
+        public GameObject weapon;
     }
 }

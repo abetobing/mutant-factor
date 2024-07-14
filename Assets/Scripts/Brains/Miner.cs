@@ -26,18 +26,10 @@ namespace Brains
 
         public GatherableResource Target { get; set; }
         public StockPile StockPile { get; set; }
-        public GameObject weaponPrefab;
-        public Transform weaponPlaceholder;
 
         private void Awake()
         {
             Profession = "Gatherer";
-            if (weaponPrefab != null && weaponPlaceholder != null)
-            {
-                var weapon = Instantiate(weaponPrefab, weaponPlaceholder);
-                weapon.transform.localPosition = weaponPlaceholder.transform.localPosition;
-                weapon.transform.localRotation = Quaternion.identity;
-            }
         }
 
         private void OnEnable()
