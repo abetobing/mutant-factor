@@ -5,7 +5,6 @@ using System.Collections;
 using FSM;
 using FSM.Combat;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -36,8 +35,6 @@ namespace Brains
 
         private StateMachine _stateMachine;
         private Metabolism _metabolism;
-        private Animator _animator;
-        private NavMeshAgent _navMeshAgent;
 
         private void Awake()
         {
@@ -47,8 +44,6 @@ namespace Brains
         private void OnEnable()
         {
             _metabolism = GetComponent<Metabolism>();
-            _animator = GetComponent<Animator>();
-            _navMeshAgent = GetComponent<NavMeshAgent>();
 
             _stateMachine = new StateMachine();
 
@@ -60,19 +55,17 @@ namespace Brains
             var respondToAttack = new RespondToAttack(this);
 
             At(idle, moveToTarget, () => canSeeTarget);
-            At(idle, respondToAttack, BeingAttacked());
+            At(idle, respondToAttack, () => attackedBy != null);
             At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
             At(respondToAttack, attack, () => canAttackTarget);
             At(respondToAttack, idle, () => !canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
-            At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
+            // At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
             At(attack, idle, () => !canAttackTarget);
             Any(dying, () => !_metabolism.IsAlive);
             Any(idle, () => !canSeeTarget && attackedBy == null);
 
             _stateMachine.SetState(idle);
-
-            Func<bool> BeingAttacked() => () => attackedBy != null && !canSeeTarget;
 
             void At(IState from, IState to, Func<bool> condition)
             {
@@ -193,6 +186,7 @@ namespace Brains
         {
             if (target != null)
             {
+                // transform.LookAt(target);
                 var targetMetabolism = target.GetComponent<Metabolism>();
                 targetMetabolism?.TakingDamage(baseDamage, gameObject);
             }
