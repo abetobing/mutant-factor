@@ -1,7 +1,6 @@
 ﻿#region
 
 using Brains;
-using DefaultNamespace;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
