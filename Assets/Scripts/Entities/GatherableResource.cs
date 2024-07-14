@@ -1,13 +1,16 @@
 ﻿#region
 
 using Brains;
+using UnityEngine;
 
 #endregion
 
 namespace Entities
 {
-    public class GatherableResource : BaseResource
+    public class GatherableResource : MonoBehaviour, IHarvestable
     {
-        private void Awake() => displayName = "Gatherable resource";
+        public int TotalOwned { get; set; } = 1000;
+        public int HarvestPerHit { get; set; } = 1;
+        public bool IsDepleted => TotalOwned <= 0;
     }
 }

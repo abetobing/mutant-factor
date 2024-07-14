@@ -11,39 +11,46 @@ using UnityEngine.AI;
 
 namespace Brains
 {
-    public class Miner : BaseProfession
+    public class Miner : BaseProfession, IHarvestable
     {
         public event Action<int> OnGatheredChanged;
 
-        [SerializeField] private int _maxCarried = 20;
+        // gathered resource
+        public int TotalOwned { get; set; } = 0;
 
-        private int _gathered;
+        // how many item harvested per shot
+        public int HarvestPerHit { get; set; } = 5;
+
+        [SerializeField] private int maxCarried = 20;
+
 
         public GatherableResource Target { get; set; }
         public StockPile StockPile { get; set; }
         public GameObject weaponPrefab;
         public Transform weaponPlaceholder;
 
-        private void Awake() => Profession = "Gatherer";
-
-        private void OnEnable()
+        private void Awake()
         {
+            Profession = "Gatherer";
             if (weaponPrefab != null && weaponPlaceholder != null)
             {
                 var weapon = Instantiate(weaponPrefab, weaponPlaceholder);
                 weapon.transform.localPosition = weaponPlaceholder.transform.localPosition;
                 weapon.transform.localRotation = Quaternion.identity;
             }
+        }
 
+        private void OnEnable()
+        {
             var navMeshAgent = GetComponent<NavMeshAgent>();
             var animator = GetComponent<Animator>();
 
             _stateMachine = new StateMachine();
 
             var search = new SearchForResource(this);
-            var moveToSelected = new MoveToSelectedResource(this, navMeshAgent, animator);
-            var harvest = new HarvestResource(this, navMeshAgent, animator);
-            var returnToStockpile = new ReturnToStockpile(this, navMeshAgent, animator);
+            var moveToSelected = new MoveToSelectedResource(this);
+            var harvest = new HarvestResource(this);
+            var returnToStockpile = new ReturnToStockpile(this);
             var placeResourcesInStockpile = new PlaceResourcesInStockpile(this);
 
             At(search, moveToSelected, HasTargetAndCanCarryMore());
@@ -53,14 +60,14 @@ namespace Brains
             At(harvest, search, TargetIsDepletedAndICanCarryMore());
             At(harvest, returnToStockpile, InventoryFull());
             At(returnToStockpile, placeResourcesInStockpile, ReachedStockpile());
-            At(placeResourcesInStockpile, search, () => _gathered == 0);
+            At(placeResourcesInStockpile, search, () => TotalOwned == 0);
 
             _stateMachine.SetState(search);
 
             void At(IState from, IState to, Func<bool> condition) => _stateMachine.AddTransition(from, to, condition);
 
             Func<bool> HasTargetAndCanCarryMore() => () => Target != null &&
-                                                           _gathered < _maxCarried;
+                                                           TotalOwned < maxCarried;
 
             Func<bool> StuckForOverASecond() => () => moveToSelected.TimeStuck > 1f;
 
@@ -71,7 +78,7 @@ namespace Brains
             Func<bool> TargetIsDepletedAndICanCarryMore() =>
                 () => (Target == null || Target.IsDepleted) && !InventoryFull().Invoke();
 
-            Func<bool> InventoryFull() => () => _gathered >= _maxCarried;
+            Func<bool> InventoryFull() => () => TotalOwned >= maxCarried;
 
             Func<bool> ReachedStockpile() => () => StockPile != null &&
                                                    Vector3.Distance(transform.position, StockPile.transform.position) <=
@@ -85,28 +92,18 @@ namespace Brains
         public void Enable()
         {
             this.enabled = true;
-            // _stateMachine.SetState(new SearchForResource(this));
         }
 
         public void Disable() => this.enabled = false;
 
-        public void TakeFromTarget()
+        void IHarvestable.TakeFromTarget()
         {
-            if (Target.Take())
-            {
-                _gathered++;
-                OnGatheredChanged?.Invoke(_gathered);
-            }
-        }
-
-        public bool Take()
-        {
-            if (_gathered <= 0)
-                return false;
-
-            _gathered--;
-            OnGatheredChanged?.Invoke(_gathered);
-            return true;
+            if (Target is not IHarvestable t)
+                return;
+            if (t.IsDepleted)
+                return;
+            TotalOwned += HarvestPerHit;
+            t.TotalOwned -= HarvestPerHit;
         }
     }
 }

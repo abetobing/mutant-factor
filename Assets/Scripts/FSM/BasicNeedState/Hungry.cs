@@ -12,10 +12,10 @@ namespace FSM.BasicNeedState
         private BasicNeeds _thePerson;
         private Animator _animator;
 
-        public Hungry(BasicNeeds basicNeeds, Animator animator)
+        public Hungry(BasicNeeds basicNeeds)
         {
             _thePerson = basicNeeds;
-            _animator = animator;
+            _animator = basicNeeds.GetComponent<Animator>();
         }
 
         public string String()

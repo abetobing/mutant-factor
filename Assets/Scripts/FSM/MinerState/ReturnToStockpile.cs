@@ -1,6 +1,7 @@
 ﻿#region
 
 using Brains;
+using DefaultNamespace;
 using Entities;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,15 +13,19 @@ namespace FSM.MinerState
     internal class ReturnToStockpile : IState
     {
         private readonly Miner _miner;
-        private readonly NavMeshAgent _navMeshAgent;
+        private readonly ICharacterMovement _characterMovement;
         private readonly Animator _animator;
-        private Vector3 _destination;
 
-        public ReturnToStockpile(Miner miner, NavMeshAgent navMeshAgent, Animator animator)
+        private Vector3 _destination;
+        private Vector3 _lastPosition = Vector3.zero;
+
+        public float TimeStuck;
+
+        public ReturnToStockpile(Miner miner)
         {
             _miner = miner;
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
+            _characterMovement = miner.GetComponent<ICharacterMovement>();
+            _animator = miner.GetComponent<Animator>();
         }
 
         public string String()
@@ -30,26 +35,24 @@ namespace FSM.MinerState
 
         public void Tick()
         {
-            Debug.DrawRay(_destination, Vector3.up, Color.green, 1.0f); //so you can see with gizmos
         }
 
         public void OnEnter()
         {
             _miner.StockPile = Object.FindObjectOfType<StockPile>();
             _destination = _miner.StockPile.transform.position;
-            _navMeshAgent.enabled = true;
             if (NavMesh.SamplePosition(_destination, out var hit, 2.0f,
                     NavMesh.AllAreas)) //documentation: https://docs.unity3d.com/ScriptReference/AI.NavMesh.SamplePosition.html
             {
                 _destination = hit.position;
             }
 
-            _navMeshAgent.SetDestination(_destination);
+            _characterMovement.MoveTo(_destination);
         }
 
         public void OnExit()
         {
-            _navMeshAgent.enabled = false;
+            _characterMovement.Stop();
         }
     }
 }

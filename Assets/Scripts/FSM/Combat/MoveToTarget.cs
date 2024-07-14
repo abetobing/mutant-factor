@@ -1,4 +1,5 @@
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,12 +10,13 @@ namespace FSM.Combat
         private CombatSystem _combat;
         private Animator _animator;
         private NavMeshAgent _navMeshAgent;
+        private readonly ICharacterMovement _characterMovement;
 
-        public MoveToTarget(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
+        public MoveToTarget(CombatSystem combatSystem)
         {
             _combat = combatSystem;
-            _animator = animator;
-            _navMeshAgent = navMeshAgent;
+            _animator = combatSystem.GetComponent<Animator>();
+            _characterMovement = combatSystem.GetComponent<ICharacterMovement>();
         }
 
         public string String() => "moving to target";
@@ -25,15 +27,13 @@ namespace FSM.Combat
             if (_combat.target != null)
             {
                 _combat.transform.LookAt(_combat.target.transform.position);
-                _navMeshAgent.enabled = true;
-                _navMeshAgent.SetDestination(_combat.target.transform.position);
+                _characterMovement.MoveTo(_combat.target.transform.position);
             }
         }
 
         public void OnEnter()
         {
-            _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_combat.target.transform.position);
+            _characterMovement.MoveTo(_combat.target.transform.position);
         }
 
         public void OnExit()

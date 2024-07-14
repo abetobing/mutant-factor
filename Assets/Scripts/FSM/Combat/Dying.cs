@@ -1,20 +1,15 @@
 using Brains;
-using UnityEngine;
-using UnityEngine.AI;
+using DefaultNamespace;
 
 namespace FSM.Combat
 {
     public class Dying : IState
     {
-        private CombatSystem _combat;
-        private Animator _animator;
-        private NavMeshAgent _navMeshAgent;
+        private readonly ICharacterMovement _characterMovement;
 
-        public Dying(CombatSystem combatSystem, Animator animator, NavMeshAgent navMeshAgent)
+        public Dying(CombatSystem combatSystem)
         {
-            _combat = combatSystem;
-            _animator = animator;
-            _navMeshAgent = navMeshAgent;
+            _characterMovement = combatSystem.GetComponent<ICharacterMovement>();
         }
 
         public string String() => "dying";
@@ -25,10 +20,7 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            Debug.Log(String());
-            _navMeshAgent.enabled = false;
-            // _combat.GetComponent<Bas>().enabled = false;
-            // _combat.GetComponent<BaseProfession>().enabled = false;
+            _characterMovement.Stop();
         }
 
         public void OnExit()

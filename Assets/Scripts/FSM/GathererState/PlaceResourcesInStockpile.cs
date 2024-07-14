@@ -1,7 +1,6 @@
 ﻿#region
 
 using Brains;
-using UnityEngine;
 
 #endregion
 
@@ -23,7 +22,8 @@ namespace FSM.GathererState
 
         public void Tick()
         {
-            if (_gatherer.Take())
+            if (_gatherer is not IHarvestable g) return;
+            if (g.Take(1))
                 _gatherer.StockPile.Add();
         }
 
@@ -31,6 +31,8 @@ namespace FSM.GathererState
         {
         }
 
-        public void OnExit() { }
+        public void OnExit()
+        {
+        }
     }
 }

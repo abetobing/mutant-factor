@@ -13,16 +13,21 @@ namespace DefaultNamespace
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
-        private void LateUpdate()
+        private void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 if (Physics.Raycast(ray.origin, ray.direction, out raycastHit))
                 {
-                    _navMeshAgent?.SetDestination(raycastHit.transform.position);
+                    Debug.DrawLine(ray.origin, raycastHit.point, Color.white);
+                    _navMeshAgent?.SetDestination(raycastHit.point);
                 }
             }
+        }
+
+        private void OnDrawGizmos()
+        {
         }
     }
 }

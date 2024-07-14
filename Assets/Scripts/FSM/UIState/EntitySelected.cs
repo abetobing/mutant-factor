@@ -9,6 +9,7 @@ namespace FSM.UIState
         private BasicNeeds _basicNeeds;
         private Metabolism _metabolism;
         private BaseProfession _baseProfession;
+        private CombatSystem _combatSystem;
 
         public EntitySelected(UISelectDeselect theUiPanel)
         {
@@ -42,6 +43,11 @@ namespace FSM.UIState
                 _baseProfession = _ui.selectedEntity.GetComponent<BaseProfession>();
             }
 
+            if (_ui.selectedEntity.GetComponent<CombatSystem>() != null)
+            {
+                _combatSystem = _ui.selectedEntity.GetComponent<CombatSystem>();
+            }
+
             _ui.currentInstanceID = _ui.selectedEntity.GetInstanceID();
         }
 
@@ -56,9 +62,10 @@ namespace FSM.UIState
             }
 
             if (_baseProfession != null)
-            {
                 _ui.professionStateText.text = _baseProfession.ActivtyText();
-            }
+
+            if (_combatSystem != null)
+                _ui.combatStateText.text = _combatSystem.ActivityText();
         }
 
 

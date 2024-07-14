@@ -20,7 +20,7 @@ namespace Brains
         [Range(0, 360)] public float angle;
 
         public float attackRange = 3f;
-        [Range(1f, 100f)] public float attackSpeed = 2f;
+        [Range(1f, 100f)] public float attackSpeed = 1f;
         public float baseDamage = 5f;
 
         #endregion
@@ -29,11 +29,9 @@ namespace Brains
         public LayerMask targetMask;
         public LayerMask obstructionMask;
 
-        // [HideInInspector] 
         public Transform target;
         public Transform attackedBy;
 
-        // [HideInInspector] 
         public bool canSeeTarget;
         public bool canAttackTarget;
 
@@ -56,19 +54,22 @@ namespace Brains
             _stateMachine = new StateMachine();
 
 
-            var idle = new Idle(this, _animator, _navMeshAgent);
-            var moveToTarget = new MoveToTarget(this, _animator, _navMeshAgent);
-            var attack = new Attack(this, _animator, _navMeshAgent);
-            var dying = new Dying(this, _animator, _navMeshAgent);
-            var respondToAttack = new RespondToAttack(this, _animator, _navMeshAgent);
+            var idle = new Idle(this);
+            var moveToTarget = new MoveToTarget(this);
+            var attack = new Attack(this);
+            var dying = new Dying(this);
+            var respondToAttack = new RespondToAttack(this);
 
             At(idle, moveToTarget, () => canSeeTarget);
             At(idle, respondToAttack, BeingAttacked());
-            At(respondToAttack, moveToTarget, () => canSeeTarget);
+            At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
+            At(respondToAttack, attack, () => canAttackTarget);
+            At(respondToAttack, idle, () => !canSeeTarget);
             At(moveToTarget, attack, () => canAttackTarget);
+            At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
             At(attack, idle, () => !canAttackTarget);
-            Any(idle, () => !canSeeTarget && attackedBy == null && _metabolism.IsAlive);
             Any(dying, () => !_metabolism.IsAlive);
+            Any(idle, () => !canSeeTarget && attackedBy == null);
 
             _stateMachine.SetState(idle);
 
@@ -84,6 +85,7 @@ namespace Brains
                 _stateMachine.AddAnyTransition(to, condition);
             }
         }
+
 
         private void Update()
         {
@@ -103,43 +105,29 @@ namespace Brains
 
         private void FieldOfViewCheck()
         {
-            Collider[] rangeChecks = Physics.OverlapSphere(transform.position, radius, targetMask);
+            // if (TargetLocked())
+            //     return;
 
-            if (rangeChecks.Length != 0)
+            var targetCandidates = new Collider[5];
+            var numberOfTargetAround =
+                Physics.OverlapSphereNonAlloc(transform.position, radius, targetCandidates, targetMask);
+
+            if (numberOfTargetAround != 0)
             {
-                target = rangeChecks[0].transform;
-                if (target.GetComponent<Metabolism>() != null &&
-                    !target.GetComponent<Metabolism>().IsAlive)
-                {
-                    canSeeTarget = canAttackTarget = false;
-                    return;
-                }
+                target = targetCandidates[0].transform;
+                // if being attacked, set the target to the attacker
+                if (attackedBy != null)
+                    target = attackedBy;
 
-                Vector3 directionToTarget = (target.position - transform.position).normalized;
-
-                if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
-                {
-                    float distanceToTarget = Vector3.Distance(transform.position, target.position);
-
-                    if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
-                        canSeeTarget = true;
-                    else
-                        canSeeTarget = false;
-                }
-                else
-                    canSeeTarget = false;
+                canSeeTarget = CheckIfCanSeeTarget();
             }
             else if (canSeeTarget)
                 canSeeTarget = false;
 
 
-            if (target != null)
-            {
-                var metabolism = target.GetComponent<Metabolism>();
-                canAttackTarget = metabolism.IsAlive &&
-                                  canSeeTarget &&
-                                  (Vector3.Distance(transform.position, target.position) <= attackRange);
-            }
+            canAttackTarget = CheckIfTargetInsideAttackRange();
+
+            CheckTargetIsDead();
 
             if (!canSeeTarget)
             {
@@ -149,16 +137,77 @@ namespace Brains
         }
 
 
+        // if currently is busy chasing enemy
+        private bool TargetLocked()
+        {
+            CheckTargetIsDead();
+            return target != null && canSeeTarget && canAttackTarget;
+        }
+
+        // pretty sure we cant attack dead target
+        private void CheckTargetIsDead()
+        {
+            if (target == null)
+                return;
+            if (target.GetComponent<Metabolism>() == null)
+                return;
+            if (target.GetComponent<Metabolism>().IsAlive)
+                return;
+            target = null;
+            canSeeTarget = false;
+            canAttackTarget = false;
+        }
+
+
+        /// <summary>
+        /// this will check if target is visible within range
+        /// and vision is not obstructed by wall or any object
+        /// </summary>
+        /// <returns>true or false</returns>
+        private bool CheckIfCanSeeTarget()
+        {
+            Vector3 directionToTarget = (target.position - transform.position).normalized;
+
+            if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
+            {
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                    return true;
+                return false;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// check if target is within radius of attack range
+        /// </summary>
+        private bool CheckIfTargetInsideAttackRange()
+        {
+            if (target == null)
+                return false;
+            return Vector3.Distance(transform.position, target.position) <= attackRange;
+        }
+
+
         public void PerformAttack()
         {
-            Debug.Log("performing attack");
-            target.GetComponent<Metabolism>()?.TakingDamage(baseDamage, gameObject);
+            if (target != null)
+            {
+                var targetMetabolism = target.GetComponent<Metabolism>();
+                targetMetabolism?.TakingDamage(baseDamage, gameObject);
+            }
         }
 
         private void OnDrawGizmosSelected()
         {
             if (target != null)
                 Debug.DrawLine(transform.position, target.position, Color.magenta);
+        }
+
+        public string ActivityText()
+        {
+            return _stateMachine.CurrentActivity();
         }
     }
 }

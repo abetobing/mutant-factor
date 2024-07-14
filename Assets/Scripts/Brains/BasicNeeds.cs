@@ -6,7 +6,6 @@ using Entities;
 using FSM;
 using FSM.BasicNeedState;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -23,17 +22,16 @@ namespace Brains
 
         private void Awake()
         {
-            var navMeshAgent = GetComponent<NavMeshAgent>();
-            var animator = GetComponent<Animator>();
+            var characterMovement = GetComponent<ICharacterMovement>();
 
             _metabolism = GetComponent<Metabolism>();
             _stateMachine = new StateMachine();
 
             var healthy = new Healthy(this);
-            var hungry = new Hungry(this, animator);
+            var hungry = new Hungry(this);
             var searchFood = new SearchFood(this);
-            var moveToFood = new MoveToFood(this, navMeshAgent, animator);
-            var eatingFood = new EatingFood(this, animator);
+            var moveToFood = new MoveToFood(this);
+            var eatingFood = new EatingFood(this);
 
             At(hungry, searchFood, () => HasEnteredHungryState);
             At(searchFood, moveToFood, ThereAreFoodSource());
@@ -47,7 +45,7 @@ namespace Brains
             Any(healthy, NoFoodLeftButNotHungryAnymore());
 
             Func<bool> ThereAreFoodSource() => () => FoodTarget != null;
-            Func<bool> ArrivedAtFoodSource() => () => navMeshAgent.remainingDistance <= 1f;
+            Func<bool> ArrivedAtFoodSource() => () => characterMovement.HasArrived();
             Func<bool> StuckForOverASecond() => () => moveToFood.TimeStuck > 1f;
             Func<bool> NoFoodLeft() => () => FoodTarget.IsDepleted;
 
@@ -75,7 +73,9 @@ namespace Brains
 
         public void EatFood()
         {
-            if (FoodTarget.Take()) _metabolism.hunger++;
+            if (FoodTarget is IHarvestable food)
+                if (food.Take(1))
+                    _metabolism.hunger++;
             _metabolism.hunger = Mathf.Clamp(_metabolism.hunger, 0f, Constants.DefaultMaxHunger);
         }
 

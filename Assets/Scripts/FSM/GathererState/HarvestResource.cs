@@ -1,6 +1,7 @@
 ﻿#region
 
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
 
 #endregion
@@ -11,25 +12,20 @@ namespace FSM.GathererState
     {
         private readonly Gatherer _gatherer;
         private readonly Animator _animator;
-        private float _resourcesPerSecond = 3;
+        private readonly ICharacterMovement _characterMovement;
 
-        private float _nextTakeResourceTime;
-
-        public HarvestResource(Gatherer gatherer, Animator animator)
+        public HarvestResource(Gatherer gatherer)
         {
             _gatherer = gatherer;
-            _animator = animator;
+            _characterMovement = gatherer.GetComponent<ICharacterMovement>();
+            _animator = gatherer.GetComponent<Animator>();
         }
 
         public void Tick()
         {
             if (_gatherer.Target != null)
             {
-                if (_nextTakeResourceTime <= Time.time)
-                {
-                    _nextTakeResourceTime = Time.time + (1f / _resourcesPerSecond);
-                    _gatherer.TakeFromTarget();
-                }
+                _gatherer.transform.LookAt(_gatherer.Target.transform);
             }
         }
 

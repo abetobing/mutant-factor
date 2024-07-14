@@ -1,8 +1,8 @@
 ﻿#region
 
 using Brains;
+using DefaultNamespace;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -10,19 +10,18 @@ namespace FSM.MinerState
 {
     internal class MoveToSelectedResource : IState
     {
-        private readonly Miner _miner;
-        private readonly NavMeshAgent _navMeshAgent;
-        private readonly Animator _animator;
-
         private Vector3 _lastPosition = Vector3.zero;
-
         public float TimeStuck;
 
-        public MoveToSelectedResource(Miner miner, NavMeshAgent navMeshAgent, Animator animator)
+        private readonly Miner _miner;
+        private readonly ICharacterMovement _characterMovement;
+        private readonly Animator _animator;
+
+        public MoveToSelectedResource(Miner miner)
         {
             _miner = miner;
-            _navMeshAgent = navMeshAgent;
-            _animator = animator;
+            _characterMovement = miner.GetComponent<ICharacterMovement>();
+            _animator = miner.GetComponent<Animator>();
         }
 
         public string String()
@@ -41,13 +40,12 @@ namespace FSM.MinerState
         public void OnEnter()
         {
             TimeStuck = 0f;
-            _navMeshAgent.enabled = true;
-            _navMeshAgent.SetDestination(_miner.Target.transform.position);
+            _characterMovement.MoveTo(_miner.Target.transform.position);
         }
 
         public void OnExit()
         {
-            _navMeshAgent.enabled = false;
+            _characterMovement.Stop();
         }
     }
 }
