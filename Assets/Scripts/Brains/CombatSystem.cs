@@ -5,7 +5,6 @@ using System.Collections;
 using FSM;
 using FSM.Combat;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -36,8 +35,8 @@ namespace Brains
 
         private StateMachine _stateMachine;
         private Metabolism _metabolism;
+        public float attackIndex;
         private Animator _animator;
-        private NavMeshAgent _navMeshAgent;
 
         private void Awake()
         {
@@ -48,7 +47,6 @@ namespace Brains
         {
             _metabolism = GetComponent<Metabolism>();
             _animator = GetComponent<Animator>();
-            _navMeshAgent = GetComponent<NavMeshAgent>();
 
             _stateMachine = new StateMachine();
 
@@ -191,11 +189,13 @@ namespace Brains
 
         public void PerformAttack()
         {
-            if (target != null)
-            {
-                var targetMetabolism = target.GetComponent<Metabolism>();
-                targetMetabolism?.TakingDamage(baseDamage, gameObject);
-            }
+            if (target == null)
+                return;
+            var targetMetabolism = target.GetComponent<Metabolism>();
+            targetMetabolism?.TakingDamage(baseDamage, gameObject);
+            attackIndex++;
+            if (attackIndex > 5)
+                attackIndex = 0;
         }
 
         private void OnDrawGizmosSelected()

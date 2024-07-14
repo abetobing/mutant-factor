@@ -15,6 +15,7 @@ public class Constants
     public static readonly int VerticalHash = Animator.StringToHash("vertical");
 
     public static readonly int AttackHash = Animator.StringToHash("attack");
+    public static readonly int AttackIndexHash = Animator.StringToHash("attackIndex");
     public static readonly int AttackSpeedHash = Animator.StringToHash("attackSpeed");
     public static readonly int GenderHash = Animator.StringToHash("gender");
 
