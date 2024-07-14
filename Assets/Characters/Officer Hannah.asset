@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Officer Hannah
   m_EditorClassIdentifier: 
   name: Officer Hannah
-  visionRange: 20
-  attackRange: 20
+  visionRange: 15
+  attackRange: 12
   attackRangeAngle: 90
   baseDamage: 5
   attackSpeed: 20

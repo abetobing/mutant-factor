@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Abraham
   m_EditorClassIdentifier: 
   name: Abraham
-  visionRange: 5
-  attackRange: 2.5
-  attackRangeAngle: 165
-  baseDamage: 5
+  visionRange: 20
+  attackRange: 15
+  attackRangeAngle: 65
+  baseDamage: 7
   attackSpeed: 15
   targetMask:
     serializedVersion: 2
@@ -26,6 +26,6 @@ MonoBehaviour:
   hunger: 100
   hungerFallRate: 0.25
   isFemale: 0
-  weapon: {fileID: 3330531830160758691, guid: a7ebed570ef474047b92d2b8faf5c503, type: 3}
-  weaponType: 2
-  profession: 2
+  weapon: {fileID: 5786097810451525583, guid: 11010e5723251264d97e677a84cfb316, type: 3}
+  weaponType: 7
+  profession: 0
