@@ -24,12 +24,14 @@ namespace FSM.GathererState
         {
             if (_gatherer.Target != null)
             {
-                _gatherer.transform.LookAt(_gatherer.Target.transform);
+                // _gatherer.transform.LookAt(_gatherer.Target.transform, _gatherer.transform.up);
             }
         }
 
         public void OnEnter()
         {
+            if (_gatherer.Target != null)
+                _gatherer.transform.LookAt(_gatherer.Target.transform, _gatherer.transform.up);
             _animator.SetBool(Constants.IsWorkingHash, true);
             _animator.SetTrigger(Constants.Gathering);
         }

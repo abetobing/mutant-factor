@@ -22,14 +22,12 @@ namespace FSM.MinerState
 
         public void Tick()
         {
-            if (_miner.Target != null)
-            {
-                _miner.transform.LookAt(_miner.Target.transform);
-            }
         }
 
         public void OnEnter()
         {
+            if (_miner.Target != null)
+                _miner.transform.LookAt(_miner.Target.transform, _miner.transform.up);
             _animator.SetBool(Constants.IsWorkingHash, true);
             _animator.SetTrigger(Constants.Mining);
         }
