@@ -225,6 +225,37 @@ Transform:
   - {fileID: 5295158793787347700}
   m_Father: {fileID: 2053581261775674049}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1690060971306604635
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3642746888683401577}
+  m_Layer: 7
+  m_Name: weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3642746888683401577
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690060971306604635}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.086, y: 0.02, z: 0.021}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4266096754426945458}
+  m_LocalEulerAnglesHint: {x: -90, y: 135, z: 45}
 --- !u!1 &2112563863132244011
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,6 +819,7 @@ Transform:
   m_Children:
   - {fileID: 1614127641885766045}
   - {fileID: 2742279135071604510}
+  - {fileID: 3642746888683401577}
   m_Father: {fileID: 4650465898290099107}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5404588204091311255
@@ -963,6 +995,7 @@ GameObject:
   - component: {fileID: -4531392767862647648}
   - component: {fileID: 7401327165861950197}
   - component: {fileID: -5319207767279313809}
+  - component: {fileID: -6749748948572246345}
   m_Layer: 7
   m_Name: cp_f_michelle
   m_TagString: Selectable
@@ -1066,6 +1099,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: 440f3b492c42fa943acfeeaaf74108a2, type: 2}
   professionType: 0
+--- !u!114 &-6749748948572246345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7501788059647666026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a170ed2b1564d899cf8e4634bdf7113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPlaceholder: {fileID: 3642746888683401577}
 --- !u!1 &7524111919617231996
 GameObject:
   m_ObjectHideFlags: 0

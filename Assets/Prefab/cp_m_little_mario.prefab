@@ -984,6 +984,7 @@ GameObject:
   - component: {fileID: -8454721321435202903}
   - component: {fileID: -8418371816291927975}
   - component: {fileID: -5485401222075365466}
+  - component: {fileID: 6781291461112767537}
   m_Layer: 7
   m_Name: cp_m_little_mario
   m_TagString: Selectable
@@ -1087,6 +1088,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: bcb6ed023d43d454db2285045bc11ff9, type: 2}
   professionType: 0
+--- !u!114 &6781291461112767537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5986958801767457440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a170ed2b1564d899cf8e4634bdf7113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPlaceholder: {fileID: 6986626335560587707}
 --- !u!1 &6073252102561887968
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1229,37 @@ Transform:
   - {fileID: 1766307818905327373}
   m_Father: {fileID: 1764298882705944226}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7183928609404098839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6986626335560587707}
+  m_Layer: 7
+  m_Name: weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6986626335560587707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7183928609404098839}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.074, y: 0.021, z: 0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 16465547851930232}
+  m_LocalEulerAnglesHint: {x: -90, y: 135, z: 45}
 --- !u!1 &7399329443938188948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1310,5 +1355,6 @@ Transform:
   m_Children:
   - {fileID: 3272093522476594263}
   - {fileID: 2089898277972937428}
+  - {fileID: 6986626335560587707}
   m_Father: {fileID: 8901225202689095273}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

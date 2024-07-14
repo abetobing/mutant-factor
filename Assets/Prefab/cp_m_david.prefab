@@ -141,6 +141,7 @@ GameObject:
   - component: {fileID: -7730507900120944534}
   - component: {fileID: -4711916487097330266}
   - component: {fileID: -3021925758594728031}
+  - component: {fileID: 241668103326199831}
   m_Layer: 7
   m_Name: cp_m_david
   m_TagString: Selectable
@@ -243,6 +244,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: 7821b80278c49cf4fb7368aa843d068b, type: 2}
   professionType: 0
+--- !u!114 &241668103326199831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1616406060653692748}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a170ed2b1564d899cf8e4634bdf7113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPlaceholder: {fileID: 4222714554955304953}
 --- !u!1 &1719302345640664642
 GameObject:
   m_ObjectHideFlags: 0
@@ -466,6 +480,7 @@ Transform:
   m_Children:
   - {fileID: 7499509638444929467}
   - {fileID: 6375861882199551800}
+  - {fileID: 4222714554955304953}
   m_Father: {fileID: 4538734356519949189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4675564380801761048
@@ -1000,6 +1015,37 @@ Transform:
   - {fileID: 2682270655268885238}
   m_Father: {fileID: 3027511365607851364}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7153542586522983448
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4222714554955304953}
+  m_Layer: 7
+  m_Name: weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4222714554955304953
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7153542586522983448}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.116, y: 0.057, z: -0.027}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4990318948219961236}
+  m_LocalEulerAnglesHint: {x: -90, y: 135, z: 45}
 --- !u!1 &7578631315917639271
 GameObject:
   m_ObjectHideFlags: 0

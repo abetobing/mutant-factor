@@ -851,6 +851,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3702702869319911287}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5362246756067223447
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7881460531855184683}
+  m_Layer: 7
+  m_Name: weapon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7881460531855184683
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5362246756067223447}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0.7071068, w: 0}
+  m_LocalPosition: {x: -0.074, y: 0.021, z: 0.03}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2175260922292988248}
+  m_LocalEulerAnglesHint: {x: -90, y: 135, z: 45}
 --- !u!1 &5525081885478914190
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,6 +927,7 @@ GameObject:
   - component: {fileID: -4772994070952326495}
   - component: {fileID: 1399538340318738464}
   - component: {fileID: -6773372598157140992}
+  - component: {fileID: -430297272637501938}
   m_Layer: 7
   m_Name: cp_f_officer_hannah
   m_TagString: Selectable
@@ -998,6 +1030,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   character: {fileID: 11400000, guid: 38c45cc11784dd24898e79f454fea636, type: 2}
   professionType: 0
+--- !u!114 &-430297272637501938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5557327951299580288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a170ed2b1564d899cf8e4634bdf7113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponPlaceholder: {fileID: 7881460531855184683}
 --- !u!1 &6265362778501788183
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,6 +1169,7 @@ Transform:
   m_Children:
   - {fileID: 3702702869319911287}
   - {fileID: 219168356563417588}
+  - {fileID: 7881460531855184683}
   m_Father: {fileID: 7317762487157867849}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7927699269559939709
