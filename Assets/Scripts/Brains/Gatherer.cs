@@ -1,7 +1,6 @@
 ﻿#region
 
 using System;
-using DefaultNamespace;
 using Entities;
 using FSM;
 using FSM.GathererState;
