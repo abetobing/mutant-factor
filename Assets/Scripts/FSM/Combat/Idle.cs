@@ -24,6 +24,7 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
+            _combat.GetComponent<HealthBar>().enabled = false;
             _animator.SetBool(Constants.IsCombatHash, false);
 
             // enable profession
