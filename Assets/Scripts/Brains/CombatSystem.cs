@@ -55,10 +55,10 @@ namespace Brains
             var respondToAttack = new RespondToAttack(this);
 
             At(idle, moveToTarget, () => canSeeTarget);
-            At(idle, respondToAttack, () => attackedBy != null);
-            At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
-            At(respondToAttack, attack, () => canAttackTarget);
-            At(respondToAttack, idle, () => !canSeeTarget);
+            // At(idle, respondToAttack, () => attackedBy != null);
+            // At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
+            // At(respondToAttack, attack, () => canAttackTarget);
+            // At(respondToAttack, idle, () => !canSeeTarget && attackedBy == null);
             At(moveToTarget, attack, () => canAttackTarget);
             // At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
             At(attack, idle, () => !canAttackTarget);
@@ -104,13 +104,15 @@ namespace Brains
             var numberOfTargetAround =
                 Physics.OverlapSphereNonAlloc(transform.position, radius, targetCandidates, targetMask);
 
+
             if (numberOfTargetAround != 0)
             {
                 target = targetCandidates[0].transform;
-                // if being attacked, set the target to the attacker
-                if (attackedBy != null)
-                    target = attackedBy;
-
+                canSeeTarget = CheckIfCanSeeTarget();
+            }
+            else if (attackedBy != null)
+            {
+                target = attackedBy;
                 canSeeTarget = CheckIfCanSeeTarget();
             }
             else if (canSeeTarget)
@@ -192,10 +194,18 @@ namespace Brains
             }
         }
 
-        private void OnDrawGizmosSelected()
+        private void OnDrawGizmos()
         {
             if (target != null)
-                Debug.DrawLine(transform.position, target.position, Color.magenta);
+            {
+                // Debug.DrawLine(transform.position, target.position, Color.magenta);
+            }
+
+            if (attackedBy != null)
+            {
+                var direction = (attackedBy.transform.position - transform.position).normalized * radius;
+                // Debug.DrawRay(transform.position, direction, Color.white);
+            }
         }
 
         public string ActivityText()

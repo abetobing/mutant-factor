@@ -25,8 +25,8 @@ namespace FSM.Combat
         {
             if (_combat.target != null && _combat.canSeeTarget)
             {
-                var direction = (_combat.target.position - _combat.transform.position).normalized;
-                _characterMovement.RotateTo(direction);
+                _characterMovement.RotateTo(_combat.target.position);
+                // _combat.transform.LookAt(_combat.target);
             }
         }
 

@@ -49,7 +49,7 @@ public class HumanoidMovement : MonoBehaviour, ICharacterMovement
     public void RotateTo(Vector3 direction)
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(direction),
-            180 * Time.deltaTime);
+            360 * Time.deltaTime);
     }
 
     public void Stop()

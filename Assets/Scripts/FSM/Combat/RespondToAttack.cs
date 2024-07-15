@@ -24,17 +24,18 @@ namespace FSM.Combat
         public void Tick()
         {
             if (_characterMovement.HasArrived())
-                _combat.attackedBy = null;
+            {
+                _characterMovement.RotateTo(_combat.transform.position);
+                // _combat.attackedBy = null;
+            }
         }
 
         public void OnEnter()
         {
             if (_healthBar)
                 _healthBar.enabled = true;
-            // _combat.transform.LookAt(_combat.attackedBy);
-            // _characterMovement.Stop();
-            var direction = (_combat.attackedBy.position - _combat.transform.position).normalized * _combat.radius;
-            _characterMovement.MoveTo(direction);
+            // var direction = (_combat.attackedBy.transform.position - _combat.transform.position).normalized * 3f;
+            _characterMovement.MoveTo(_combat.attackedBy.transform.position);
         }
 
         public void OnExit()
