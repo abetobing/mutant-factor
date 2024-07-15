@@ -55,15 +55,15 @@ namespace Brains
             var respondToAttack = new RespondToAttack(this);
 
             At(idle, moveToTarget, () => canSeeTarget);
-            // At(idle, respondToAttack, () => attackedBy != null);
+            At(idle, respondToAttack, () => attackedBy != null);
             // At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
             // At(respondToAttack, attack, () => canAttackTarget);
-            // At(respondToAttack, idle, () => !canSeeTarget && attackedBy == null);
-            At(moveToTarget, attack, () => canAttackTarget);
+            // At(moveToTarget, attack, () => canAttackTarget);
             // At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
-            At(attack, idle, () => !canAttackTarget);
+            // At(attack, idle, () => !canAttackTarget);
             Any(dying, () => !_metabolism.IsAlive);
-            Any(idle, () => !canSeeTarget && attackedBy == null);
+            Any(idle, () => target == null && attackedBy == null);
+            Any(attack, () => target != null && canSeeTarget && canAttackTarget);
 
             _stateMachine.SetState(idle);
 
@@ -100,23 +100,26 @@ namespace Brains
         {
             // when no target available, do FOV scan check
             if (target == null)
-                target = FieldOfViewCheck();
-            // FOV scan result is zero, reset the variables
-            if (target == null)
             {
-                canSeeTarget = false;
-                canAttackTarget = false;
-                return;
+                // if there's an attacker, set is as target
+                // otherwise scan target on FOV
+                target = attackedBy != null ? attackedBy : FieldOfViewCheck();
+                CheckTargetIsDead();
+
+                // FOV scan result is zero or there are no attacker reset the variables
+                if (target == null)
+                {
+                    canSeeTarget = false;
+                    canAttackTarget = false;
+                    attackedBy = null;
+                    return;
+                }
             }
 
             // target is available, do some further check
             canSeeTarget = CheckIfCanSeeTarget();
             canAttackTarget = canSeeTarget && CheckIfTargetInsideAttackRange();
             CheckTargetIsDead();
-
-            // cant see the target, reset the variable
-            if (!canSeeTarget)
-                target = null;
         }
 
         private Transform FieldOfViewCheck()
