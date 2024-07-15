@@ -60,7 +60,7 @@ namespace Brains
             // At(respondToAttack, attack, () => canAttackTarget);
             // At(moveToTarget, attack, () => canAttackTarget);
             // At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
-            // At(attack, idle, () => !canAttackTarget);
+            At(attack, idle, () => !canAttackTarget);
             Any(dying, () => !_metabolism.IsAlive);
             Any(idle, () => target == null && attackedBy == null);
             Any(attack, () => target != null && canSeeTarget && canAttackTarget);
@@ -159,7 +159,9 @@ namespace Brains
 
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
-                // float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                if (distanceToTarget > radius)
+                    return false;
                 if (!Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
                     return true;
                 return false;
@@ -189,12 +191,17 @@ namespace Brains
             }
         }
 
-        private void OnDrawGizmos()
+        private void OnDrawGizmosSelected()
         {
-            if (canSeeTarget && !canAttackTarget)
-                Debug.DrawLine(transform.position, target.position, Color.yellow);
-            if (canSeeTarget && canAttackTarget)
-                Debug.DrawLine(transform.position, target.position, Color.red);
+            if (target != null)
+            {
+                var color = Color.green;
+                if (canSeeTarget)
+                    color = Color.yellow;
+                if (canAttackTarget)
+                    color = Color.red;
+                Debug.DrawLine(transform.position, target.position, color);
+            }
 
             if (attackedBy != null)
             {
