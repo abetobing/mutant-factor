@@ -5,6 +5,9 @@ public class HumanoidMovement : MonoBehaviour, ICharacterMovement
 {
     private NavMeshAgent _agent;
     private Animator _animator;
+    private Vector3 _destination;
+    private bool _hasPath;
+    private bool _hasArrived;
 
     private void OnValidate()
     {
@@ -19,6 +22,8 @@ public class HumanoidMovement : MonoBehaviour, ICharacterMovement
 
     private void Update()
     {
+        _hasPath = _agent.hasPath;
+        _hasArrived = HasArrived();
         if (_agent.hasPath)
         {
             if (HasArrived())
@@ -43,7 +48,8 @@ public class HumanoidMovement : MonoBehaviour, ICharacterMovement
 
     public void MoveTo(Vector3 destination)
     {
-        _agent.SetDestination(destination);
+        _destination = destination;
+        _agent.SetDestination(_destination);
     }
 
     public void RotateTo(Vector3 direction)
