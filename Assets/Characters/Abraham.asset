@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Abraham
   visionRange: 20
   attackRange: 15
-  attackRangeAngle: 65
+  attackRangeAngle: 90
   baseDamage: 7
   attackSpeed: 15
   targetMask:

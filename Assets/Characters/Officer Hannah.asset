@@ -15,7 +15,7 @@ MonoBehaviour:
   name: Officer Hannah
   visionRange: 15
   attackRange: 12
-  attackRangeAngle: 90
+  attackRangeAngle: 135
   baseDamage: 5
   attackSpeed: 20
   targetMask:

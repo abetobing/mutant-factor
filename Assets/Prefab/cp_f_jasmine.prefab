@@ -847,6 +847,11 @@ GameObject:
   - component: {fileID: 8543287223331582559}
   - component: {fileID: 220664633669713068}
   - component: {fileID: -303748734603666730}
+  - component: {fileID: 2079518981892648707}
+  - component: {fileID: 7873239988242848222}
+  - component: {fileID: 5923614752700068297}
+  - component: {fileID: 8056084983640558126}
+  - component: {fileID: 3965862202785807603}
   m_Layer: 7
   m_Name: cp_f_jasmine
   m_TagString: Selectable
@@ -962,6 +967,88 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponPlaceholder: {fileID: 2240968830633049645}
+--- !u!114 &2079518981892648707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584613354768528393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d793950aa444c56be1ce1d31f8b5e33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7873239988242848222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584613354768528393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e24898589a4b9aad361c1ac3775054, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  hunger: 100
+  stamina: 100
+  isFemale: 0
+  hungerFallRate: 0.25
+--- !u!114 &5923614752700068297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584613354768528393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ec3f08a6f454d77940e97a3b7ab9cd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FoodTarget: {fileID: 0}
+  HasEnteredHungryState: 0
+--- !u!114 &8056084983640558126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584613354768528393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9486d0f6832e3c34aba7bc72be518524, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0
+  angle: 0
+  attackRange: 3
+  attackSpeed: 1
+  baseDamage: 5
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 0
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 0
+  target: {fileID: 0}
+  attackedBy: {fileID: 0}
+  canSeeTarget: 0
+  canAttackTarget: 0
+--- !u!114 &3965862202785807603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6584613354768528393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bb67f83cb84a34b1969c916da405f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6646269780412227657
 GameObject:
   m_ObjectHideFlags: 0
