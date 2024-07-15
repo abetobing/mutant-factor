@@ -31,7 +31,6 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
-            _characterMovement.MoveTo(_combat.target.transform.position);
         }
 
         public void OnExit()
