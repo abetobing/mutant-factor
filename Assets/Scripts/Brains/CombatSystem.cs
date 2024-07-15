@@ -86,7 +86,7 @@ namespace Brains
 
         private IEnumerator FOVRoutine()
         {
-            WaitForSeconds wait = new WaitForSeconds(0.2f);
+            WaitForSeconds wait = new WaitForSeconds(0.1f);
 
             while (true)
             {
@@ -97,10 +97,17 @@ namespace Brains
 
         private void FieldOfViewCheck()
         {
-            // if (TargetLocked())
-            //     return;
+            if (TargetLocked())
+            {
+                canSeeTarget = CheckIfCanSeeTarget();
+                canAttackTarget = canSeeTarget && CheckIfTargetInsideAttackRange();
+                CheckTargetIsDead();
+                if (canSeeTarget && canAttackTarget)
+                    return;
+                target = null;
+            }
 
-            var targetCandidates = new Collider[5];
+            var targetCandidates = new Collider[1];
             var numberOfTargetAround =
                 Physics.OverlapSphereNonAlloc(transform.position, radius, targetCandidates, targetMask);
 
@@ -119,7 +126,7 @@ namespace Brains
                 canSeeTarget = false;
 
 
-            canAttackTarget = CheckIfTargetInsideAttackRange();
+            canAttackTarget = canSeeTarget && CheckIfTargetInsideAttackRange();
 
             CheckTargetIsDead();
 
@@ -164,8 +171,8 @@ namespace Brains
 
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
-                float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                // float distanceToTarget = Vector3.Distance(transform.position, target.position);
+                if (!Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
                     return true;
                 return false;
             }
@@ -196,10 +203,10 @@ namespace Brains
 
         private void OnDrawGizmos()
         {
-            if (target != null)
-            {
-                // Debug.DrawLine(transform.position, target.position, Color.magenta);
-            }
+            if (canSeeTarget && !canAttackTarget)
+                Debug.DrawLine(transform.position, target.position, Color.yellow);
+            if (canSeeTarget && canAttackTarget)
+                Debug.DrawLine(transform.position, target.position, Color.red);
 
             if (attackedBy != null)
             {
