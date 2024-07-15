@@ -26,15 +26,17 @@ namespace FSM.Combat
 
         public void OnEnter()
         {
+            _animator.SetBool(Constants.IsCombatHash, false);
+            _animator.ResetTrigger(Constants.AttackHash);
+
             if (_healthBar != null)
                 _healthBar.enabled = false;
-            _animator.SetBool(Constants.IsCombatHash, false);
 
             // enable profession
             _profession = _combat.GetComponent<BaseProfession>();
+            _basicNeeds = _combat.GetComponent<BasicNeeds>();
             if (_profession != null)
                 _profession.enabled = true;
-            _basicNeeds = _combat.GetComponent<BasicNeeds>();
             if (_basicNeeds != null)
                 _basicNeeds.enabled = true;
         }
@@ -42,9 +44,10 @@ namespace FSM.Combat
         public void OnExit()
         {
             // must disable profession, so its not finding another path when combat
+            _profession = _combat.GetComponent<BaseProfession>();
+            _basicNeeds = _combat.GetComponent<BasicNeeds>();
             if (_profession != null)
                 _profession.enabled = false;
-            _basicNeeds = _combat.GetComponent<BasicNeeds>();
             if (_basicNeeds != null)
                 _basicNeeds.enabled = false;
         }
