@@ -7,9 +7,10 @@ public class Metabolism : MonoBehaviour
     public float health = 100f;
     public float hunger = 100f;
     public float stamina = 100f;
+    public bool isFemale;
 
     public bool IsAlive => health > 0f;
-    [SerializeField] private float hungerFallRate = 0.25f;
+    public float hungerFallRate = 0.25f;
 
     private BasicNeeds _basicNeeds;
 

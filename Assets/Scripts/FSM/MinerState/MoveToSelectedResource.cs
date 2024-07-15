@@ -30,7 +30,8 @@ namespace FSM.MinerState
 
         public void Tick()
         {
-            if (Vector3.Distance(_miner.transform.position, _lastPosition) <= 0f)
+            if (Vector3.Distance(_lastPosition, _miner.transform.position) <= 1f &&
+                Vector3.Distance(_miner.transform.position, _lastPosition) <= 0f)
                 TimeStuck += Time.deltaTime;
 
             _lastPosition = _miner.transform.position;

@@ -25,14 +25,12 @@ namespace FSM.Combat
         {
             if (_combat.target != null)
             {
-                _combat.transform.LookAt(_combat.target.transform.position);
                 _characterMovement.MoveTo(_combat.target.transform.position);
             }
         }
 
         public void OnEnter()
         {
-            _characterMovement.MoveTo(_combat.target.transform.position);
         }
 
         public void OnExit()

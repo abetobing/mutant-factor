@@ -5,7 +5,6 @@ using System.Collections;
 using FSM;
 using FSM.Combat;
 using UnityEngine;
-using UnityEngine.AI;
 
 #endregion
 
@@ -36,8 +35,6 @@ namespace Brains
 
         private StateMachine _stateMachine;
         private Metabolism _metabolism;
-        private Animator _animator;
-        private NavMeshAgent _navMeshAgent;
 
         private void Awake()
         {
@@ -47,8 +44,6 @@ namespace Brains
         private void OnEnable()
         {
             _metabolism = GetComponent<Metabolism>();
-            _animator = GetComponent<Animator>();
-            _navMeshAgent = GetComponent<NavMeshAgent>();
 
             _stateMachine = new StateMachine();
 
@@ -60,19 +55,17 @@ namespace Brains
             var respondToAttack = new RespondToAttack(this);
 
             At(idle, moveToTarget, () => canSeeTarget);
-            At(idle, respondToAttack, BeingAttacked());
-            At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
-            At(respondToAttack, attack, () => canAttackTarget);
-            At(respondToAttack, idle, () => !canSeeTarget);
-            At(moveToTarget, attack, () => canAttackTarget);
-            At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
+            At(idle, respondToAttack, () => attackedBy != null);
+            // At(respondToAttack, moveToTarget, () => canSeeTarget && !canAttackTarget);
+            // At(respondToAttack, attack, () => canAttackTarget);
+            // At(moveToTarget, attack, () => canAttackTarget);
+            // At(moveToTarget, respondToAttack, () => !canAttackTarget && attackedBy != null);
             At(attack, idle, () => !canAttackTarget);
             Any(dying, () => !_metabolism.IsAlive);
-            Any(idle, () => !canSeeTarget && attackedBy == null);
+            Any(idle, () => target == null && attackedBy == null);
+            Any(attack, () => target != null && canSeeTarget && canAttackTarget);
 
             _stateMachine.SetState(idle);
-
-            Func<bool> BeingAttacked() => () => attackedBy != null && !canSeeTarget;
 
             void At(IState from, IState to, Func<bool> condition)
             {
@@ -93,54 +86,51 @@ namespace Brains
 
         private IEnumerator FOVRoutine()
         {
-            WaitForSeconds wait = new WaitForSeconds(0.2f);
+            WaitForSeconds wait = new WaitForSeconds(0.1f);
 
             while (true)
             {
                 yield return wait;
-                FieldOfViewCheck();
+                ScanTarget();
             }
         }
 
-        private void FieldOfViewCheck()
-        {
-            // if (TargetLocked())
-            //     return;
 
-            var targetCandidates = new Collider[5];
+        private void ScanTarget()
+        {
+            // when no target available, do FOV scan check
+            if (target == null)
+            {
+                // if there's an attacker, set is as target
+                // otherwise scan target on FOV
+                target = attackedBy != null ? attackedBy : FieldOfViewCheck();
+                CheckTargetIsDead();
+
+                // FOV scan result is zero or there are no attacker reset the variables
+                if (target == null)
+                {
+                    canSeeTarget = false;
+                    canAttackTarget = false;
+                    attackedBy = null;
+                    return;
+                }
+            }
+
+            // target is available, do some further check
+            canSeeTarget = CheckIfCanSeeTarget();
+            canAttackTarget = canSeeTarget && CheckIfTargetInsideAttackRange();
+            CheckTargetIsDead();
+        }
+
+        private Transform FieldOfViewCheck()
+        {
+            var targetCandidates = new Collider[1];
             var numberOfTargetAround =
                 Physics.OverlapSphereNonAlloc(transform.position, radius, targetCandidates, targetMask);
 
             if (numberOfTargetAround != 0)
-            {
-                target = targetCandidates[0].transform;
-                // if being attacked, set the target to the attacker
-                if (attackedBy != null)
-                    target = attackedBy;
-
-                canSeeTarget = CheckIfCanSeeTarget();
-            }
-            else if (canSeeTarget)
-                canSeeTarget = false;
-
-
-            canAttackTarget = CheckIfTargetInsideAttackRange();
-
-            CheckTargetIsDead();
-
-            if (!canSeeTarget)
-            {
-                target = null;
-                canAttackTarget = false;
-            }
-        }
-
-
-        // if currently is busy chasing enemy
-        private bool TargetLocked()
-        {
-            CheckTargetIsDead();
-            return target != null && canSeeTarget && canAttackTarget;
+                return targetCandidates[0].transform;
+            return null;
         }
 
         // pretty sure we cant attack dead target
@@ -170,7 +160,9 @@ namespace Brains
             if (Vector3.Angle(transform.forward, directionToTarget) < angle / 2)
             {
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
-                if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
+                if (distanceToTarget > radius)
+                    return false;
+                if (!Physics.Raycast(transform.position, directionToTarget, radius, obstructionMask))
                     return true;
                 return false;
             }
@@ -193,6 +185,7 @@ namespace Brains
         {
             if (target != null)
             {
+                // transform.LookAt(target);
                 var targetMetabolism = target.GetComponent<Metabolism>();
                 targetMetabolism?.TakingDamage(baseDamage, gameObject);
             }
@@ -201,7 +194,20 @@ namespace Brains
         private void OnDrawGizmosSelected()
         {
             if (target != null)
-                Debug.DrawLine(transform.position, target.position, Color.magenta);
+            {
+                var color = Color.green;
+                if (canSeeTarget)
+                    color = Color.yellow;
+                if (canAttackTarget)
+                    color = Color.red;
+                Debug.DrawLine(transform.position, target.position, color);
+            }
+
+            if (attackedBy != null)
+            {
+                var direction = (attackedBy.transform.position - transform.position).normalized * radius;
+                // Debug.DrawRay(transform.position, direction, Color.white);
+            }
         }
 
         public string ActivityText()

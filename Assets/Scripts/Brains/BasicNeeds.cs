@@ -15,8 +15,8 @@ namespace Brains
         private StateMachine _stateMachine;
         private Metabolism _metabolism;
 
-        [HideInInspector] public FoodSource FoodTarget;
-        [HideInInspector] public bool HasEnteredHungryState;
+        public FoodSource FoodTarget;
+        public bool HasEnteredHungryState;
         [HideInInspector] public string CurrentStateString => _stateMachine.CurrentActivity();
 
         private void Awake()

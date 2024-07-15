@@ -10,24 +10,33 @@ namespace FSM.Combat
     {
         private CombatSystem _combat;
         private readonly ICharacterMovement _characterMovement;
+        private readonly HealthBar _healthBar;
+        private BaseProfession _profession;
+        private BasicNeeds _basicNeeds;
 
         public RespondToAttack(CombatSystem combatSystem)
         {
             _combat = combatSystem;
             _characterMovement = combatSystem.GetComponent<ICharacterMovement>();
+            _healthBar = combatSystem.GetComponent<HealthBar>();
         }
 
         public string String() => "responding to attacker";
 
         public void Tick()
         {
-            // _combat.transform.LookAt(_combat.attackedBy);
-            _characterMovement.RotateTo(_combat.attackedBy.position);
         }
 
         public void OnEnter()
         {
-            _characterMovement.Stop();
+            if (_combat.attackedBy != null)
+            {
+                _combat.transform.LookAt(_combat.attackedBy);
+                _characterMovement.MoveTo(_combat.attackedBy.position);
+            }
+
+            if (_healthBar)
+                _healthBar.enabled = true;
         }
 
         public void OnExit()
