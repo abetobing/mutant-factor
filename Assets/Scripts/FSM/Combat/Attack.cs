@@ -10,6 +10,8 @@ namespace FSM.Combat
         private float _nextAttackTime;
         private readonly ICharacterMovement _characterMovement;
         private readonly HealthBar _healthBar;
+        private BaseProfession _profession;
+        private BasicNeeds _basicNeeds;
 
         public Attack(CombatSystem combatSystem)
         {
@@ -23,15 +25,16 @@ namespace FSM.Combat
 
         public void Tick()
         {
-            if (_combat.target != null && _combat.canSeeTarget)
+            if (_combat.target != null)
             {
-                _characterMovement.RotateTo(_combat.target.position);
-                // _combat.transform.LookAt(_combat.target);
+                _combat.transform.LookAt(_combat.target);
             }
         }
 
         public void OnEnter()
         {
+            _characterMovement.Stop();
+            _combat.transform.LookAt(_combat.target);
             _animator.SetBool(Constants.IsCombatHash, true);
             _animator.SetTrigger(Constants.AttackHash);
             if (_healthBar != null)
@@ -40,8 +43,8 @@ namespace FSM.Combat
 
         public void OnExit()
         {
-            _animator.SetBool(Constants.IsCombatHash, false);
             _animator.ResetTrigger(Constants.AttackHash);
+            _combat.target = null;
         }
     }
 }
