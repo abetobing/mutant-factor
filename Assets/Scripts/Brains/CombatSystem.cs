@@ -91,58 +91,43 @@ namespace Brains
             while (true)
             {
                 yield return wait;
-                FieldOfViewCheck();
+                ScanTarget();
             }
         }
 
-        private void FieldOfViewCheck()
+
+        private void ScanTarget()
         {
-            if (TargetLocked())
+            // when no target available, do FOV scan check
+            if (target == null)
+                target = FieldOfViewCheck();
+            // FOV scan result is zero, reset the variables
+            if (target == null)
             {
-                canSeeTarget = CheckIfCanSeeTarget();
-                canAttackTarget = canSeeTarget && CheckIfTargetInsideAttackRange();
-                CheckTargetIsDead();
-                if (canSeeTarget && canAttackTarget)
-                    return;
-                target = null;
+                canSeeTarget = false;
+                canAttackTarget = false;
+                return;
             }
 
+            // target is available, do some further check
+            canSeeTarget = CheckIfCanSeeTarget();
+            canAttackTarget = canSeeTarget && CheckIfTargetInsideAttackRange();
+            CheckTargetIsDead();
+
+            // cant see the target, reset the variable
+            if (!canSeeTarget)
+                target = null;
+        }
+
+        private Transform FieldOfViewCheck()
+        {
             var targetCandidates = new Collider[1];
             var numberOfTargetAround =
                 Physics.OverlapSphereNonAlloc(transform.position, radius, targetCandidates, targetMask);
 
-
             if (numberOfTargetAround != 0)
-            {
-                target = targetCandidates[0].transform;
-                canSeeTarget = CheckIfCanSeeTarget();
-            }
-            else if (attackedBy != null)
-            {
-                target = attackedBy;
-                canSeeTarget = CheckIfCanSeeTarget();
-            }
-            else if (canSeeTarget)
-                canSeeTarget = false;
-
-
-            canAttackTarget = canSeeTarget && CheckIfTargetInsideAttackRange();
-
-            CheckTargetIsDead();
-
-            if (!canSeeTarget)
-            {
-                target = null;
-                canAttackTarget = false;
-            }
-        }
-
-
-        // if currently is busy chasing enemy
-        private bool TargetLocked()
-        {
-            CheckTargetIsDead();
-            return target != null && canSeeTarget && canAttackTarget;
+                return targetCandidates[0].transform;
+            return null;
         }
 
         // pretty sure we cant attack dead target
